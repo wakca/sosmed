@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\User;
-class UsersFactoryReset extends Seeder
+class RubahPasswordSeed extends Seeder
 {
     /**
      * Run the database seeds.
