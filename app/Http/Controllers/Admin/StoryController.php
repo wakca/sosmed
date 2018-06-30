@@ -32,6 +32,7 @@ class StoryController extends Controller
     public function anyData()
     {
         $query = Story::select('stories.*')->with('tags')->distinct();
+        // return $query = Story::select('stories.*')->with('tags')->get();
 
         return Datatables::eloquent($query)
             ->addColumn('tagname', function (Story $story) {
