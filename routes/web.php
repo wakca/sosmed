@@ -15,6 +15,11 @@ Route::get('/', 'HomeController@index')->name('index');
 Route::get('/beranda','HomeController@beranda')->middleware(['auth','checkname']);
 Auth::routes();
 
+//superadmin
+Route::group(['prefix' => 'superadmin'], function () {
+    Route::get('/', 'SuperAdmin\DashboardController@index')->name('super.dashboard'); 
+});
+
 //admin
 Route::group(['prefix' => 'admin'], function () {
     Route::get('/', 'Admin\DashboardController@index')->name('admin.dashboard');
