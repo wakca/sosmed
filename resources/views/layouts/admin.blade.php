@@ -45,7 +45,7 @@
                 </a>
             </div>
 
-            @yield('menu')
+            @include('layouts.menu_admin')
     	</div>
     </div>
 

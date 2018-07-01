@@ -79,6 +79,7 @@
 
                                 <ul class="dropdown-menu" role="menu">
                                     {!! Auth::user()->level == 3 ?"<li><a href='/admin'>Halaman Administrator</a></li>":"" !!}
+                                    {!! Auth::user()->level == 4 ?"<li><a href='/superadmin'>Halaman Super Admin</a></li>":"" !!}
                                     <li><a href="/{{ Auth::user()->username }}">My Profile</a></li>
                                     <li><a href='/account-setting'>Pengaturan Akun</a></li>
                                     <li role="separator" class="divider"></li>
