@@ -78,4 +78,9 @@ class User extends Authenticatable
    {
        $this->notify(new PasswordReset($token));
    }
+
+   public function asal_desa()
+   {
+       return $this->belongsTo('App\Desa', 'desa');
+   }
 }

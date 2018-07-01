@@ -45,6 +45,21 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/comment/{id}/delete','Admin\CommentController@destroy')->name('admin.comment.delete');
     Route::get('/comment/{id}/edit','Admin\CommentController@edit')->name('admin.comment.edit');
     Route::post('/comment/{id}/edit','Admin\CommentController@update');
+
+
+    //Pengurus Desa
+    Route::group(['prefix' => 'pengurus'], function(){
+        Route::get('/', 'Admin\PengurusController@index')->name('admin.pengurus');
+        Route::get('kabupaten/{id_provinsi}', 'Admin\PengurusController@kabupaten');
+        Route::get('kecamatan/{id_kabupaten}', 'Admin\PengurusController@kecamatan');
+        Route::get('desa/{id_kecamatan}', 'Admin\PengurusController@desa');
+
+        Route::get('/data_provinsi','Admin\PengurusController@dataProvinsi')->name('admin.provinsi');
+        Route::get('/data_kabupaten/{id_provinsi}','Admin\PengurusController@dataKabupaten')->name('admin.kabupaten');
+        Route::get('/data_kecamatan/{id_kabupaten}','Admin\PengurusController@dataKecamatan')->name('admin.kecamatan');
+        Route::get('/data_desa/{id_desa}','Admin\PengurusController@dataDesa')->name('admin.desa');
+    });
+
     Route::get('/user','Admin\UserController@index')->name('admin.user');
     Route::post('/user/create','Admin\UserController@save');
     Route::get('/user/list','Admin\UserController@anyData')->name('user.data');

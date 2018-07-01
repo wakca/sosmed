@@ -13,7 +13,7 @@
     </li>
 
     <li>
-        <a href="{{ route('admin.user') }}">
+        <a href="{{ route('admin.pengurus') }}">
             <i class="pe-7s-user"></i>
             <p>Pengurus Desa</p>
         </a>

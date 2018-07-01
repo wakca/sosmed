@@ -22,5 +22,14 @@ class Desa extends Model
     public function stories(){
         return $this->hasMany('App\Stories','desa');
     }
+
+    public function pengurus(){
+        return $this->hasMany('App\User', 'desa');
+    }
+
+    public function penduduk()
+    {
+        return $this->hasMany('App\User', 'desa');
+    }
     
 }
