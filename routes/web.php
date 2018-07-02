@@ -22,7 +22,7 @@ Route::group(['prefix' => 'superadmin'], function () {
 
 //admin
 Route::group(['prefix' => 'admin'], function () {
-    Route::get('/', 'Admin\DashboardController@index')->name('admin.dashboard');
+    Route::get('/dashboard', 'Admin\DashboardController@index')->name('admin.dashboard');
     Route::get('/story','Admin\StoryController@index')->name('admin.story');
     Route::get('/story/list','Admin\StoryController@anyData')->name('story.data');
     Route::get('/story/{id}/delete','Admin\StoryController@destroy')->name('admin.story.delete');
@@ -53,11 +53,15 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('kabupaten/{id_provinsi}', 'Admin\PengurusController@kabupaten');
         Route::get('kecamatan/{id_kabupaten}', 'Admin\PengurusController@kecamatan');
         Route::get('desa/{id_kecamatan}', 'Admin\PengurusController@desa');
+        Route::get('desa/{id_desa}/detail', 'Admin\PengurusController@detailDesa');
+
+        Route::get('set_pengurus/{id_user}', 'Admin\PengurusController@setPengurus')->name('admin.set_pengurus');
 
         Route::get('/data_provinsi','Admin\PengurusController@dataProvinsi')->name('admin.provinsi');
         Route::get('/data_kabupaten/{id_provinsi}','Admin\PengurusController@dataKabupaten')->name('admin.kabupaten');
         Route::get('/data_kecamatan/{id_kabupaten}','Admin\PengurusController@dataKecamatan')->name('admin.kecamatan');
         Route::get('/data_desa/{id_desa}','Admin\PengurusController@dataDesa')->name('admin.desa');
+        Route::get('/data_penduduk/{id_desa}', 'Admin\PengurusController@dataPenduduk')->name('admin.penduduk');
     });
 
     Route::get('/user','Admin\UserController@index')->name('admin.user');

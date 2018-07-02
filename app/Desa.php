@@ -10,6 +10,7 @@ class Desa extends Model
     protected $table = "desa";
     protected $casts = ['id' => 'string'];
     protected $fillable = ['admin_id'];
+    public $timestamps = false;
     
     public function kecamatan(){
         return $this->belongsTo('App\Kecamatan','id_kecamatan');

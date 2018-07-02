@@ -4,21 +4,21 @@
     </div>
     <div class='content'>
         <table class="table table-bordered" id="users-table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Username</th>
-                <th>Nama</th>
-                <th>Desa</th>
-                <th>Post</th>
-                <th>Followers</th>
-                <th>Following</th>
-                <th>Created At</th>
-                <th>Updated At</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-    </table>
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Username</th>
+                    <th>Nama</th>
+                    <th>Desa</th>
+                    <th>Post</th>
+                    <th>Followers</th>
+                    <th>Following</th>
+                    <th>Created At</th>
+                    <th>Updated At</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+        </table>
     </div>
 </div>
 @section('modal')

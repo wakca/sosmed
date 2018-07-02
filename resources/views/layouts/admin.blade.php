@@ -22,6 +22,8 @@
     <!--     Fonts and icons     -->
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
     <link href="{{ asset('adminstyle/css/pe-icon-7-stroke.css') }}" rel="stylesheet" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	
 	@yield('css')
 	

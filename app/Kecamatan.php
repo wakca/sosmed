@@ -11,7 +11,7 @@ class Kecamatan extends Model
     protected $casts = ['id' => 'string'];
 
     public function kab(){
-        return $this->belongsTo('App\Kabupaten','id_kecamatan');
+        return $this->belongsTo('App\Kabupaten','id_kabupaten');
     }
     
     public function des(){

@@ -90,14 +90,14 @@ class PengurusController extends Controller
         // $desa = Desa::find($id_kecamatan);
         return Datatables::of($desa)
             ->addColumn('action', function($desa){
-                return "<a href='/admin/pengurus/kecamatan/".$desa->id."' class='btn btn-xs btn-primary'>Pilih Pengurus</a>";
+                return "<a href='/admin/pengurus/desa/".$desa->id."/detail' class='btn btn-xs btn-primary'>Pilih Pengurus</a>";
             })
             ->addColumn('pengurus',function($desa){
                 // return $label = '11';
                 if($desa->admin_id)
                 {
                     $pengurus = \App\User::where('id', $desa->admin_id)->first();
-                    return "<a class='btn btn-xs btn-info'>".$pengurus->name ." / @".$pengurus->username."</a>";
+                    return "<a href='/".$pengurus->username."' class='btn btn-xs btn-info'>".$pengurus->name ." / @".$pengurus->username."</a>";
                 } else {
                     return "<badge class='badge badge-danger'>Belum memiliki Pengurus</badge>";
                 }
@@ -142,6 +142,32 @@ class PengurusController extends Controller
             ->rawColumns(['action'])->make(true);
         
     }
+
+    public function dataPenduduk($id_desa)
+    {
+        $penduduk = \DB::table('users')
+        ->where('desa', $id_desa);
+        
+        return Datatables::of($penduduk)
+        ->editColumn('username', function($penduduk){
+                $desa = Desa::findOrFail($penduduk->desa);
+                // return $penduduk->id;
+                if($desa->admin_id == $penduduk->id)
+                {
+                    return $penduduk->username ." <span class='label label-info'>Pengurus <i class='fa fa-check'></i></span>";
+                }
+                else {
+                    return "@".$penduduk->username;
+                }
+
+            })
+            ->addColumn('action', function($penduduk){
+                return "
+                <a href='javascript:void(0);' onclick='setPengurus(".$penduduk->id.");' class='btn btn-xs btn-info'>Set Pengurus</a> 
+                ";
+            })
+            ->rawColumns(['action', 'username'])->make(true);
+    }
     
     public function edit($id){
         $user = User::find($id);
@@ -149,72 +175,28 @@ class PengurusController extends Controller
         return view('admin.user',['data' => 'edit', 'user' => $user, 'provinsi' => $provinsi]);
     }
     
-    public function update(Request $request, $id){        
-        $validator = Validator::make($request->all(), [
-            'photo' => ($request->photo != '' ?'image|mimes:jpeg,jpg,png|max:2048|dimensions:max_width=1920':''),
-            'tgl' => 'required',
-            'bln' => 'required',
-            'thn' => 'required',
-            'name' => 'required|max:255',
-            'jk' => 'required',
-            'provinsi' => 'required',
-            'kabupaten' => 'required',
-            'kecamatan' => 'required',
-            'desa' => 'required',
-            'alamat' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:users,email,'.$id,
-            'password' => ($request->password != '' ?'required|min:6|confirmed':''),
+    public function detailDesa($id){
+        $desa = Desa::find($id);
+
+        return view('admin.pengurus.detail_desa', [
+            'desa' => $desa
         ]);
-        
-        if($validator->fails()){
-            return response()->json(['error'=>$validator->errors()->all()]);
-        }
-        
-        if($request->password != ''){
-            $password = bcrypt($request->password);
-        }
-        else{
-            $password = User::find($id)->password;
-        }
-        
-        $tgl_lahir = $request->thn.'-'.$request->bln.'-'.$request->tgl;
-        $previmage = User::find($id)->photo;
-        $dest = public_path('/photos');
-        $image = $request->photo;
-        if($image != ''){
-            $imagename = time().'.'.$image->getClientOriginalExtension();
-            $img = Image::make($image->getRealPath());
-            $img->fit(300,300,function ($constraint) {
-                $constraint->upsize();
-            });
-            $img->save($dest.'/'.$imagename,50);
-        }
-        else{
-            $imagename = $previmage;
-        }
-        if($previmage != '' && $image != ''){
-            File::delete($dest.'/'.$previmage);
-        }
-        
-        User::where('id',$id)->update([
-                      'name' => $request->name,
-                      'photo' => $imagename,
-                      'jk' => $request->jk,
-                      'tgl_lahir' => $tgl_lahir,
-                      'provinsi' => $request->provinsi,
-                      'kabupaten' => $request->kabupaten,
-                      'kecamatan' => $request->kecamatan,
-                      'desa' => $request->desa,
-                      'alamat' => $request->alamat,
-                      'email' => $request->email,
-                      'password' => $password]);
-        
-        return response()->json(['status' => 'success']);
     }
-    
-    public function destroy($id){
-        $user = User::find($id);
-        $user->delete();
-        return Response()->json(['status'=>'success']);
+
+    public function setPengurus($id_user)
+    {
+        // return response()->json(['message' => 'Berhasil mengganti Pengurus Desa']);
+        $user = User::findOrFail($id_user);
+        $desa = $user->asal_desa;
+
+        $desa->admin_id = $user->id;
+        if($desa->save())
+        {
+            $respon = [
+                'message' => 'Berhasil mengganti Pengurus Desa',
+                'penduduk' => $user->username
+            ];
+            return response()->json($respon);
+        }
     }
 }
