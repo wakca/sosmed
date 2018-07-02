@@ -29,7 +29,7 @@
                 <td>
                     <div id="pengurus">
                         @if($desa->admin_id)
-                        {{ $desa->pengurus->first()->name }} <span class="label label-success"><i class="fa fa-lg fa-check"></i></span>
+                        {{ $desa->pengurus->name }} <span class="label label-success"><i class="fa fa-lg fa-check"></i></span>
                         @else
                         <span class="label label-danger">Belum Ada Pengurus</span>
                         @endif

@@ -25,7 +25,7 @@ class Desa extends Model
     }
 
     public function pengurus(){
-        return $this->hasMany('App\User', 'desa');
+        return $this->belongsTo('App\User', 'admin_id');
     }
 
     public function penduduk()
