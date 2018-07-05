@@ -53,8 +53,11 @@ class PengurusController extends Controller
                     ->select("*")->get();
         
         return Datatables::of($provinsi)
-            ->addColumn('action', function($user){
-                return "<a href='/admin/pengurus/kabupaten/".$user->id."' class='btn btn-xs btn-primary'>Pilih</a>";
+            ->addColumn('action', function($provinsi){
+                return "<a href='/admin/pengurus/kabupaten/".$provinsi->id."' class='btn btn-xs btn-primary'>Pilih</a>";
+            })
+            ->addColumn('jumlah_user', function($provinsi){
+                return count(Provinsi::find($provinsi->id)->user);
             })
             ->rawColumns(['action'])->make(true);
     }
@@ -68,6 +71,9 @@ class PengurusController extends Controller
             ->addColumn('action', function($kabupaten){
                 return "<a href='/admin/pengurus/kecamatan/".$kabupaten->id."' class='btn btn-xs btn-primary'>Pilih</a>";
             })
+            ->addColumn('jumlah_user', function($kabupaten){
+                return count(Kabupaten::find($kabupaten->id)->user);
+            })
             ->rawColumns(['action'])->make(true);
     }
 
@@ -80,6 +86,9 @@ class PengurusController extends Controller
             ->addColumn('action', function($kecamatan){
                 return "<a href='/admin/pengurus/desa/".$kecamatan->id."' class='btn btn-xs btn-primary'>Pilih</a>";
             })
+            ->addColumn('jumlah_user', function($kecamatan){
+                return count(Kecamatan::find($kecamatan->id)->user);
+            })
             ->rawColumns(['action'])->make(true);
     }
 
@@ -91,6 +100,9 @@ class PengurusController extends Controller
         return Datatables::of($desa)
             ->addColumn('action', function($desa){
                 return "<a href='/admin/pengurus/desa/".$desa->id."/detail' class='btn btn-xs btn-primary'>Pilih Pengurus</a>";
+            })
+            ->addColumn('jumlah_user', function($desa){
+                return count(Desa::find($desa->id)->user);
             })
             ->addColumn('pengurus',function($desa){
                 // return $label = '11';
@@ -154,7 +166,7 @@ class PengurusController extends Controller
                 // return $penduduk->id;
                 if($desa->admin_id == $penduduk->id)
                 {
-                    return $penduduk->username ." <span class='label label-info'>Pengurus <i class='fa fa-check'></i></span>";
+                    return "@".$penduduk->username ."<br><span class='label label-info'>Pengurus <i class='fa fa-check'></i></span>";
                 }
                 else {
                     return "@".$penduduk->username;

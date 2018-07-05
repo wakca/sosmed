@@ -9,6 +9,7 @@
                 <th>Kode</th>
                 <th>Nama</th>
                 <th>Pengurus</th>
+                <th>Jumlah User</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -35,6 +36,7 @@ $(function() {
             { data: 'id', name: 'id' },
             { data: 'nama', name: 'nama' },
             { data: 'pengurus', name: 'pengurus', orderable: false, searchable:false },
+            { data: 'jumlah_user', name: 'jumlah_user' },
             { data: 'action', name: 'action', orderable: false, searchable:false }
         ]
     });

@@ -57,8 +57,8 @@
                 </div>
             </div>
             <div class='hidden-div'>{{ $stories-> links() }}</div>
-            <div class='center-text' id='load-more'>
-                        </div>
+                <div class='center-text' id='load-more'>
+            </div>
         </div>
     </div>
 </div>

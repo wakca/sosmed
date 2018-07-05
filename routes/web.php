@@ -15,6 +15,13 @@ Route::get('/', 'HomeController@index')->name('index');
 Route::get('/beranda','HomeController@beranda')->middleware(['auth','checkname']);
 Auth::routes();
 
+//Halaman Desa
+Route::group(['prefix' => 'profil_desa/{id_desa}'], function($id_desa){
+    Route::get('/beranda', 'ProfilDesaCotroller@index')->name('profil_desa.beranda');
+    Route::get('/story', 'ProfilDesaCotroller@story')->name('profil_desa.story');
+    Route::get('/peta', 'ProfilDesaCotroller@peta')->name('profil_desa.peta');
+});
+
 //superadmin
 Route::group(['prefix' => 'superadmin'], function () {
     Route::get('/', 'SuperAdmin\DashboardController@index')->name('super.dashboard'); 

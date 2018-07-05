@@ -7,7 +7,8 @@
         <thead>
             <tr>
                 <th>Kode</th>
-                <th>Nama</th>
+                <th>Nama Provinsi</th>
+                <th>Jumlah User</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -33,6 +34,7 @@ $(function() {
         columns: [
             { data: 'id', name: 'id' },
             { data: 'nama', name: 'nama' },
+            { data: 'jumlah_user', name: 'jumlah_user' },
             { data: 'action', name: 'action', orderable: false, searchable:false }
         ]
     });
