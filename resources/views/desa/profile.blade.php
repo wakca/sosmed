@@ -32,11 +32,18 @@ Desa {{ $desa->nama }}
                 <td>:</td>
                 <td><strong>{{ $desa->kecamatan->kab->prov->nama }}</strong> ({{ $desa->kecamatan->kab->prov->id }})</td>
             </tr>
+            <tr>
+                <td>Admin Desa</td>
+                <td>:</td>
+                <td>{{ $desa->pengurus->nama }} user</td>
+            </tr>
+            <tr>
+                <td>Jumlah User Terdaftar</td>
+                <td>:</td>
+                <td>{{ $desa->user->count() }} user</td>
+            </tr>
         </table>
     </div>
 </div>
 <br>
-
-
-
 @endsection
