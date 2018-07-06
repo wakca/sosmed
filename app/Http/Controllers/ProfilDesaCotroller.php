@@ -36,6 +36,8 @@ class ProfilDesaCotroller extends Controller
         $desa = Desa::findOrFail($id_desa);
         $provinsi = Provinsi::all();
 
+        header('Access-Control-Allow-Origin: *');
+
         return view('desa.peta', [
             'desa' => $desa,
             'provinsi' => $provinsi

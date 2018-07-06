@@ -27,11 +27,14 @@ Peta Desa {{ $desa->nama }}
 @endsection
 
 @section('sidebar_peta')
-<h2>test</h2>
+{{-- @include('desa.sidebar_peta') --}}
 @endsection
 
 @section('styles')
 @endsection
 
 @section('scripts')
+<script>
+    createCORSRequest('GET', 'https://petadesa.klikdesa.com/mod/filekat.php?desaid=3205200005');
+</script>
 @endsection
