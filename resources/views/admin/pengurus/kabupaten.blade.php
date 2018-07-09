@@ -34,7 +34,7 @@ $(function() {
         columns: [
             { data: 'id', name: 'id' },
             { data: 'nama', name: 'nama' },
-            { data: 'jumlah_user', name: 'jumlah_user', orderable: false, searchable:false  },
+            { data: 'user', name: 'user', orderable: true },
             { data: 'action', name: 'action', orderable: false, searchable:false }
         ]
     });

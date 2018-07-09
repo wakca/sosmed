@@ -49,46 +49,57 @@ class PengurusController extends Controller
 
     public function dataProvinsi()
     {
-        $provinsi = \DB::table("provinsi")
-                    ->select("*")->get();
+
+        // $query = "SELECT id, nama, (SELECT count(DISTINCT id) FROM users WHERE provinsi = provinsi.id) as jumlah_user FROM provinsi";
+        // return $provinsi = \DB::select(\DB::raw($query));
+        // $provinsi = \DB::table("provinsi")
+                    // ->select("*")->get();
         
+        $provinsi = \DB::table("provinsi")
+        ->select("*")->get();
         return Datatables::of($provinsi)
+            // ->editColumn('user', function($provinsi){
+                // return $provinsi->user->count();
+                // return "<a href='/admin/pengurus/desa/".$provinsi->id."' class='btn btn-xs btn-primary'>Pilih</a>";
+            // })
+            ->addColumn('user', function($provinsi){
+                return Provinsi::find($provinsi->id)->user->count();
+            })
             ->addColumn('action', function($provinsi){
                 return "<a href='/admin/pengurus/kabupaten/".$provinsi->id."' class='btn btn-xs btn-primary'>Pilih</a>";
             })
-            ->addColumn('jumlah_user', function($provinsi){
-                return count(Provinsi::find($provinsi->id)->user);
-            })
-            ->rawColumns(['action'])->make(true);
+            ->rawColumns(['action'])->make('true');
     }
 
     public function dataKabupaten($id_provinsi)
     {
-        $kabupaten = \DB::table('kabupaten')
-        ->where('id_provinsi', $id_provinsi);
+        $kabupaten = \DB::table("kabupaten")
+        ->where('id_provinsi', $id_provinsi)->get();
         
         return Datatables::of($kabupaten)
             ->addColumn('action', function($kabupaten){
                 return "<a href='/admin/pengurus/kecamatan/".$kabupaten->id."' class='btn btn-xs btn-primary'>Pilih</a>";
             })
-            ->addColumn('jumlah_user', function($kabupaten){
-                return count(Kabupaten::find($kabupaten->id)->user);
-                // return 'asu';
+            ->editColumn('user', function($kabupaten){
+                return Kabupaten::find($kabupaten->id)->user->count();
+                // return "<a href='/admin/pengurus/desa/".$provinsi->id."' class='btn btn-xs btn-primary'>Pilih</a>";
             })
             ->rawColumns(['action'])->make(true);
     }
 
     public function dataKecamatan($id_kabupaten)
     {
-        $kecamatan = \DB::table('kecamatan')
-        ->where('id_kabupaten', $id_kabupaten);
+        $kecamatan = \DB::table("kecamatan")
+        ->where('id_kabupaten', $id_kabupaten)->get();
         
         return Datatables::of($kecamatan)
+            
             ->addColumn('action', function($kecamatan){
                 return "<a href='/admin/pengurus/desa/".$kecamatan->id."' class='btn btn-xs btn-primary'>Pilih</a>";
             })
-            ->addColumn('jumlah_user', function($kecamatan){
+            ->editColumn('user', function($kecamatan){
                 return count(Kecamatan::find($kecamatan->id)->user);
+                // return "<a href='/admin/pengurus/desa/".$provinsi->id."' class='btn btn-xs btn-primary'>Pilih</a>";
             })
             ->rawColumns(['action'])->make(true);
     }
@@ -96,7 +107,7 @@ class PengurusController extends Controller
     public function dataDesa($id_kecamatan)
     {
         $desa = \DB::table('desa')
-        ->where('id_kecamatan', $id_kecamatan);
+        ->where('id_kecamatan', $id_kecamatan)->get();
         // $desa = Desa::find($id_kecamatan);
         return Datatables::of($desa)
             ->addColumn('action', function($desa){
