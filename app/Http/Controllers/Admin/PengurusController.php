@@ -73,6 +73,7 @@ class PengurusController extends Controller
             })
             ->addColumn('jumlah_user', function($kabupaten){
                 return count(Kabupaten::find($kabupaten->id)->user);
+                // return 'asu';
             })
             ->rawColumns(['action'])->make(true);
     }
