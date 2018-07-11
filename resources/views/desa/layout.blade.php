@@ -16,7 +16,7 @@
     <!-- Custom CSS: You can use this stylesheet to override any Bootstrap styles and/or apply your own styles -->
     <link href="{!! asset('css/custom.css') !!}" rel="stylesheet">
 
-    <link rel="stylesheet" type="text/css" href="{!! asset('assets/css/font-awesome.min.css') !!}" id="color"/>
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" id="color"/>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -163,22 +163,22 @@
 							<div class="row">
 								<div class="col-xs-6">
 									<a href="#" class="thumbnail">
-										<img src="/public/js/holder.min.js/110x80" alt="">
+										<img src="#" alt="">
 									</a>
 								</div>
 								<div class="col-xs-6">
 									<a href="#" class="thumbnail">
-										<img src="/public/js/holder.min.js/110x80" alt="">
+										<img src="#" alt="">
 									</a>
 								</div>
 								<div class="col-xs-6">
 									<a href="#" class="thumbnail">
-										<img src="/public/js/holder.min.js/110x80" alt="">
+										<img src="#" alt="">
 									</a>
 								</div>
 								<div class="col-xs-6">
 									<a href="#" class="thumbnail">
-										<img src="/public/js/holder.min.js/110x80" alt="">
+										<img src="#" alt="">
 									</a>
 								</div>
 							</div>
@@ -224,9 +224,6 @@
     <!-- Bootstrap Core JavaScript -->
     <script src="{!! asset('js/bootstrap.min.js') !!}"></script>
 
-	<!-- Placeholder Images -->
-	<script src="{!! asset('js/holder.min.js') !!}"></script>
-
     <script src="{!! asset('js/sosmed_share.min.js') !!}"></script>
 
     <!--Social Links -->
@@ -243,37 +240,6 @@
             return false;
         }
 
-    </script>
-
-    <script>
-        function createCORSRequest(method, url) {
-            var xhr = new XMLHttpRequest();
-            if ("withCredentials" in xhr) {
-
-                // Check if the XMLHttpRequest object has a "withCredentials" property.
-                // "withCredentials" only exists on XMLHTTPRequest2 objects.
-                xhr.open(method, url, true);
-
-            } else if (typeof XDomainRequest != "undefined") {
-
-                // Otherwise, check if XDomainRequest.
-                // XDomainRequest only exists in IE, and is IE's way of making CORS requests.
-                xhr = new XDomainRequest();
-                xhr.open(method, url);
-
-            } else {
-
-                // Otherwise, CORS is not supported by the browser.
-                xhr = null;
-
-            }
-                return xhr;
-            }
-
-            var xhr = createCORSRequest('GET', url);
-            if (!xhr) {
-            throw new Error('CORS not supported');
-        }
     </script>
 
     @yield('scripts')

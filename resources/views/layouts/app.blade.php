@@ -38,9 +38,9 @@
                 <div class="navbar-header">
                     @if (Auth::guest())
                         <ul class="nav nav-pills navbar-toggle collapsed">
-                                <!-- Authentication Links -->
-                                    <li><a href="{{ route('login') }}">Masuk</a></li>
-                                    <li><a href="{{ route('register') }}">Daftar</a></li>
+                            <!-- Authentication Links -->
+                            <li><a href="{{ route('login') }}">Masuk</a></li>
+                            <li><a href="{{ route('register') }}">Daftar</a></li>
                         </ul>
                     @else
                     <!-- Collapsed Hamburger -->
@@ -72,6 +72,7 @@
                             <li><a href='/story'>Story</a></li>
                             <li><a href='/notifications'>Pemberitahuan <span id='notif'></span></a></li>
                             <li><a href='/messages'>Pesan <span id='message'></span></a></li>
+                            <li><a href='/desa'>Kanal Desa <span id='message'></span></a></li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                     <i class='glyphicon glyphicon-user'></i> {{ isset(Auth::user()->name)?Auth::user()->name : Auth::user()->username }} <span class="caret"></span>
