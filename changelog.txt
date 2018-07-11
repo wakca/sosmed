@@ -14,10 +14,10 @@ Profil Desa akan dibuat :
 7. Profil Desa (Using Text Editor @Web Admin / CKEditor)
 --------------------------
 Changes
-1. Penambahan table selayang_pandang
-2. Penambahan table organisasi_desa
-3. Penambahan table produk_unggulan
-4. Penambahan table galeri_desa
-5. Penambahan table proyek_desa
-6. Penambahan table profil_desa
+1. Penambahan table selayang_pandang & Model App\SelayangPandang.php
+2. Penambahan table organisasi_desa & Model App\OrganisasiDesa.php
+3. Penambahan table produk_unggulan & Model App\ProdukUnggulan.php
+4. Penambahan table galeri_desa & Model App\GaleriDesa.php
+5. Penambahan table proyek_desa & Model App\ProyekDesa.php
+6. Penambahan table profil_desa & Model App\ProfilDesa.php
 ::: Ends
