@@ -35,12 +35,24 @@ Desa {{ $desa->nama }}
             <tr>
                 <td>Admin Desa</td>
                 <td>:</td>
-                <td>{{ $desa->pengurus->nama }} user</td>
+                <td>
+                    @if($desa->pengurus)
+                        {{ $desa->pengurus->nama }} / @{{ $desa->pengurus->username }}
+                    @else
+                        Belum ada Pengurus
+                    @endif
+                </td>
             </tr>
             <tr>
                 <td>Jumlah User Terdaftar</td>
                 <td>:</td>
-                <td>{{ $desa->user->count() }} user</td>
+                <td>
+                    @if($desa->user)
+                    {{ $desa->user->count() }} user
+                    @else
+                    Belum ada User
+                    @endif
+                </td>
             </tr>
         </table>
     </div>
