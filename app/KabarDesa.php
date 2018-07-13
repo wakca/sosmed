@@ -4,13 +4,13 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ProyekDesa extends Model
+class KabarDesa extends Model
 {
-    protected $table = 'proyek_desa';
+    protected $table = 'kabar_desa';
 
     public $timestamps = false;
 
-    public function desa()
+    public function des()
     {
         return $this->belongsTo('App\Desa', 'desa');
     }

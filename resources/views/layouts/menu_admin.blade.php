@@ -1,4 +1,6 @@
 <ul class="nav">
+    <!-- Super Admin -->
+    @if(Auth::user()->level == 3)
     <li @if(Request::segment(2) == 'dashboard') class="active" @endif>
         <a href="{{ route('admin.dashboard') }}">
             <i class="pe-7s-graph"></i>
@@ -43,4 +45,23 @@
             <p>Comment</p>
         </a>
     </li>
+    <!-- /Super Admin -->
+
+    <!-- Admin Desa -->
+    @elseif(Auth::user()->level == 2)
+    <li @if(Request::segment(2) == 'dashboard') class="active" @endif>
+        <a href="{{ route('admin_desa.dashboard') }}">
+            <i class="pe-7s-graph"></i>
+            <p>Dashboard</p>
+        </a>
+    </li>
+
+    <li @if(Request::segment(2) == 'konten_desa') class="active" @endif>
+        <a href="{{ route('admin_desa.content') }}">
+            <i class="fa fa-file-o"></i>
+            <p>Konten Desa</p>
+        </a>
+    </li>
+    @endif
+    <!-- /Admin Desa -->
 </ul>

@@ -79,9 +79,9 @@
                     <li @if(Request::segment(3) == 'beranda') class="active" @endif>
                         <a href="{{ route('profil_desa.beranda', $desa->id) }}">Beranda</a>
                     </li>
-                    <li>
-                        <a href="#">Tentang Desa</a>
-                    </li>
+                    <li @if(Request::segment(3) == 'berita') class="active" @endif>
+                            <a href="{{ route('profil_desa.peta', $desa->id) }}">Berita</a>
+                        </li>
                     <li @if(Request::segment(3) == 'peta') class="active" @endif>
                         <a href="{{ route('profil_desa.peta', $desa->id) }}">Peta</a>
                     </li>
@@ -120,24 +120,21 @@
                     Informasi Desa
                 </h2>
                 <ul class="list-group">
-                    <li class="list-group-item"><a href="javascript:void(0);" id="org">Struktur Organisasi</a></li>
-                    <li class="list-group-item"><a href="javascript:void(0);" id="rt">Struktur RT dan RW</a></li>
-                    <li class="list-group-item"><a href="javascript:void(0);" id="demo">Demografi</a></li>
-                    <li class="list-group-item"><a href="javascript:void(0);" id="topo">Topologi</a></li>
-                    <li class="list-group-item"><a href="javascript:void(0);" id="sosek">Sosial Ekonomi</a></li>
-                    <li class="list-group-item"><a href="javascript:void(0);" id="uang">Keuangan</a></li>
-                    <li class="list-group-item"><a href="javascript:void(0);" id="keg">Kabar dari Desa</a></li>
-                    <li class="list-group-item"><a href="javascript:void(0);" id="produk">Produk Unggulan</a></li>
-                    <li class="list-group-item"><a href="javascript:void(0);" id="rutilahu">Rumah Tidak Layak Huni</a></li>
-                    <li class="list-group-item"><a href="javascript:void(0);" id="proyek">Data Proyek</a></li>
-                    <li class="list-group-item"><a href="javascript:void(0);" id="kontak">Kontak</a></li>
+                    <li class="list-group-item"><a href="javascript:void(0);" id="selayang_pandang">Selayang Pandang</a></li>
+                    <li class="list-group-item"><a href="javascript:void(0);" id="produk_unggulan">Produk Unggulan</a></li>
+                    <li class="list-group-item"><a href="javascript:void(0);" id="profil_desa">Profil Desa</a></li>
+                    <li class="list-group-item"><a href="javascript:void(0);" id="kabar_desa">Kabar Desa</a></li>
+                    <li class="list-group-item"><a href="javascript:void(0);" id="proyek_desa">Data Proyek</a></li>
+                    <li class="list-group-item"><a href="javascript:void(0);" id="galeri_desa">Galeri Desa</a></li>
+                    <li class="list-group-item"><a href="javascript:void(0);" id="organisasi_desa">Organisasi Desa</a></li>
+                    <li class="list-group-item"><a href="javascript:void(0);" id="dokumen_desa">Dokumen Desa</a></li>
                 </ul>
             </div>
         </div>
     </div>
 
 
-	<footer>
+	{{-- <footer>
 		<div class="footer-blurb">
 			<div class="container">
 				<div class="row">
@@ -215,7 +212,7 @@
     			</div>
         	</div>
         </div>
-	</footer>
+	</footer> --}}
 
 
     <!-- jQuery -->

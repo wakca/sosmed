@@ -32,5 +32,40 @@ class Desa extends Model
     {
         return $this->hasMany('App\User', 'desa');
     }
+
+    public function selayang_pandang()
+    {
+        return $this->hasOne('App\SelayangPandang', 'desa');
+    }
+
+    public function dokumen()
+    {
+        return $this->hasMany('App\DokumenDesa', 'desa');
+    }
+
+    public function organisasi_desa()
+    {
+        return $this->hasOne('App\OrganisasiDesa', 'desa');
+    }
+
+    public function profil_desa()
+    {
+        return $this->hasOne('App\ProfilDesa', 'desa');
+    }
+
+    public function produk_unggulan()
+    {
+        return $this->hasOne('App\ProdukUnggulan', 'desa');
+    }
+
+    public function proyek_desa()
+    {
+        return $this->hasMany('App\ProyekDesa', 'desa');
+    }
+
+    public function kabar_desa()
+    {
+        return $this->hasOne('App\KabarDesa', 'desa');
+    }
     
 }

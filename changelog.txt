@@ -1,7 +1,6 @@
 Please don't delete this File...
 
-07/11/2018 - 23:00 WIB.
-
+07/11/2018 - 10:55 WIB by WA Call.
 @antoniosai ::: -- Start
 Profil Desa akan dibuat :
 --------------------------
@@ -20,4 +19,13 @@ Changes
 4. Penambahan table galeri_desa & Model App\GaleriDesa.php
 5. Penambahan table proyek_desa & Model App\ProyekDesa.php
 6. Penambahan table profil_desa & Model App\ProfilDesa.php
+::: Ends
+
+07/11/2018 - 10:55 WIB by WA Call.
+@antoniosai ::: --Start
+Dokumen Desa
+1. Dokumen desa (bukan text editor tetapi list dokumen yg bisa di download) misalnya download perdes, dll
+-----------------------
+Changes :
+1. Penambahan table dokumen_desa & Model App\DokumenDesa.php
 ::: Ends

@@ -13,6 +13,19 @@
 
 Route::get('/', 'HomeController@index')->name('index');
 Route::get('/beranda','HomeController@beranda')->middleware(['auth','checkname']);
+
+Route::group(['prefix' => 'api'], function(){
+    Route::group(['prefix' => 'konten_desa/{desa_id}'], function(){
+        Route::get('selayang_pandang', 'Api\ContentController@selayang_pandang');
+        Route::get('profil_desa', 'Api\ContentController@profil_desa');
+        Route::get('proyek_desa', 'Api\ContentController@proyek_desa');
+        Route::get('organisasi_desa', 'Api\ContentController@organisasi_desa');
+        Route::get('produk_unggulan', 'Api\ContentController@produk_unggulan');
+        Route::get('galeri_desa', 'Api\ContentController@galeri_desa');
+        Route::get('kabar_desa', 'Api\ContentController@kabar_desa');
+    });
+});
+
 Auth::routes();
 
 //Halaman Desa
@@ -22,9 +35,26 @@ Route::group(['prefix' => 'profil_desa/{id_desa}'], function($id_desa){
     Route::get('/peta', 'ProfilDesaCotroller@peta')->name('profil_desa.peta');
 });
 
-//superadmin
-Route::group(['prefix' => 'superadmin'], function () {
-    Route::get('/', 'SuperAdmin\DashboardController@index')->name('super.dashboard'); 
+//admin_desa
+Route::group(['prefix' => 'admin_desa'], function () {
+    Route::get('dashboard', 'AdminDesa\DashboardController@index')->name('admin_desa.dashboard'); 
+
+    Route::group(['prefix' => 'konten_desa/'], function(){
+
+        Route::get('/', 'AdminDesa\ContentController@index')->name('admin_desa.content');
+
+        Route::get('edit/{slug}', 'AdminDesa\ContentController@edit')->name('admin_desa.content.edit');
+
+        Route::group(['prefix' => 'save'], function(){
+            Route::post('selayang_pandang', 'AdminDesa\ContentController@selayang_pandang')->name('admin_desa.content.selayang_pandang.save');
+            Route::post('profil_desa', 'AdminDesa\ContentController@profil_desa')->name('admin_desa.content.profil_desa.save');
+            Route::post('proyek_desa', 'AdminDesa\ContentController@proyek_desa')->name('admin_desa.content.proyek_desa.save');
+            Route::post('organisasi_desa', 'AdminDesa\ContentController@organisasi_desa')->name('admin_desa.content.organisasi_desa.save');
+            Route::post('produk_unggulan', 'AdminDesa\ContentController@produk_unggulan')->name('admin_desa.content.produk_unggulan.save');
+            Route::post('galeri_desa', 'AdminDesa\ContentController@galeri_desa')->name('admin_desa.content.galeri_desa.save');
+            Route::post('kabar_desa', 'AdminDesa\ContentController@kabar_desa')->name('admin_desa.content.kabar_desa.save');
+        });
+    });
 });
 
 //admin

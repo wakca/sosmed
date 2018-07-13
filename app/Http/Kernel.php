@@ -59,5 +59,6 @@ class Kernel extends HttpKernel
         'checkname' => \App\Http\Middleware\CheckName::class,
         'checkowner' => \App\Http\Middleware\CheckOwner::class,
         'admin' => \App\Http\Middleware\IsAdmin::class,
+        'admin_desa' => \App\Http\Middleware\IsAdminDesa::class,
     ];
 }

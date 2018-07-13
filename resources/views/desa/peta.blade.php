@@ -74,6 +74,41 @@ Peta Desa {{ $desa->nama }}
         console.log(api_url + 'mod/filekat.php?desaid=' + dataKec);
     });
 
+    //Database / Kategori
+    var searchIDs = [];
+    $("#vmenu li input[type=checkbox]").click(function () {
+        if ($(this).is(':checked')) {
+            $(this).parent().find(':checkbox').prop('checked', true);
+
+            searchIDs.push($(this).val());
+            console.log(searchIDs);
+
+            //with iframe
+            $("#maps").attr({
+                src: api_url + "mod/peta.php?id=" + dataKec + "&jnis=" + searchIDs,
+                height: "600px"
+            });
+            console.log(api_url + "mod/peta.php?id=" + dataKec + "&jnis=" + searchIDs);
+
+            // $.get(api_url+"mod/peta.php?id="+dataKec+"&jnis="+searchIDs, function(data){   
+            //      $("#data").html(data);
+            //  		      });
+
+        } else {
+            $(this).parent().find(':checkbox').prop('checked', false);
+            console.log($(this).val());
+            console.log(searchIDs.indexOf($(this).val()));
+            searchIDs.splice(searchIDs.indexOf($(this).val()), 1);
+            $("#maps").attr({
+                src: api_url + "mod/peta.php?id=" + dataKec + "&jnis=" + searchIDs,
+                height: "600px"
+            });
+
+            console.log(api_url + "mod/peta.php?id=" + dataKec + "&jnis=" + searchIDs);
+
+        }
+    });
+
     //Tataguna Lahan
     var searchTata = [];
     $("#vmenum li input[type=checkbox]").click(function () {
@@ -83,7 +118,7 @@ Peta Desa {{ $desa->nama }}
             searchTata.push($(this).val());
             console.log(searchTata);
             $("#maps").attr({
-                src: api_url+'/mod/petatataguna.php?opt4='+ dataKec +'&jnis='+searchTata, 
+                src: api_url+'/mod/petatataguna.php?opt4='+ dataKec +'&opt5='+searchTata, 
                 height:"600px"
             });
             // $.get("http://localhost/petanasional/mod/petatataguna.php?opt4=" + dataKec + "&jnis=" + searchTata, function (data) {
@@ -97,7 +132,7 @@ Peta Desa {{ $desa->nama }}
             console.log(searchTata.indexOf($(this).val()));
             searchTata.splice(searchTata.indexOf($(this).val()), 1);
             $("#maps").attr({
-                src: api_url+'/mod/petatataguna.php?opt4='+dataKec+'&jnis='+searchTata, 
+                src: api_url+'mod/petatataguna.php?opt4='+dataKec+'&opt5='+searchTata, 
                 height:"600px"
             });
 
@@ -117,7 +152,7 @@ Peta Desa {{ $desa->nama }}
 
 
             $("#maps").attr({
-                src: api_url+'/mod/petastatus.php?id='+dataKec+'&jnis='+searchStatus, 
+                src: api_url+'mod/petastatus.php?id='+dataKec+'&jnis='+searchStatus, 
                 height:"600px"
             });
 
