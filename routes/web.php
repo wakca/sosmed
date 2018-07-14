@@ -39,6 +39,20 @@ Route::group(['prefix' => 'profil_desa/{id_desa}'], function($id_desa){
 Route::group(['prefix' => 'admin_desa'], function () {
     Route::get('dashboard', 'AdminDesa\DashboardController@index')->name('admin_desa.dashboard'); 
 
+    //admin_desa/user
+    Route::group(['prefix' => 'user'], function(){
+        Route::get('/', 'AdminDesa\UserController@index')->name('admin_desa.user.index');
+        
+        Route::get('/list','AdminDesa\UserController@anyData')->name('admin_desa.user.data');
+    });
+
+    //admin_desa/story
+    Route::group(['prefix' => 'story'], function(){
+        Route::get('/', 'AdminDesa\StoryController@index')->name('admin_desa.asu.index');
+        
+        Route::get('/list','AdminDesa\StoryController@anyData')->name('admin_desa.story.data');
+    });
+
     Route::group(['prefix' => 'konten_desa/'], function(){
 
         Route::get('/', 'AdminDesa\ContentController@index')->name('admin_desa.content');
@@ -53,6 +67,7 @@ Route::group(['prefix' => 'admin_desa'], function () {
             Route::post('produk_unggulan', 'AdminDesa\ContentController@produk_unggulan')->name('admin_desa.content.produk_unggulan.save');
             Route::post('galeri_desa', 'AdminDesa\ContentController@galeri_desa')->name('admin_desa.content.galeri_desa.save');
             Route::post('kabar_desa', 'AdminDesa\ContentController@kabar_desa')->name('admin_desa.content.kabar_desa.save');
+            Route::post('dokumen_desa', 'AdminDesa\ContentController@dokumen_desa')->name('admin_desa.content.dokumen_desa.save');
         });
     });
 });

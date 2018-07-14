@@ -22,7 +22,7 @@ class ContentController extends Controller
             'produk_unggulan' => $this->getDesa()->produk_unggulan,
             'galeri_desa' => $this->getDesa()->galeri_desa,
             'organisasi_desa' => $this->getDesa()->organisasi_desa,
-            'dokumen_desa' => $this->getDesa()->dokumen_desa,
+            'dokumen_desa' => $this->getDesa()->dokumen,
             'proyek_desa' => $this->getDesa()->proyek_desa,
             'kabar_desa' => $this->getDesa()->kabar_desa,
         ];
@@ -33,7 +33,6 @@ class ContentController extends Controller
 
     public function edit($slug)
     {
-        // return $this->getDesa();
         $data = $this->content($slug);
 
         return view('admin_desa.content.'.$slug,[
@@ -47,42 +46,42 @@ class ContentController extends Controller
             [
                 'slug' => 'selayang_pandang',
                 'judul' => 'Selayang Pandang',
-                'data' => $this->getDesa()->selayang_pandang
+                'data' => count($this->getDesa()->selayang_pandang)
             ],
             [
                 'slug' => 'profil_desa',
                 'judul' => 'Profil Desa',
-                'data' => $this->getDesa()->profil_desa
+                'data' => count($this->getDesa()->profil_desa)
             ],
             [
                 'slug' => 'produk_unggulan',
                 'judul' => 'Produk Unggulan',
-                'data' => $this->getDesa()->produk_unggulan
+                'data' => count($this->getDesa()->produk_unggulan)
             ],
             [
                 'slug' => 'galeri_desa',
                 'judul' => 'Galeri Desa',
-                'data' => $this->getDesa()->galeri_desa
+                'data' => count($this->getDesa()->galeri_desa)
             ],
             [
                 'slug' => 'organisasi_desa',
                 'judul' => 'Organisasi Desa',
-                'data' => $this->getDesa()->organisasi_desa
+                'data' => count($this->getDesa()->organisasi_desa)
             ],
             [
                 'slug' => 'dokumen_desa',
                 'judul' => 'Dokumen Desa',
-                'data' => $this->getDesa()->dokumen_desa
+                'data' => count($this->getDesa()->dokumen)
             ],
             [
                 'slug' => 'proyek_desa',
                 'judul' => 'Proyek Desa',
-                'data' => $this->getDesa()->proyek_desa
+                'data' => count($this->getDesa()->proyek_desa)
             ],
             [
                 'slug' => 'kabar_desa',
                 'judul' => 'Kabar Desa',
-                'data' => $this->getDesa()->kabar_desa
+                'data' => count($this->getDesa()->kabar_desa)
             ]
         ];
 

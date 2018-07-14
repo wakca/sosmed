@@ -2,11 +2,11 @@
 @section('title','User')
 @section('content')
 @if($data == 'create')
-    @include('admin.user.create')
+    @include('admin_desa.user.create')
 @elseif($data == 'edit')
-    @include('admin.user.edit')
+    @include('admin_desa.user.edit')
 @else
-    @include('admin.user.index')
+    @include('admin_desa.user.index')
 @endif
 @endsection
 @section('css')

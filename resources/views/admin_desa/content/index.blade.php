@@ -26,13 +26,14 @@
                                 <td>{{ $no++ }}</td>
                                 <td>{{ $list['judul'] }}</td>
                                 <td>
-                                    @if($list['data'] == NULL || count($list['data']) == 0)
+                                    @if($list['data'] == 0)
                                         <label for="" class="label label-danger" style="color:white">Data Belum Terisi</label>
                                     @else
                                         <label for="" class="label label-success" style="color:white">Data Sudah Terisi</label>
                                     @endif
                                 </td>
                                 <td>
+                                    <a href="{{ route('admin_desa.content.edit', $list['slug']) }}" class="btn btn-xs btn-info">Preview</a>
                                     <a href="{{ route('admin_desa.content.edit', $list['slug']) }}" class="btn btn-xs btn-primary">Edit</a>
                                 </td>
                             </tr>

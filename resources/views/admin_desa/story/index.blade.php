@@ -51,7 +51,7 @@ $(function() {
    table =  $('#users-table').DataTable({
         processing: true,
         serverSide: true,
-        ajax: '{!! route('story.data') !!}',
+        ajax: '{!! route('admin_desa.story.data') !!}',
         columns: [
             { data: 'id', name: 'id' },
             { data: 'title', name: 'title' },

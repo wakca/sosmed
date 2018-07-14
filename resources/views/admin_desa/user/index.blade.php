@@ -9,13 +9,11 @@
                     <th>Id</th>
                     <th>Username</th>
                     <th>Nama</th>
-                    <th>Desa</th>
                     <th>Post</th>
                     <th>Followers</th>
                     <th>Following</th>
                     <th>Created At</th>
                     <th>Updated At</th>
-                    <th>Action</th>
                 </tr>
             </thead>
         </table>
@@ -55,18 +53,16 @@ $(function() {
    table =  $('#users-table').DataTable({
         processing: true,
         serverSide: true,
-        ajax: '{!! route('user.data') !!}',
+        ajax: '{!! route('admin_desa.user.data') !!}',
         columns: [
             { data: 'id', name: 'id' },
             { data: 'username', name: 'username' },
             { data: 'name', name: 'name' },
-            { data: 'desa', name: 'desa' },
             { data: 'numposts', name: 'numposts' },
             { data: 'numfollowers', name: 'numfollowers' },
             { data: 'numfollowing', name: 'numfollowing' },
             { data: 'created_at', name: 'created_at' },
             { data: 'updated_at', name: 'updated_at' },
-            { data: 'action', name: 'action', orderable: false, searchable:false }
         ]
     });
 });

@@ -55,11 +55,25 @@
             <p>Dashboard</p>
         </a>
     </li>
-
+    
     <li @if(Request::segment(2) == 'konten_desa') class="active" @endif>
         <a href="{{ route('admin_desa.content') }}">
             <i class="fa fa-file-o"></i>
             <p>Konten Desa</p>
+        </a>
+    </li>
+
+    <li @if(Request::segment(2) == 'user') class="active" @endif>
+        <a href="{{ route('admin_desa.user.index') }}">
+            <i class="fa fa-users"></i>
+            <p>Users</p>
+        </a>
+    </li>
+
+    <li @if(Request::segment(2) == 'story') class="active" @endif>
+        <a href="{{ route('admin_desa.asu.index') }}">
+            <i class="fa fa-list"></i>
+            <p>Story</p>
         </a>
     </li>
     @endif

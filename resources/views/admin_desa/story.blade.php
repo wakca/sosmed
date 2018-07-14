@@ -2,9 +2,9 @@
 @section('title','Story')
 @section('content')
 @if($data == 'edit')
-    @include('admin.story.edit')
+    @include('admin_desa.story.edit')
 @else
-    @include('admin.story.index')
+    @include('admin_desa.story.index')
 @endif
 @endsection
 @section('css')
