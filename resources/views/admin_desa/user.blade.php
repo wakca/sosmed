@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title','User')
+@section('title','Desa ' . $desa->nama . '('.$desa->id.') - Kec ' . $desa->kecamatan->nama . '  - ' . $desa->kecamatan->kab->nama . ' - Prov ' . $desa->kecamatan->kab->prov->nama)
 @section('content')
 @if($data == 'create')
     @include('admin_desa.user.create')

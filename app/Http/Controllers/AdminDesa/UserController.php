@@ -18,7 +18,8 @@ class UserController extends Controller
 
     public function index()
     {
-        return view('admin_desa.user',['data' => null]);
+        $desa = $this->getDesa();
+        return view('admin_desa.user',['data' => null, 'desa' => $desa]);
     }
 
     public function anyData()
