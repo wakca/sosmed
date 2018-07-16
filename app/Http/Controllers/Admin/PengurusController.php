@@ -211,6 +211,8 @@ class PengurusController extends Controller
     {
         // return response()->json(['message' => 'Berhasil mengganti Pengurus Desa']);
         $user = User::findOrFail($id_user);
+        $user->level = 2;
+        $user->save();
         $desa = $user->asal_desa;
 
         $desa->admin_id = $user->id;
