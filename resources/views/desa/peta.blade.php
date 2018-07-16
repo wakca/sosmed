@@ -68,7 +68,7 @@ Peta Desa {{ $desa->nama }}
     // var xhr = createCORSRequest('GET', api_url);
 
     var dataKec = '{{ $desa->id }}';
-    var api_url = 'https://peta.itsinergi.id/';
+    var api_url = 'http://peta.itsinergi.id/';
 
 
     $.get(api_url + 'mod/filekat.php?desaid=' + dataKec, function (data) {
