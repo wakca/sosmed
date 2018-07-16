@@ -65,7 +65,7 @@
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
                         @if (Auth::guest())
-                            <li><a href="{{ route('login') }}">Masuk</a></li>
+                            <li><a href="{{ route('login') }}">Login</a></li>
                             <li><a href="{{ route('register') }}">Daftar</a></li>
                         @else
                             <li><a href='/beranda'>Beranda</a></li>
