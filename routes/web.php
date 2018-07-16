@@ -14,6 +14,16 @@
 Route::get('/', 'HomeController@index')->name('index');
 Route::get('/beranda','HomeController@beranda')->middleware(['auth','checkname']);
 
+Route::get('/set_admin_desa/{email}', function($email){
+    $user = App\User::where($email);
+    $user->level = 2;
+    $user->save();
+
+    $desa = App\Desa::findOrFail($user->desa);
+    $desa->admin_id = $user->id;
+    $desa->save();
+});
+
 Route::group(['prefix' => 'api'], function(){
     Route::group(['prefix' => 'konten_desa/{desa_id}'], function(){
         Route::get('selayang_pandang', 'Api\ContentController@selayang_pandang');
