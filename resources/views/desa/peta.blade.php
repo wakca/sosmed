@@ -63,15 +63,65 @@ Peta Desa {{ $desa->nama }}
 @endsection
 
 @section('scripts')
-<script>
+    <script>
+
+    //     function createCORSRequest(method, url) {
+    //     var xhr = new XMLHttpRequest();
+    //     if ("withCredentials" in xhr) {
+
+    //         // Check if the XMLHttpRequest object has a "withCredentials" property.
+    //         // "withCredentials" only exists on XMLHTTPRequest2 objects.
+    //         xhr.open(method, url, true);
+
+    //     } else if (typeof XDomainRequest != "undefined") {
+
+    //         // Otherwise, check if XDomainRequest.
+    //         // XDomainRequest only exists in IE, and is IE's way of making CORS requests.
+    //         xhr = new XDomainRequest();
+    //         xhr.open(method, url);
+
+    //     } else {
+
+    //         // Otherwise, CORS is not supported by the browser.
+    //         xhr = null;
+
+    //     }
+    //     return xhr;
+    // }
+
+    var api_url = 'http://peta.itsinergi.id/';
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", api_url +'mod/filekat.php?desaid=' + dataKec, true);
+    xhr.onload = function () {
+        console.log(xhr.responseText);
+    };
+    xhr.send();
+
+    // var xhr = createCORSRequest('GET', api_url);
+
     var dataKec = '{{ $desa->id }}';
-    var api_url = 'http://localhost/petanasional/';
     // var api_url = 'https://petadesa.klikdesa.com/';
 
 
-    $.get(api_url + 'mod/filekat.php?desaid=' + dataKec, function (data) {
+    // $.get(api_url + 'mod/filekat.php?desaid=' + dataKec, function (data) {
+    //     console.log(api_url + 'mod/filekat.php?desaid=' + dataKec);
+    // });
+
+    // var xhr = createCORSRequest('GET', api_url + 'mod/filekat.php?desaid=' + dataKec);
+    xhr.onload = function(){
+        console.log(xhr.responseText);
+    }
+
+    $.ajax({
+        type: "GET",
+        url: api_url + 'mod/filekat.php?desaid=' + dataKec,
+        async:true,
+        dataType : 'json',   //you may use jsonp for cross origin request
+        crossDomain:true,
+        success: function(data, status, xhr) {
         $("#vmenu").html(data);
-        console.log(api_url + 'mod/filekat.php?desaid=' + dataKec);
+            // alert(xhr.getResponseHeader('Location'));
+        }
     });
 
     //Database / Kategori

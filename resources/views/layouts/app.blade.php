@@ -39,7 +39,7 @@
                     @if (Auth::guest())
                         <ul class="nav nav-pills navbar-toggle collapsed">
                             <!-- Authentication Links -->
-                            <li><a href="{{ route('login') }}">Masuk</a></li>
+                            <li><a href="{{ route('login') }}">Login</a></li>
                             <li><a href="{{ route('register') }}">Daftar</a></li>
                         </ul>
                     @else

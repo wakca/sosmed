@@ -46,27 +46,27 @@ class ContentController extends Controller
             [
                 'slug' => 'selayang_pandang',
                 'judul' => 'Selayang Pandang',
-                'data' => count($this->getDesa()->selayang_pandang)
+                'data' => $this->getDesa()->selayang_pandang
             ],
             [
                 'slug' => 'profil_desa',
                 'judul' => 'Profil Desa',
-                'data' => count($this->getDesa()->profil_desa)
+                'data' => $this->getDesa()->profil_desa
             ],
             [
                 'slug' => 'produk_unggulan',
                 'judul' => 'Produk Unggulan',
-                'data' => count($this->getDesa()->produk_unggulan)
+                'data' => $this->getDesa()->produk_unggulan
             ],
             [
                 'slug' => 'galeri_desa',
                 'judul' => 'Galeri Desa',
-                'data' => count($this->getDesa()->galeri_desa)
+                'data' => $this->getDesa()->galeri_desa
             ],
             [
                 'slug' => 'organisasi_desa',
                 'judul' => 'Organisasi Desa',
-                'data' => count($this->getDesa()->organisasi_desa)
+                'data' => $this->getDesa()->organisasi_desa
             ],
             [
                 'slug' => 'dokumen_desa',
@@ -81,7 +81,7 @@ class ContentController extends Controller
             [
                 'slug' => 'kabar_desa',
                 'judul' => 'Kabar Desa',
-                'data' => count($this->getDesa()->kabar_desa)
+                'data' => $this->getDesa()->kabar_desa
             ]
         ];
 
@@ -188,6 +188,24 @@ class ContentController extends Controller
         if($model->save())
         {
             return redirect()->route('admin_desa.content');
+        }
+    }
+
+    public function dokumen_desa(Request $request)
+    {
+        if ($request->hasFile('file')) {
+            $file = $request->file('file');
+
+            $randomNumber = rand(000,999);
+
+            $filename = $randomNumber.$file->getClientOriginalName();
+
+            $destinationPath = 'uploads/pengumuman';
+            // $pengumuman->gambar = $destinationPath.'/'.$filename;
+            $disk = Storage::disk('google'); 
+            $disk->put($filename, $file);
+
+            // $file->move($destinationPath, $filename);
         }
     }
 }

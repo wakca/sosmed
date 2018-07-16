@@ -71,7 +71,7 @@
     </li>
 
     <li @if(Request::segment(2) == 'story') class="active" @endif>
-        <a href="{{ route('admin_desa.asu.index') }}">
+        <a href="{{ route('admin_desa.story.index') }}">
             <i class="fa fa-list"></i>
             <p>Story</p>
         </a>

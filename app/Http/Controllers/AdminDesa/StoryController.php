@@ -26,7 +26,7 @@ class StoryController extends Controller
     
     public function index()
     {
-        return view('admin_desa.story',['data' => null]);
+        return view('admin_desa.story',['data' => null, 'desa' => $this->getDesa()]);
     }
     
     /**
@@ -44,7 +44,17 @@ class StoryController extends Controller
                 return $story->tags->pluck('name')->implode(', ');
             })
             ->addColumn('action', function(Story $story){
-                return "<a href='javascript:void(0);' onclick='reportStory(".$story->id.");' class='btn btn-xs btn-danger'>Report</a>";
+
+                if($story->reported == 'Y'){
+                    // return 'reported';
+                    return "<a href='javascript:void(0);' onclick='unreportStory(".$story->id.");' class='btn btn-xs btn-success'>Batalkan Report</a>";
+                    
+                } else {
+                    // return 'unreported';
+                    return "<a href='javascript:void(0);' onclick='reportStory(".$story->id.");' class='btn btn-xs btn-danger'>Report</a>";
+
+                }
+
             })
             ->editColumn('content', function(Story $story){
                 return strlen(strip_tags($story->content)) > 100 ?substr(strip_tags($story->content),0,100)."...":strip_tags($story->content);
@@ -119,24 +129,32 @@ class StoryController extends Controller
         return response()->json(['status' => 'success']);
     }
     
-    public function destroy($id){
+    public function report($id){
+
         $story = Story::find($id);
-        $content = $story->content;
-        $dom = new \DomDocument();
-        libxml_use_internal_errors(true);
-        $dom->loadHTML('<?xml encoding="utf-8" ?>'.$content,  LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
-        $images = $dom->getElementsByTagName('img');
-        $dest   = public_path('/images');
-        foreach($images as $k => $img){
-            $data = $img->getAttribute('src');
-            if(preg_match('/images/', $data)){
-                $data = explode('images',$data);
-                $image = str_replace("/","",$data[1]);
-                File::delete($dest.'/'.$image);
-            }
+        $story->reported = 'Y';
+
+        if($story->save())
+        {
+            return response()->json([
+                'message' => 'Berhasil mereport Story #'.$story->id,
+                'status' => 'success'
+            ]);
         }
-        $story->delete();
-        return response()->json(['status' => 'success']);
+    }
+
+    public function unreport($id){
+
+        $story = Story::find($id);
+        $story->reported = 'N';
+
+        if($story->save())
+        {
+            return response()->json([
+                'message' => 'Berhasil membatalkan aksi report untuk Story #'.$story->id,
+                'status' => 'success'
+            ]);
+        }
     }
     
     public function remove($image){

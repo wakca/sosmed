@@ -48,8 +48,11 @@ Route::group(['prefix' => 'admin_desa'], function () {
 
     //admin_desa/story
     Route::group(['prefix' => 'story'], function(){
-        Route::get('/', 'AdminDesa\StoryController@index')->name('admin_desa.asu.index');
+        Route::get('/', 'AdminDesa\StoryController@index')->name('admin_desa.story.index');
         
+        Route::get('/{id}/report','AdminDesa\StoryController@report')->name('admin_desa.story.report');
+        Route::get('/{id}/unreport','AdminDesa\StoryController@unreport')->name('admin_desa.story.unreport');
+
         Route::get('/list','AdminDesa\StoryController@anyData')->name('admin_desa.story.data');
     });
 

@@ -26,7 +26,7 @@
                                 <td>{{ $no++ }}</td>
                                 <td>{{ $list['judul'] }}</td>
                                 <td>
-                                    @if($list['data'] == 0)
+                                    @if(!$list['data'])
                                         <label for="" class="label label-danger" style="color:white">Data Belum Terisi</label>
                                     @else
                                         <label for="" class="label label-success" style="color:white">Data Sudah Terisi</label>
