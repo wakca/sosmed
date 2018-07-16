@@ -1,8 +1,12 @@
-
+<?php header('Access-Control-Allow-Origin: *'); ?>
 <!DOCTYPE html>
 <!-- Template by Quackit.com -->
 <html lang="en">
 <head>
+
+    <?php
+        
+    ?>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -71,23 +75,25 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Desa {{ $desa->nama }}</a>
+                <a class="navbar-brand" href="#">@yield('title')</a>
             </div>
             <!-- Navbar links -->
             <div class="collapse navbar-collapse" id="navbar">
                 <ul class="nav navbar-nav">
-                    <li @if(Request::segment(3) == 'beranda') class="active" @endif>
-                        <a href="{{ route('profil_desa.beranda', $desa->id) }}">Beranda</a>
-                    </li>
-                    <li @if(Request::segment(3) == 'berita') class="active" @endif>
-                            <a href="{{ route('profil_desa.peta', $desa->id) }}">Berita</a>
+                    @if($desa)
+                        <li @if(Request::segment(3) == 'beranda') class="active" @endif>
+                            <a href="{{ route('profil_desa.beranda', $desa->id) }}">Beranda</a>
                         </li>
-                    <li @if(Request::segment(3) == 'peta') class="active" @endif>
-                        <a href="{{ route('profil_desa.peta', $desa->id) }}">Peta</a>
-                    </li>
-                    <li @if(Request::segment(3) == 'story') class="active" @endif>
-                        <a href="{{ route('profil_desa.story', $desa->id) }}">Story</a>
-                    </li>
+                        <li @if(Request::segment(3) == 'berita') class="active" @endif>
+                                <a href="{{ route('profil_desa.peta', $desa->id) }}">Berita</a>
+                            </li>
+                        <li @if(Request::segment(3) == 'peta') class="active" @endif>
+                            <a href="{{ route('profil_desa.peta', $desa->id) }}">Peta</a>
+                        </li>
+                        <li @if(Request::segment(3) == 'story') class="active" @endif>
+                            <a href="{{ route('profil_desa.story', $desa->id) }}">Story</a>
+                        </li>
+                    @endif
                     
                 </ul>
 
@@ -116,6 +122,7 @@
     
             <div class="col-md-4 col-xs-12">
                 @yield('sidebar_peta')
+                @if($desa)
                 <h2>
                     Informasi Desa
                 </h2>
@@ -129,6 +136,7 @@
                     <li class="list-group-item"><a href="javascript:void(0);" id="organisasi_desa">Organisasi Desa</a></li>
                     <li class="list-group-item"><a href="javascript:void(0);" id="dokumen_desa">Dokumen Desa</a></li>
                 </ul>
+                @endif
             </div>
         </div>
     </div>

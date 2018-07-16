@@ -17,7 +17,7 @@ class ContentController extends Controller
     public function selayang_pandang($desa_id)
     {
         $desa = $this->getDesa($desa_id);
-        $data = $desa->selayang_pandang->konten;
+        $data = $desa->selayang_pandang;
 
         return view('desa.content.selayang_pandang', [
             'data' => $data
@@ -39,7 +39,7 @@ class ContentController extends Controller
         $desa = $this->getDesa($desa_id);
 
         return view('desa.content.kabar_desa', [
-            'data' => $desa->kabar_desa->konten
+            'data' => $desa->kabar_desa
         ]);
     }
 
@@ -48,7 +48,7 @@ class ContentController extends Controller
         $desa = $this->getDesa($desa_id);
 
         return view('desa.content.produk_unggulan', [
-            'data' => $desa->produk_unggulan->konten
+            'data' => $desa->produk_unggulan
         ]);
     }
 

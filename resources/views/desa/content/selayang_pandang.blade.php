@@ -1,5 +1,5 @@
 @if($data)
-{!! $data !!}
+{!! $data->konten !!}
 @else
-<p>Proyek Belum Ada</p>
+<p>Belum ada Konten</p>
 @endif

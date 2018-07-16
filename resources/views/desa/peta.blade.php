@@ -60,9 +60,11 @@ Peta Desa {{ $desa->nama }}
 
 @section('styles')
 <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+
 @endsection
 
 @section('scripts')
+
     <script>
 
     // var xhr = createCORSRequest('GET', api_url);
@@ -73,6 +75,7 @@ Peta Desa {{ $desa->nama }}
 
     $.get(api_url + 'mod/filekat.php?desaid=' + dataKec, function (data) {
         console.log(api_url + 'mod/filekat.php?desaid=' + dataKec);
+        $("#vmenu").html(data);
     });
 
     //Database / Kategori

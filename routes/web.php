@@ -24,6 +24,12 @@ Route::get('/set_admin_desa/{email}', function($email){
     $desa->save();
 });
 
+Route::group(['prefix' => 'desa'], function(){
+    Route::get('/', 'DesaController@index');
+
+    Route::get('/suggest', 'DesaController@suggest')->name('desa.suggest');
+});
+
 Route::group(['prefix' => 'api'], function(){
     Route::group(['prefix' => 'konten_desa/{desa_id}'], function(){
         Route::get('selayang_pandang', 'Api\ContentController@selayang_pandang');
