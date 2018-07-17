@@ -38,8 +38,6 @@ Route::get('generate_admin_desa', function(){
                 $user->desa = $listDesa->id;
                 $user->save();
 
-                echo 'Admin Desa ' . $listDesa->nama;
-                
                 unset($user);
             } else {
                 $user = new App\User;
@@ -51,8 +49,6 @@ Route::get('generate_admin_desa', function(){
                 $user->desa = $listDesa->id;
                 $user->save();
 
-                echo 'Admin Desa ' . $listDesa->nama;
-                
                 unset($user);
             }
             unset($listDesa);
