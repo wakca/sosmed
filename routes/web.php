@@ -16,6 +16,8 @@ Route::get('/beranda','HomeController@beranda')->middleware(['auth','checkname']
 
 Route::get('generate_admin_desa', function(){
     
+    set_time_limit(20000);
+
     $desa = App\Desa::all();
     
     foreach($desa as $listDesa)
