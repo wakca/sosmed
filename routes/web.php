@@ -14,6 +14,52 @@
 Route::get('/', 'HomeController@index')->name('index');
 Route::get('/beranda','HomeController@beranda')->middleware(['auth','checkname']);
 
+Route::get('generate_admin_desa', function(){
+    
+    $desa = App\Desa::all();
+    
+    foreach($desa as $listDesa)
+    {
+        $listDesa->admin_id = $listDesa->id;
+        
+        if($listDesa->save()){
+
+            
+            $user = App\User::where('username', $listDesa->id)->first();
+            
+            if($user){
+                $user->name = 'Admin Desa ' . $listDesa->nama;
+                $user->password = bcrypt($listDesa->id);
+                $user->username = $listDesa->id;
+                $user->email = $listDesa->id.'@desa.id';
+                $user->level = 2;
+                $user->provinsi = $listDesa->kecamatan->kab->prov->id;
+                $user->kabupaten = $listDesa->kecamatan->kab->id;
+                $user->kecamatan = $listDesa->kecamatan->id;
+                $user->desa = $listDesa->id;
+                $user->save();
+                
+                unset($user);
+            } else {
+                $user = new App\User;
+                $user->name = 'Admin Desa ' . $listDesa->nama;
+                $user->password = bcrypt($listDesa->id);
+                $user->username = $listDesa->id;
+                $user->email = $listDesa->id.'@desa.id';
+                $user->level = 2;
+                $user->provinsi = $listDesa->kecamatan->kab->prov->id;
+                $user->kabupaten = $listDesa->kecamatan->kab->id;
+                $user->kecamatan = $listDesa->kecamatan->id;
+                $user->desa = $listDesa->id;
+                $user->save();
+                
+                unset($user);
+            }
+            unset($listDesa);
+        }
+    }
+});
+
 Route::get('/set_admin_desa/{email}', function($email){
     $user = App\User::where('email' ,$email)->first();
     $user->level = 2;
