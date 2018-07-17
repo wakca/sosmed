@@ -33,9 +33,6 @@ Route::get('generate_admin_desa', function(){
                 $user->username = $listDesa->id;
                 $user->email = $listDesa->id.'@desa.id';
                 $user->level = 2;
-                $user->provinsi = $listDesa->kecamatan->kab->prov->id;
-                $user->kabupaten = $listDesa->kecamatan->kab->id;
-                $user->kecamatan = $listDesa->kecamatan->id;
                 $user->desa = $listDesa->id;
                 $user->save();
                 
@@ -47,9 +44,6 @@ Route::get('generate_admin_desa', function(){
                 $user->username = $listDesa->id;
                 $user->email = $listDesa->id.'@desa.id';
                 $user->level = 2;
-                $user->provinsi = $listDesa->kecamatan->kab->prov->id;
-                $user->kabupaten = $listDesa->kecamatan->kab->id;
-                $user->kecamatan = $listDesa->kecamatan->id;
                 $user->desa = $listDesa->id;
                 $user->save();
                 
