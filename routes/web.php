@@ -35,6 +35,8 @@ Route::get('generate_admin_desa', function(){
                 $user->level = 2;
                 $user->desa = $listDesa->id;
                 $user->save();
+
+                echo 'Admin Desa ' . $listDesa->nama;
                 
                 unset($user);
             } else {
@@ -46,6 +48,8 @@ Route::get('generate_admin_desa', function(){
                 $user->level = 2;
                 $user->desa = $listDesa->id;
                 $user->save();
+
+                echo 'Admin Desa ' . $listDesa->nama;
                 
                 unset($user);
             }
