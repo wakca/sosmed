@@ -24,7 +24,7 @@
                     <tbody>
                         @php $no = 1 @endphp
                         @forelse($data as $doc)
-                        <tr>
+                        <tr id="data-{{ $doc->id }}">
                             <td>{{ $no++ }}</td>
                             <td>{{ $doc->judul }}</td>
                             <td>{{ $doc->keterangan }}</td>
@@ -32,7 +32,7 @@
                             <td>
                                 <a href="" class="btn btn-xs btn-info">Detail</a>
                                 <a href="" class="btn btn-xs btn-warning">Edit</a>
-                                <a href="" class="btn btn-xs btn-danger">Delete</a>
+                                <button onclick="deletedokumen({{ $doc->id }})" class="btn btn-xs btn-danger">Delete</button>
                             </td>
                         </tr>
                         @empty
@@ -42,7 +42,6 @@
                             </td>
                         </tr>
                         @endforelse
-                        
                     </tbody>
                 </table>
             </div>
@@ -83,16 +82,68 @@
         </div>
     </div>
 </div>
-
-
-
-
 @endsection
+
+@section('modal')
+<!-- Hapus Story -->
+<div class="modal fade" id='modal-delete-dokumen' tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">
+                    <span class='glyphicon glyphicon-exclamation-sign'></span> Hapus Dokumen</h4>
+            </div>
+            <div class="modal-body">
+                <p>Anda yakin ingin menghapus Dokumen ini ?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id='btn-delete-dokumen' class="btn btn-sm  btn-danger">
+                    <span class='glyphicon glyphicon-trash'></span> Hapus</button>
+                <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Batal</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+@endsection
+
 
 @section('js')
 <script src="https://cdn.ckeditor.com/4.10.0/standard/ckeditor.js"></script>
 
 <script>
     CKEDITOR.replace( 'konten' );
+</script>
+
+<script>
+    function deletedokumen(id) {
+        var dokumen_id = id;
+        $("#modal-delete-dokumen").modal('show');
+        $('#modal-delete-dokumen').on('hidden.bs.modal', function(){
+            dokumen_id = 0;
+        });
+        $("#btn-delete-dokumen").click(function(){
+            if (dokumen_id != 0) {
+                $.ajax({
+                    url:'/admin_desa/konten_desa/dokumen_desa/delete/'+dokumen_id,
+                    type:'GET',
+                    success:function(data){
+                        $("#modal-delete-dokumen").modal('hide');
+                        if (data.status == 'success') {
+                            $("#data-"+dokumen_id).remove();
+                        }
+                        else{
+                            window.alert('Gagal Menghapus data !');
+                        }
+                    }
+                });
+            }
+        });
+    }
 </script>
 @endsection
