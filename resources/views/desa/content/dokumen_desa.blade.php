@@ -1,4 +1,18 @@
 @if($data)
+<div class="clearfix">
+    <div class="pull-right">
+        Filter Tahun
+        <div class="btn-group">
+            @for($i = date('Y')-2; $i <= date('Y'); $i++)
+            <button class="btn btn-info btn-sm" id="tahun{{ $i }}" value="{{ $i }}">{{ $i }}</button>
+            @endfor
+            <button class="btn btn-success btn-sm" value="all">Semua</button>
+        </div>
+
+    </div>
+</div>
+<br>
+
 <table class="table table-hover table-striped table-condensed">
     <thead>
         <tr>
@@ -24,13 +38,36 @@
         @empty
         <tr>
             <td colspan="5">
-                <center><h3>Tidak ada Dokumen, Silahkan Upload</h3></center>
+                <center><h3>Tidak ada Dokumen</h3></center>
             </td>
         </tr>
         @endforelse
         
     </tbody>
 </table>
+
+
+<script>
+    $("button").click(function() {
+        var tahun = $(this).val();
+
+        if(tahun == "all")
+        {
+            console.log();
+            $.get("/api/konten_desa/"+id_desa+"/dokumen_desa/", function(data){
+                konten.html(data);
+            });
+        }
+        else 
+        {
+            $.get("/api/konten_desa/"+id_desa+"/dokumen_desa_by_tahun/"+tahun, function(data){
+                judul.html('Dokumen Desa Tahun ' + tahun);
+                konten.html(data);
+            });
+        }
+    });
+</script>
+
 @else
 <p>Dokumen Ada</p>
 @endif

@@ -99,6 +99,16 @@ class ContentController extends Controller
         ]);
     }
 
+    public function dokumen_desa_by_tahun($desa_id, $tahun)
+    {
+        $desa = $this->getDesa($desa_id);
+
+        return view('desa.content.dokumen_desa', [
+            'desa' => $desa,
+            'data' => $desa->dokumen->where('tahun', $tahun)
+        ]);
+    }
+
     public function open_dokumen($id)
     {
         $dokumen = DokumenDesa::findOrFail($id);

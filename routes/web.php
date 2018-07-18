@@ -53,6 +53,7 @@ Route::group(['prefix' => 'api'], function(){
         Route::get('galeri_desa', 'Api\ContentController@galeri_desa');
         Route::get('kabar_desa', 'Api\ContentController@kabar_desa');
         Route::get('dokumen_desa', 'Api\ContentController@dokumen_desa');
+        Route::get('dokumen_desa_by_tahun/{tahun}', 'Api\ContentController@dokumen_desa_by_tahun');
     });
 });
 
