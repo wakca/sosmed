@@ -237,6 +237,34 @@ class ContentController extends Controller
         }
     }
 
+    public function delete_dokumen($id)
+    {
+        $dokumen = DokumenDesa::findOrFail($id);
+
+        $filename = $dokumen->link;
+        // Now find that file and use its ID (path) to delete it
+        $dir = '/';
+        $recursive = false; // Get subdirectories also?
+        $contents = collect(Storage::cloud()->listContents($dir, $recursive));
+        $file = $contents
+            ->where('type', '=', 'file')
+            ->where('filename', '=', pathinfo($filename, PATHINFO_FILENAME))
+            ->where('extension', '=', pathinfo($filename, PATHINFO_EXTENSION))
+            ->first(); // there can be duplicate file names!
+        $deletingFile = Storage::cloud()->delete($file['path']);
+
+        if($deletingFile)
+        {
+            $dokumen->delete();
+
+            return response()->json([
+                'message' => 'Berhasil menghapus Dokumen',
+                'status' => 'success'
+            ]);
+        }
+        
+    }
+
     public function open_dokumen($id)
     {
         $dokumen = DokumenDesa::findOrFail($id);

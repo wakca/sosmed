@@ -17,22 +17,20 @@ Route::get('/beranda','HomeController@beranda')->middleware(['auth','checkname']
 
 Route::get('gdrive', function(){
 
-    $filename = '427Peta-Tataguna Lahan.PNG';
+    $filename = 'test1121.txt';
+    // First we need to create a file to delete
+    Storage::cloud()->makeDirectory('Test Dir');
+    // Now find that file and use its ID (path) to delete it
     $dir = '/';
     $recursive = false; // Get subdirectories also?
-    $contents = collect(Storage::disk('google')->listContents($dir, $recursive));
+    $contents = collect(Storage::cloud()->listContents($dir, $recursive));
     $file = $contents
-    ->where('type', '=', 'file')
-    ->where('filename', '=', pathinfo($filename, PATHINFO_FILENAME))
-    ->where('extension', '=', pathinfo($filename, PATHINFO_EXTENSION))
-    ->first(); // there can be duplicate file names!
-    $readStream = Storage::disk('google')->getDriver()->readStream($file['path']);
-    return response()->stream(function () use ($readStream) {
-        fpassthru($readStream);
-    }, 200, [
-        'Content-Type' => $file['mimetype'],
-        //'Content-disposition' => 'attachment; filename="'.$filename.'"', // force download?
-    ]);
+        ->where('type', '=', 'file')
+        ->where('filename', '=', pathinfo($filename, PATHINFO_FILENAME))
+        ->where('extension', '=', pathinfo($filename, PATHINFO_EXTENSION))
+        ->first(); // there can be duplicate file names!
+    Storage::cloud()->delete($file['path']);
+    return 'File was deleted from Google Drive';
 });
 
 
@@ -105,6 +103,8 @@ Route::group(['prefix' => 'admin_desa'], function () {
             Route::post('kabar_desa', 'AdminDesa\ContentController@kabar_desa')->name('admin_desa.content.kabar_desa.save');
             Route::post('dokumen_desa', 'AdminDesa\ContentController@dokumen_desa')->name('admin_desa.content.dokumen_desa.save');
         });
+
+        Route::get('dokumen_desa/delete/{id}', 'AdminDesa\ContentController@delete_dokumen')->name('admin_desa.content.dokumen_desa.delete');
     });
 });
 
