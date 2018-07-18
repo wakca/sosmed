@@ -5,6 +5,16 @@ namespace App\Http\Controllers\AdminDesa;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+use Google_Service_Drive_DriveFile;
+use League\Flysystem\Filesystem;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Storage;
+use Hypweb\Flysystem\GoogleDrive\GoogleDriveAdapter;
+
+use File;
+
+use App\DokumenDesa;
+
 use Auth;
 
 class ContentController extends Controller
@@ -193,8 +203,12 @@ class ContentController extends Controller
 
     public function dokumen_desa(Request $request)
     {
-        if ($request->hasFile('file')) {
-            $file = $request->file('file');
+        
+        if ($request->hasFile('link')) {
+            // Load new Model
+            $model = new DokumenDesa;
+            
+            $file = $request->file('link');
 
             $randomNumber = rand(000,999);
 
@@ -202,10 +216,51 @@ class ContentController extends Controller
 
             $destinationPath = 'uploads/pengumuman';
             // $pengumuman->gambar = $destinationPath.'/'.$filename;
-            $disk = Storage::disk('google'); 
-            $disk->put($filename, $file);
 
-            // $file->move($destinationPath, $filename);
+            $file->move(storage_path($destinationPath), $filename);
+
+            $filePath = storage_path($destinationPath.'/'.$filename);
+            // Upload using a stream...
+            Storage::disk('google')->put($filename, fopen($filePath, 'r+'));
+            
+            $model->desa = $this->getDesa()->id;
+            $model->tahun = $request->input('tahun');
+            $model->judul = $request->input('judul');
+            $model->keterangan = $request->input('keterangan');
+            $model->link = $filename;
+
+            if($model->save())
+            {
+                File::delete($filePath);
+                return redirect()->back();
+            }
         }
+    }
+
+    public function open_dokumen($id)
+    {
+        $dokumen = DokumenDesa::findOrFail($id);
+
+        $filename = $dokumen->link;
+        $dir = '/';
+        $recursive = false; // Get subdirectories also?
+        $contents = collect(Storage::disk('google')->listContents($dir, $recursive));
+        $file = $contents
+        ->where('type', '=', 'file')
+        ->where('filename', '=', pathinfo($filename, PATHINFO_FILENAME))
+        ->where('extension', '=', pathinfo($filename, PATHINFO_EXTENSION))
+        ->first(); // there can be duplicate file names!
+        $readStream = Storage::disk('google')->getDriver()->readStream($file['path']);
+        return response()->stream(function () use ($readStream) {
+            fpassthru($readStream);
+        }, 200, [
+            'Content-Type' => $file['mimetype'],
+            //'Content-disposition' => 'attachment; filename="'.$filename.'"', // force download?
+        ]);
+    }
+
+    public function delete_file($model, $id)
+    {
+        
     }
 }

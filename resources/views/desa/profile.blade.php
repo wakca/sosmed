@@ -89,6 +89,14 @@ Desa {{ $desa->nama }}
         });
     });
 
+    //profil_desa
+    $("#dokumen_desa").click(function(e){
+        $.get(url+"api/konten_desa/"+id_desa+"/dokumen_desa", function(data){
+            judul.html('Dokumen Desa');
+            konten.html(data);
+        });
+    });
+
     //proyek_desa
     $("#proyek_desa").click(function(e){
         $.get(url+"api/konten_desa/"+id_desa+"/proyek_desa", function(data){
