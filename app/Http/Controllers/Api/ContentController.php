@@ -7,6 +7,14 @@ use App\Http\Controllers\Controller;
 
 use App\Desa;
 
+use App\DokumenDesa;
+
+use Google_Service_Drive_DriveFile;
+use League\Flysystem\Filesystem;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Storage;
+use Hypweb\Flysystem\GoogleDrive\GoogleDriveAdapter;
+
 class ContentController extends Controller
 {
     private function getDesa($id)
@@ -78,6 +86,38 @@ class ContentController extends Controller
         return view('desa.content.profil_desa', [
             'desa' => $desa,
             'data' => $desa->profil
+        ]);
+    }
+
+    public function dokumen_desa($desa_id)
+    {
+        $desa = $this->getDesa($desa_id);
+
+        return view('desa.content.dokumen_desa', [
+            'desa' => $desa,
+            'data' => $desa->dokumen
+        ]);
+    }
+
+    public function open_dokumen($id)
+    {
+        $dokumen = DokumenDesa::findOrFail($id);
+
+        $filename = $dokumen->link;
+        $dir = '/';
+        $recursive = false; // Get subdirectories also?
+        $contents = collect(Storage::disk('google')->listContents($dir, $recursive));
+        $file = $contents
+        ->where('type', '=', 'file')
+        ->where('filename', '=', pathinfo($filename, PATHINFO_FILENAME))
+        ->where('extension', '=', pathinfo($filename, PATHINFO_EXTENSION))
+        ->first(); // there can be duplicate file names!
+        $readStream = Storage::disk('google')->getDriver()->readStream($file['path']);
+        return response()->stream(function () use ($readStream) {
+            fpassthru($readStream);
+        }, 200, [
+            'Content-Type' => $file['mimetype'],
+            //'Content-disposition' => 'attachment; filename="'.$filename.'"', // force download?
         ]);
     }
 }

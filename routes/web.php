@@ -14,57 +14,28 @@
 Route::get('/', 'HomeController@index')->name('index');
 Route::get('/beranda','HomeController@beranda')->middleware(['auth','checkname']);
 
-Route::get('generate_admin_desa', function(){
-    
-    set_time_limit(20000);
 
-    $desa = App\Desa::all();
-    
-    foreach($desa as $listDesa)
-    {
-        $listDesa->admin_id = $listDesa->id;
-        
-        if($listDesa->save()){
+Route::get('gdrive', function(){
 
-            
-            $user = App\User::where('username', $listDesa->id)->first();
-            
-            if($user){
-                $user->name = 'Admin Desa ' . $listDesa->nama;
-                $user->password = bcrypt($listDesa->id);
-                $user->username = $listDesa->id;
-                $user->email = $listDesa->id.'@desa.id';
-                $user->level = 2;
-                $user->desa = $listDesa->id;
-                $user->save();
-
-                unset($user);
-            } else {
-                $user = new App\User;
-                $user->name = 'Admin Desa ' . $listDesa->nama;
-                $user->password = bcrypt($listDesa->id);
-                $user->username = $listDesa->id;
-                $user->email = $listDesa->id.'@desa.id';
-                $user->level = 2;
-                $user->desa = $listDesa->id;
-                $user->save();
-
-                unset($user);
-            }
-            unset($listDesa);
-        }
-    }
+    $filename = '427Peta-Tataguna Lahan.PNG';
+    $dir = '/';
+    $recursive = false; // Get subdirectories also?
+    $contents = collect(Storage::disk('google')->listContents($dir, $recursive));
+    $file = $contents
+    ->where('type', '=', 'file')
+    ->where('filename', '=', pathinfo($filename, PATHINFO_FILENAME))
+    ->where('extension', '=', pathinfo($filename, PATHINFO_EXTENSION))
+    ->first(); // there can be duplicate file names!
+    $readStream = Storage::disk('google')->getDriver()->readStream($file['path']);
+    return response()->stream(function () use ($readStream) {
+        fpassthru($readStream);
+    }, 200, [
+        'Content-Type' => $file['mimetype'],
+        //'Content-disposition' => 'attachment; filename="'.$filename.'"', // force download?
+    ]);
 });
 
-Route::get('/set_admin_desa/{email}', function($email){
-    $user = App\User::where('email' ,$email)->first();
-    $user->level = 2;
-    $user->save();
 
-    $desa = App\Desa::find($user->desa);
-    $desa->admin_id = $user->id;
-    $desa->save();
-});
 
 Route::group(['prefix' => 'desa'], function(){
     Route::get('/', 'DesaController@index');
@@ -81,6 +52,7 @@ Route::group(['prefix' => 'api'], function(){
         Route::get('produk_unggulan', 'Api\ContentController@produk_unggulan');
         Route::get('galeri_desa', 'Api\ContentController@galeri_desa');
         Route::get('kabar_desa', 'Api\ContentController@kabar_desa');
+        Route::get('dokumen_desa', 'Api\ContentController@dokumen_desa');
     });
 });
 
@@ -92,6 +64,8 @@ Route::group(['prefix' => 'profil_desa/{id_desa}'], function($id_desa){
     Route::get('/story', 'ProfilDesaCotroller@story')->name('profil_desa.story');
     Route::get('/peta', 'ProfilDesaCotroller@peta')->name('profil_desa.peta');
 });
+
+Route::get('dokumen_desa/{id}', 'Api\ContentController@open_dokumen')->name('open_dokumen');
 
 //admin_desa
 Route::group(['prefix' => 'admin_desa'], function () {

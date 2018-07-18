@@ -16,6 +16,8 @@
                         <tr>
                             <th>No</th>
                             <th>Nama Dokumen</th>
+                            <th>Keterangan</th>
+                            <th>Tahun</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -25,6 +27,8 @@
                         <tr>
                             <td>{{ $no++ }}</td>
                             <td>{{ $doc->judul }}</td>
+                            <td>{{ $doc->keterangan }}</td>
+                            <td>{{ $doc->tahun }}</td>
                             <td>
                                 <a href="" class="btn btn-xs btn-info">Detail</a>
                                 <a href="" class="btn btn-xs btn-warning">Edit</a>
@@ -33,7 +37,7 @@
                         </tr>
                         @empty
                         <tr>
-                            <td colspan="3">
+                            <td colspan="5">
                                 <center><h3>Tidak ada Dokumen, Silahkan Upload</h3></center>
                             </td>
                         </tr>
@@ -53,6 +57,18 @@
             <div class="content">
                 <form action="{{ route('admin_desa.content.dokumen_desa.save') }}" method="POST" enctype="multipart/form-data">
                     {{ csrf_field() }}
+                    <div class="form-group">
+                        <label for="link">Nama Dokumen</label>
+                        <input type="text" class="form-control" name="judul" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="link">Keterangan</label>
+                        <input type="text" class="form-control" name="keterangan" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="link">Tahun</label>
+                        <input type="integer" class="form-control" name="tahun" required>
+                    </div>
                     <div class="form-group">
                         <label for="link">Upload Dokumen</label>
                         <input type="file" class="form-control" name="link" required>
