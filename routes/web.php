@@ -42,6 +42,9 @@ Route::group(['prefix' => 'desa'], function(){
 });
 
 Route::group(['prefix' => 'api'], function(){
+
+    Route::get('/search_desa/{query}', 'Api\DesaController@search');
+
     Route::group(['prefix' => 'konten_desa/{desa_id}'], function(){
         Route::get('selayang_pandang', 'Api\ContentController@selayang_pandang');
         Route::get('profil_desa', 'Api\ContentController@profil_desa');
