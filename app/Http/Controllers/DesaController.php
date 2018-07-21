@@ -4,11 +4,20 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Auth;
+
 class DesaController extends Controller
 {
     public function index()
     {
-        return view('desa.index', ['desa' => null]);
+        $desa = null;
+
+        if(Auth::check())
+        {
+            $desa = Auth::user()->des;
+        }
+
+        return view('desa.index', ['desa' => $desa]);
     }
 
     public function suggest(Request $request)

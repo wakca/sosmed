@@ -265,6 +265,14 @@ class ContentController extends Controller
         
     }
 
+    public function data_dokumen($id)
+    {
+        $dokumen = DokumenDesa::findOrFail($id);
+
+        return $dokumen;
+        
+    }
+
     public function open_dokumen($id)
     {
         $dokumen = DokumenDesa::findOrFail($id);

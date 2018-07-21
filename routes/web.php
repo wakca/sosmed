@@ -53,6 +53,8 @@ Route::group(['prefix' => 'api'], function(){
         Route::get('dokumen_desa', 'Api\ContentController@dokumen_desa');
         Route::get('dokumen_desa_by_tahun/{tahun}', 'Api\ContentController@dokumen_desa_by_tahun');
     });
+
+    Route::get('produk_unggulan_by_user/{user_id}', 'Api\ContentController@produk_unggulan_by_user');
 });
 
 Auth::routes();
@@ -105,6 +107,7 @@ Route::group(['prefix' => 'admin_desa'], function () {
         });
 
         Route::get('dokumen_desa/delete/{id}', 'AdminDesa\ContentController@delete_dokumen')->name('admin_desa.content.dokumen_desa.delete');
+        Route::get('dokumen_desa/data/{id}', 'AdminDesa\ContentController@data_dokumen')->name('admin_desa.content.dokumen_desa.data');
     });
 });
 
