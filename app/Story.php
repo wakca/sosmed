@@ -9,7 +9,7 @@ class Story extends Model
     protected $table = "stories";
     protected $fillable = ['desa', 'user_id', 'cat_id', 'title', 'slug', 'content', 'tags', 'status', 'views'];
     
-    public function desa(){
+    public function des(){
         return $this->belongsTo('App\Desa', 'desa');
     }
     

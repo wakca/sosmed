@@ -141,43 +141,40 @@
 
     <div class="row">
         <div class="col-md-6">
-            <div class='panel panel-default profile-card margin-bottom'>
-                <div class='panel-heading'>
-                    <div class="media">
-                        <div class="media-body">
-                            Produk Unggulan Terbaru
+            <h2>Produk Unggulan Terbaru</h2>
+            @foreach($produk as $list_produk)
+                <div class='panel story panel-default'>
+                    <div class='panel-heading'><img height='25' class='img-rounded' src='{{ asset('photos/'.(isset($list_produk->user->photo) ? $list_produk->user->photo : 'av-default.jpg')) }}'/> <strong><a href='{{ $list_produk->user->username }}'>{{ $list_produk->user->name }}</a></strong> <span class='pull-right'>{{ Date::parse($list_produk->created_at)->ago() }} &bull; <i class='glyphicon glyphicon-comment'></i> <strong>{{ count($list_produk->comment) }}</strong></span></div>
+                    <div class='panel-body'>
+                        {!! Getter::getStoryThumb($list_produk->konten,$list_produk->nama) !!}
+                        <br>
+                        <div class="btn-group">
+                            <a href="{{ route('profil_desa.beranda', $list_produk->des->id) }}" class="btn btn-xs btn-primary">Desa {{ $list_produk->des->nama }}</a>
+                            <a href="/{{ '@'.$list_produk->user->username }}" class="btn btn-xs btn-info">{{ '@'.$list_produk->user->username }}</a>
+                        </div>
+                        <br>
+                        <div class="caption">
+                            <h4><a href='{{ route('story.view',['slug' => $list_produk->slug]) }}'>{{ $list_produk->nama }}</a></h4>
+                            <p>{{ strlen(strip_tags($list_produk->konten)) > 100 ? str_limit(strip_tags($list_produk->konten),100)."...":strip_tags($list_produk->konten) }}</p>
                         </div>
                     </div>
                 </div>
-                    
-                    @foreach($produk as $list_produk)
-                        <div class="panel-body">
-                            {!! Getter::getStoryThumb($list_produk->konten,$list_produk->nama) !!}
-                        
-                            
-                            <h4><a href='{{ route('desa.produk.detail', $list_produk->id) }}'>{{ $list_produk->nama }}</a></h4>
-                            <div class="btn-group">
-                                    <a href="{{ route('profil_desa.beranda', $list_produk->des->id) }}" class="btn btn-xs btn-primary">Desa {{ $list_produk->des->nama }}</a>
-                                    <a href="/{{ '@'.$list_produk->user->username }}" class="btn btn-xs btn-info">{{ '@'.$list_produk->user->username }}</a>
-                                </div>
-                                <br>
-                            <p>{{ strlen(strip_tags($list_produk->konten)) > 250 ? str_limit(strip_tags($list_produk->konten),250)."...":strip_tags($list_produk->konten) }}</p>
-                            <p>
-                                <span class='small-text'>{{ Date::parse($list_produk->created_at)->ago() }}</span>
-                            </p>
-                        </div>
-                        <hr>
-                    @endforeach
-            
-        
-            </div>
+                <br>
+            @endforeach
         </div>
         <div class="col-md-6">
+            <h2>Story Desa Terbaru</h2>
              @foreach($stories as $story)
                 <div class='panel story panel-default'>
                     <div class='panel-heading'><img height='25' class='img-rounded' src='{{ asset('photos/'.(isset($story->user->photo) ? $story->user->photo : 'av-default.jpg')) }}'/> <strong><a href='{{ $story->user->username }}'>{{ $story->user->name }}</a></strong> <span class='pull-right'>{{ Date::parse($story->created_at)->ago() }} &bull; <i class='glyphicon glyphicon-comment'></i> <strong>{{ count($story->comment) }}</strong></span></div>
                     <div class='panel-body'>
                         {!! Getter::getStoryThumb($story->content,$story->title) !!}
+                        <br>
+                        <div class="btn-group">
+                            <a href="{{ route('profil_desa.beranda', $story->des->id) }}" class="btn btn-xs btn-primary">Desa {{ $story->des->nama }}</a>
+                            <a href="/{{ '@'.$story->user->username }}" class="btn btn-xs btn-info">{{ '@'.$story->user->username }}</a>
+                        </div>
+                        <br>
                         <div class="caption">
                             <h4><a href='{{ route('story.view',['slug' => $story->slug]) }}'>{{ $story->title }}</a></h4>
                             <p>{{ strlen(strip_tags($story->content)) > 100 ? str_limit(strip_tags($story->content),100)."...":strip_tags($story->content) }}</p>
