@@ -11,7 +11,7 @@ class DesaController extends Controller
 {
     public function search($query)
     {
-        $desa = Desa::where('id', $query)->orWhere('nama', 'LIKE' ,'%'.$query.'%')->get();
+        $desa = Desa::where('id', 'LIKE' ,'%'.$query.'%')->orWhere('nama', 'LIKE' ,'%'.$query.'%')->get();
 
 
         $data = [

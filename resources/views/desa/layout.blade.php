@@ -82,7 +82,7 @@
                 <ul class="nav navbar-nav">
                     @if($desa)
                         <li @if(Request::segment(3) == 'beranda') class="active" @endif>
-                            <a href="{{ route('profil_desa.beranda', $desa->id) }}">Beranda</a>
+                            <a href="{{ route('profil_desa.beranda', $desa->id) }}">Profil</a>
                         </li>
                         <li @if(Request::segment(3) == 'berita') class="active" @endif>
                                 <a href="{{ route('profil_desa.peta', $desa->id) }}">Berita</a>
@@ -90,14 +90,20 @@
                         <li @if(Request::segment(3) == 'peta') class="active" @endif>
                             <a href="{{ route('profil_desa.peta', $desa->id) }}">Peta</a>
                         </li>
+                        <li @if(Request::segment(3) == 'produk') class="active" @endif>
+                            <a href="{{ route('profil_desa.produk', $desa->id) }}">Produk Unggulan</a>
+                        </li>
                         <li @if(Request::segment(3) == 'story') class="active" @endif>
                             <a href="{{ route('profil_desa.story', $desa->id) }}">Story</a>
+                        </li>
+                        <li class="pull-right">
+                            <a href="/">Beranda Wakca</a>
                         </li>
                     @endif
                     
                 </ul>
 
-				<!-- Search -->
+                <!-- Search -->
 				<form class="navbar-form navbar-right" method="GET" action="/" role="search">
 					<div class="form-group">
 						<input type="text" name="query" class="form-control">

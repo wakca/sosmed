@@ -37,8 +37,22 @@ Route::get('gdrive', function(){
 
 Route::group(['prefix' => 'desa'], function(){
     Route::get('/', 'DesaController@index');
-
+    
     Route::get('/suggest', 'DesaController@suggest')->name('desa.suggest');
+    
+    
+    Route::group(['prefix' => 'produk'], function(){
+        Route::get('/', 'Desa\ProdukController@index')->name('desa.produk');
+        
+        Route::get('create', 'Desa\ProdukController@create')->name('desa.produk.create');
+        Route::post('save', 'Desa\ProdukController@save')->name('desa.produk.save');
+        Route::get('detail/{id}', 'Desa\ProdukController@detail')->name('desa.produk.detail');
+
+        Route::get('edit/{id}', 'Desa\ProdukController@edit')->name('desa.produk.edit');
+        Route::post('update', 'Desa\ProdukController@update')->name('desa.produk.update');
+
+    });
+
 });
 
 Route::group(['prefix' => 'api'], function(){
@@ -65,6 +79,7 @@ Auth::routes();
 //Halaman Desa
 Route::group(['prefix' => 'profil_desa/{id_desa}'], function($id_desa){
     Route::get('/beranda', 'ProfilDesaCotroller@index')->name('profil_desa.beranda');
+    Route::get('/produk', 'ProfilDesaCotroller@produk')->name('profil_desa.produk');
     Route::get('/story', 'ProfilDesaCotroller@story')->name('profil_desa.story');
     Route::get('/peta', 'ProfilDesaCotroller@peta')->name('profil_desa.peta');
 });

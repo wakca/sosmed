@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\ProdukUnggulan as Produk;
+use App\Story;
+
 use Auth;
 
 class DesaController extends Controller
@@ -12,12 +15,19 @@ class DesaController extends Controller
     {
         $desa = null;
 
+        $produk = Produk::orderBy('created_at', 'DESC')->take(5)->get();
+        $stories = Story::orderBy('created_at', 'DESC')->take(5)->get();
+
         if(Auth::check())
         {
             $desa = Auth::user()->des;
         }
 
-        return view('desa.index', ['desa' => $desa]);
+        return view('desa.index', [
+            'desa' => $desa,
+            'produk' => $produk,
+            'stories' => $stories,
+        ]);
     }
 
     public function suggest(Request $request)

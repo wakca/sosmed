@@ -1,18 +1,18 @@
 <div class='panel panel-default profile-card margin-bottom'>
     <div class='panel-heading'>
         <div class="media">
-            <div class="media-body" id="title">Pencarian : {{ $query }}</div>
+            <div class="media-body" id="title">Pencarian : {{ $query }} - @if($desa){{ count($desa) }} data ditemukan @else Hasil tidak ditemukan @endif</div>
         </div>
     </div>
     <div class='panel-body'>
-        <div class="container">
+        <div class="container" id="data-desa">
             <table class="table">
                 <thead>
                     <tr>
                         <th>Nama Desa</th>
                         <th>Kecamatan</th>
-                        <th>Aksi</th>
-                        <th>Aksi</th>
+                        <th>Kabupaten</th>
+                        <th>Provinsi</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -30,6 +30,7 @@
                     @endforeach
                 </tbody>
             </table>
+            {{-- {{ $desa->links() }} --}}
         </div>
     </div>
 </div>

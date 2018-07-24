@@ -20,6 +20,11 @@ class Story extends Model
     public function comment(){
         return $this->hasMany('App\Storycomment','story_id');
     }
+
+    public function image()
+    {
+        return $this->hasMany('App\Storyimage', 'story_id');
+    }
     
     public function tags(){
         return $this->belongsToMany(\App\Tag::class);
