@@ -1,64 +1,64 @@
 <?php
 
-namespace App\Http\Controllers\Story;
+namespace App\Http\Controllers\Desa;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\User;
-use App\Story;
-use App\Storycomment;
-use Auth;
-use Validator;
+
+use App\ProdukUnggulan as Produk;
+
 use Image;
-use Config;
 use File;
-use App\Tag;
-use App\Storytag;
-use App\Storyimage;
+use Validator;
 
+use Auth;
+use Config;
 
-class StoryController extends Controller
+class ProdukController extends Controller
 {
-    public function __construct()
+
+    private function getUser()
     {
-        $this->middleware('auth',['except' => ['view','tag']]);
+        return Auth::user();
     }
-    
-    public function index(){
+
+    public function index()
+    {
+
+        $produk = $this->getUser()->produk;
+        $desa = $this->getUser()->des;
+
+        return view('desa.produk.index', [
+            'produk' => $produk,
+            'desa' => $desa
+        ]);
+    }
+
+    public function detail($id)
+    {
         $numpage = Config::get('global.paginate_number');
-        $profile = User::where('id',Auth::Id())->first();
-        $stories = Story::where('user_id',Auth::Id())->orderBy('created_at','desc')->simplePaginate($numpage);
-        return view('story', ['data' => 'null','profile' => $profile, 'stories' => $stories]);
+        $random = Produk::where('id','!=',$id)->inRandomOrder()->take(5)->get();
+
+        $produk = Produk::findOrFail($id);
+
+        return view('desa.produk.detail', [
+            'produk' => $produk,
+            'random' => $random
+        ]);
     }
-    
-    public function tag($tag){
-        $numpage = Config::get('global.story_number');
-        $tag = Tag::where('name',$tag)->first();
-        $stories = $tag->stories()->orderBy('created_at','desc')->paginate($numpage);
-        $tags = Tag::all();
-        return view('tag', ['stories' => $stories, 'tags' => $tags]); 
+
+    public function create()
+    {
+        return view('desa.produk.create');
     }
-    
-    public function view($slug){
-        $numpage = Config::get('global.paginate_number');
-        $story = Story::where('slug',$slug)->first();
-        $profile = User::where('id',$story->user->id)->first();
-        $comments = Storycomment::where('story_id',$story->id)->orderBy('created_at','asc')->simplePaginate($numpage);
-        $random = Story::where('slug','!=',$slug)->inRandomOrder()->take(5)->get();
-        return view('story',['data' => 'view', 'story' => $story, 'profile' => $profile, 'random' => $random, 'comments' => $comments]);
-    }
-    
-    public function create(){
-        $profile = User::where('id',Auth::Id())->first();
-        $tags = Tag::all();
-        return view('story', ['data' => 'create','tags' => $tags, 'profile' => $profile]);
-    }
-    
-    public function save(Request $request){        
+
+    public function save(Request $request){     
+        
+        // return $request->all();
+
         $validator = Validator::make($request->all(),[
-            'title' => 'required|max:190',
-            'content' => 'required',
-            'tags' => 'required',
+            'nama' => 'required|max:190',
+            'konten' => 'required',
         ]);
         
         if($validator->fails()){
@@ -81,50 +81,46 @@ class StoryController extends Controller
                 $mimetype = $groups['mime'];                
                 // Generating a random filename
                 $filename = Auth::Id().'_'.md5(time().$k.Auth()->Id());
-                $filepath = "/images/$filename.$mimetype";    
+                $filepath = "/produk_unggulan/$filename.$mimetype";    
                 // @see http://image.intervention.io/api/
                 $image = Image::make($data)
                   // resize if required
                   /* ->resize(300, 200) */
                   ->encode($mimetype, 100)  // encode file to the specified mimetype
                   ->save(public_path($filepath),50);                
-
-                array_push($gambar, $filepath);
-                
                 $new_src = asset($filepath);
                 $img->removeAttribute('src');
                 $img->setAttribute('src', $new_src);
             } // <!--endif
         }
         $content = $dom->saveHTML();
-        $story = Story::create(['title' => $request->title, 'content' => $content,  'desa' => Auth::user()->desa, 'user_id' => Auth::Id()]);
-        $slug = $story->id."-".str_slug($request->title,"-");                    
-        Story::where('id',$story->id)->update(['slug' => $slug]);
+        $produk = new Produk;
+        $produk->desa = Auth::user()->des->id;
+        $produk->user_id = Auth::user()->id;
+        $produk->konten = $request->input('konten');
+        $produk->nama = $request->input('nama');
 
-        foreach($gambar as $list_gambar){
-            Storyimage::create(['story_id' => $story->id, 'image' => $list_gambar]);
+        if($produk->save())
+        {
+            return redirect()->route('desa.produk');
+            // return response()->json(['status'=>'success']);
         }
-
-        foreach($request->tags as $tag){
-            Storytag::create(['story_id' => $story->id, 'tag_id' => $tag]);
-        }
-        return response()->json(['status'=>'success']);
     }
     
     public function edit($id){
-        $story = Story::find($id);
-        $profile = User::where('id',Auth::Id())->first();
-        $tags = Tag::all();
-        return view('story',['data' => 'edit', 'tags' => $tags, 'profile' => $profile, 'story' => $story]);
+        $produk = Produk::find($id);
+        return view('desa.produk.edit', [
+            'produk' => $produk
+        ]);
     }
     
-    public function update(Request $request, $id){
+    public function update(Request $request){
+
         $removedfiles = $request->rfile;
         
         $validator = Validator::make($request->all(),[
-            'title' => 'required|max:190',
-            'content' => 'required',
-            'tags' => 'required'
+            'nama' => 'required|max:190',
+            'konten' => 'required',
         ]);
         
         if($validator->fails()){
@@ -146,8 +142,6 @@ class StoryController extends Controller
         $dom->loadHtml('<?xml encoding="utf-8" ?>'.$content, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);    
         $images = $dom->getElementsByTagName('img');
 
-        $gambar = [];
-
         foreach($images as $k => $img){
             $data = $img->getAttribute('src');
             // if the img source is 'data-url'
@@ -158,9 +152,6 @@ class StoryController extends Controller
                 // Generating a random filename
                 $filename = Auth::Id().'_'.md5(time().$k.Auth()->Id());
                 $filepath = "/images/$filename.$mimetype";    
-
-                array_push($gambar, $filepath);
-
                 // @see http://image.intervention.io/api/
                 $image = Image::make($data)
                   // resize if required
@@ -174,20 +165,18 @@ class StoryController extends Controller
         }
         $content = $dom->saveHTML();
         
-        $story = Story::where('id',$id)->update(['title' => $request->title,
-                                                 'content' => $content
-                                                 ]);
+        
+        $produk = Produk::findOrFail($request->input('id'));
+        $produk->desa = Auth::user()->des->id;
+        $produk->user_id = Auth::user()->id;
+        $produk->konten = $request->input('konten');
+        $produk->nama = $request->input('nama');
 
-        Storyimage::where('story_id',$id)->delete();
-        foreach($gambar as $list_gambar){
-            Storyimage::create(['story_id' => $id, 'image' => $list_gambar]);
+        if($produk->save())
+        {
+            return redirect()->route('desa.produk');
+            // return response()->json(['status'=>'success']);
         }
-
-        Storytag::where('story_id',$id)->delete();
-        foreach($request->tags as $tag){
-            Storytag::create(['story_id' => $id, 'tag_id' => $tag]);
-        }
-        return response()->json(['status' => 'success']);
     }
     
     public function destroy($id){

@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 use Hypweb\Flysystem\GoogleDrive\GoogleDriveAdapter;
 
+use Auth;
+
 class ContentController extends Controller
 {
     private function getDesa($id)
@@ -56,6 +58,17 @@ class ContentController extends Controller
         $desa = $this->getDesa($desa_id);
 
         return view('desa.content.produk_unggulan', [
+            'data' => $desa->produk_unggulan
+        ]);
+    }
+
+    public function produk_unggulan_by_user($user_id)
+    {
+        $user = Auth::user();
+        $desa = $user->des;
+        $data = $user->produk;
+
+        return view('desa.content.produk_by_users', [
             'data' => $desa->produk_unggulan
         ]);
     }

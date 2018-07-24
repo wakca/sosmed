@@ -10,8 +10,13 @@ class ProdukUnggulan extends Model
 
     public $timestamps = false;
 
-    public function desa()
+    public function des()
     {
         return $this->belongsTo('App\Desa', 'desa');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo('App\User');
     }
 }

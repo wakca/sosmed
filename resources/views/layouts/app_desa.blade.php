@@ -39,6 +39,8 @@
                     @if (Auth::guest())
                         <ul class="nav nav-pills navbar-toggle collapsed">
                             <!-- Authentication Links -->
+                            
+                            <li><a href='/desa'>Kanal Desa <span id='message'></span></a></li>
                             <li><a href="{{ route('login') }}">Login</a></li>
                             <li><a href="{{ route('register') }}">Daftar</a></li>
                         </ul>
@@ -65,7 +67,7 @@
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
                         @if (Auth::guest())
-                            <li><a href="{{ url('/') }}">Beranda</a></li>
+                        
                             <li><a href='/desa'>Kanal Desa <span id='message'></span></a></li>
                             <li><a href="{{ route('login') }}">Login</a></li>
                             <li><a href="{{ route('register') }}">Daftar</a></li>
