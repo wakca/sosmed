@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title','Dokumen Desa')
+@section('title','galeri Desa')
 @section('content')
 
 <div class="row">
@@ -7,7 +7,7 @@
         
         <div class="card ">
             <div class="header">
-                <h4 class="title">Data Dokumen</h4>
+                <h4 class="title">Data Galeri</h4>
             </div>
             <div class="content">
                 
@@ -15,9 +15,9 @@
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>Nama Dokumen</th>
+                            <th>Preview</th>
+                            <th>Nama Galeri</th>
                             <th>Keterangan</th>
-                            <th>Tahun</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -26,19 +26,21 @@
                         @forelse($data as $doc)
                         <tr id="data-{{ $doc->id }}">
                             <td>{{ $no++ }}</td>
+                            <th>
+                                <img src="{{ asset($doc->link) }}" alt="" style="max-width: 120px">
+                            </th>
                             <td>{{ $doc->judul }}</td>
                             <td>{{ $doc->keterangan }}</td>
-                            <td>{{ $doc->tahun }}</td>
                             <td>
-                                <a href="{{ route('open_dokumen', $doc->id) }}" target="__blank" class="btn btn-xs btn-info"><i class="fa fa-lg fa-eye"></i></a>
-                                <button onclick="edit_dokumen({{ $doc->id }})" class="btn btn-xs btn-warning"><i class="fa fa-lg fa-pencil"></i></button>
-                                <button onclick="delete_dokumen({{ $doc->id }})" class="btn btn-xs btn-danger"><i class="fa fa-lg fa-trash"></i></button>
+                                <a href="" class="btn btn-xs btn-info"><i class="fa fa-lg fa-eye"></i></a>
+                                <button onclick="edit_galeri({{ $doc->id }})" class="btn btn-xs btn-warning"><i class="fa fa-lg fa-pencil"></i></button>
+                                <button onclick="delete_galeri({{ $doc->id }})" class="btn btn-xs btn-danger"><i class="fa fa-lg fa-trash"></i></button>
                             </td>
                         </tr>
                         @empty
                         <tr>
                             <td colspan="5">
-                                <center><h3>Tidak ada Dokumen, Silahkan Upload</h3></center>
+                                <center><h3>Tidak ada Galeri, Silahkan Upload</h3></center>
                             </td>
                         </tr>
                         @endforelse
@@ -51,13 +53,13 @@
     <div class="col-md-5">
         <div class="card ">
             <div class="header">
-                <h4 class="title">Upload Dokumen Desa</h4>
+                <h4 class="title">Upload Galeri Desa</h4>
             </div>
             <div class="content">
-                <form action="{{ route('admin_desa.content.dokumen_desa.save') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('admin_desa.content.galeri_desa.save') }}" method="POST" enctype="multipart/form-data">
                     {{ csrf_field() }}
                     <div class="form-group">
-                        <label for="link">Nama Dokumen</label>
+                        <label for="link">Nama Galeri</label>
                         <input type="text" class="form-control" name="judul" required>
                     </div>
                     <div class="form-group">
@@ -65,11 +67,7 @@
                         <input type="text" class="form-control" name="keterangan" required>
                     </div>
                     <div class="form-group">
-                        <label for="link">Tahun</label>
-                        <input type="integer" class="form-control" name="tahun" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="link">Upload Dokumen</label>
+                        <label for="link">Pilih Gambar</label>
                         <input type="file" class="form-control" name="link" required>
                     </div>
                     <div class="clearfix">
@@ -85,8 +83,8 @@
 @endsection
 
 @section('modal')
-<!-- Delete Dokumen -->
-<div class="modal fade" id='modal-delete-dokumen' tabindex="-1" role="dialog">
+<!-- Delete Galeri -->
+<div class="modal fade" id='modal-delete-galeri' tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -94,13 +92,13 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
                 <h4 class="modal-title">
-                    <span class='glyphicon glyphicon-exclamation-sign'></span> Hapus Dokumen</h4>
+                    <span class='glyphicon glyphicon-exclamation-sign'></span> Hapus Galeri</h4>
             </div>
             <div class="modal-body">
-                <p>Anda yakin ingin menghapus Dokumen ini ?</p>
+                <p>Anda yakin ingin menghapus Galeri ini ?</p>
             </div>
             <div class="modal-footer">
-                <button type="button" id='btn-delete-dokumen' class="btn btn-sm  btn-danger">
+                <button type="button" id='btn-delete-galeri' class="btn btn-sm  btn-danger">
                     <span class='glyphicon glyphicon-trash'></span> Hapus</button>
                 <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Batal</button>
             </div>
@@ -111,8 +109,8 @@
 </div>
 <!-- /.modal -->
 
-<!-- Edit Dokumen -->
-<div class="modal fade" id='modal-edit-dokumen' tabindex="-1" role="dialog">
+<!-- Edit Galeri -->
+<div class="modal fade" id='modal-edit-galeri' tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -120,15 +118,15 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
                 <h4 class="modal-title" id="title-edit">
-                    <span class='glyphicon glyphicon-exclamation-sign'></span> Edit Dokumen
+                    <span class='glyphicon glyphicon-exclamation-sign'></span> Edit Galeri
                 </h4>
             </div>
             <div class="modal-body">
-                <form action="{{ route('admin_desa.content.dokumen_desa.update') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('admin_desa.content.galeri.update') }}" method="POST" enctype="multipart/form-data">
                     {{ csrf_field() }}
-                    <input type="hidden" name="id_desa" id="id_desa">
+                    <input type="hidden" id="id_galeri" name="id_galeri">
                     <div class="form-group">
-                        <label for="link">Nama Dokumen</label>
+                        <label for="link">Nama Galeri</label>
                         <input type="text" class="form-control" name="judul" id="judul" required>
                     </div>
                     <div class="form-group">
@@ -136,11 +134,7 @@
                         <input type="text" class="form-control" name="keterangan" id="keterangan" required>
                     </div>
                     <div class="form-group">
-                        <label for="link">Tahun</label>
-                        <input type="integer" class="form-control" name="tahun" id="tahun" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="link">Upload Dokumen</label>
+                        <label for="link">Upload Galeri</label>
                         <input type="file" class="form-control" name="link" id="file">
                     </div>
                     <div class="clearfix">
@@ -167,21 +161,22 @@
 </script>
 
 <script>
-    function delete_dokumen(id) {
-        var dokumen_id = id;
-        $("#modal-delete-dokumen").modal('show');
-        $('#modal-delete-dokumen').on('hidden.bs.modal', function(){
-            dokumen_id = 0;
+    function delete_galeri(id) {
+        var galeri_id = id;
+        $("#modal-delete-galeri").modal('show');
+        $('#modal-delete-galeri').on('hidden.bs.modal', function(){
+            galeri_id = 0;
         });
-        $("#btn-delete-dokumen").click(function(){
-            if (dokumen_id != 0) {
+        $("#btn-delete-galeri").click(function(){
+            if (galeri_id != 0) {
                 $.ajax({
-                    url:'/admin_desa/konten_desa/dokumen_desa/delete/'+dokumen_id,
+                    url:'/admin_desa/konten_desa/galeri/delete/'+galeri_id,
                     type:'GET',
                     success:function(data){
-                        $("#modal-delete-dokumen").modal('hide');
+                        $("#modal-delete-galeri").modal('hide');
                         if (data.status == 'success') {
-                            $("#data-"+dokumen_id).remove();
+                            $("#data-"+galeri_id).remove();
+                            window.alert("Berhasil menghapus Galeri");
                         }
                         else{
                             window.alert('Gagal Menghapus data !');
@@ -192,22 +187,21 @@
         });
     }
 
-    function edit_dokumen(id) {
-        var dokumen_id = id;
+    function edit_galeri(id) {
+        var galeri_id = id;
 
-        $.get('/admin_desa/konten_desa/dokumen_desa/data/'+id, function(data){ 
-            $('#id_desa').val(data['id']);
+        $.get('/admin_desa/konten_desa/galeri/data/'+id, function(data){ 
             $('#judul').val(data['judul']);
+            $('#id_galeri').val(data['id']);
             $('#keterangan').val(data['keterangan']);
-            $('#tahun').val(data['tahun']);
 
-            $("#title-edit").html('Edit Dokumen ' + data['judul']);
+            $("#title-edit").html('Edit Galeri ' + data['judul']);
         });
 
 
-        $("#modal-edit-dokumen").modal('show');
-        $('#modal-edit-dokumen').on('hidden.bs.modal', function(){
-            dokumen_id = 0;
+        $("#modal-edit-galeri").modal('show');
+        $('#modal-edit-galeri').on('hidden.bs.modal', function(){
+            galeri_id = 0;
         });
     }
 </script>

@@ -14,6 +14,7 @@ use Hypweb\Flysystem\GoogleDrive\GoogleDriveAdapter;
 use File;
 
 use App\DokumenDesa;
+use App\GaleriDesa;
 
 use Auth;
 
@@ -169,12 +170,87 @@ class ContentController extends Controller
         }
     }
 
-    public function galeri_desa()
+    public function galeri_desa(Request $request)
     {
+        if ($request->hasFile('link')) {
+            // Load new Model
+            $model = new GaleriDesa;
+            
+            $file = $request->file('link');
 
-        return view('desa.content.galeri_desa', [
-            'data' => $this->getDesa()->galeri_desa
-        ]);
+            $randomNumber = rand(000,999);
+
+            $filename = $randomNumber.$file->getClientOriginalName();
+
+            $destinationPath = 'uploads/galeri_desa/'.$this->getDesa()->id.'/';
+            // $pengumuman->gambar = $destinationPath.'/'.$filename;
+
+            $file->move(public_path($destinationPath), $filename);
+
+            $finalDest = $destinationPath.'/'.$filename;
+            $filePath = public_path($finalDest);
+            // Upload using a stream...
+            Storage::disk('google')->put($filename, fopen($filePath, 'r+'));
+            
+            $model->desa = $this->getDesa()->id;
+            $model->judul = $request->input('judul');
+            $model->keterangan = $request->input('keterangan');
+            $model->link = $finalDest;
+
+            if($model->save())
+            {
+                return redirect()->back();
+            }
+        }
+        
+    }
+
+    public function galeri_desa_update(Request $request)
+    {
+        // return $request->all();
+
+        $id = $request->input('id_galeri');
+        $model = GaleriDesa::findOrFail($id);
+        $model->judul = $request->input('judul');
+        $model->keterangan = $request->input('keterangan');
+        if ($request->hasFile('link')) {
+            File::delete(public_path($model->link));
+            // Load new Model
+            
+            $file = $request->file('link');
+
+            $randomNumber = rand(000,999);
+
+            $filename = $randomNumber.$file->getClientOriginalName();
+
+            $destinationPath = 'uploads/galeri_desa/'.$this->getDesa()->id.'/';
+            // $pengumuman->gambar = $destinationPath.'/'.$filename;
+
+            $file->move(public_path($destinationPath), $filename);
+
+            $finalDest = $destinationPath.'/'.$filename;
+            $filePath = public_path($finalDest);
+            // Upload using a stream...
+            Storage::disk('google')->put($filename, fopen($filePath, 'r+'));
+            
+            $model->desa = $this->getDesa()->id;
+            $model->judul = $request->input('judul');
+            $model->keterangan = $request->input('keterangan');
+            $model->link = $finalDest;
+
+            if($model->save())
+            {
+                return redirect()->back();
+            }
+        }
+
+        if($model->save())
+        {
+            return redirect()->back();
+        }
+
+
+        
     }
 
     public function proyek_desa()
@@ -237,6 +313,51 @@ class ContentController extends Controller
         }
     }
 
+    public function dokumen_desa_update(Request $request)
+    {
+        $id = $request->input('id_desa');
+        $model = DokumenDesa::findOrFail($id);
+        $model->tahun = $request->input('tahun');
+        $model->judul = $request->input('judul');
+        $model->keterangan = $request->input('keterangan');
+        
+        if ($request->hasFile('link')) {
+            // Load new Model
+            
+            $file = $request->file('link');
+
+            $randomNumber = rand(000,999);
+
+            $filename = $randomNumber.$file->getClientOriginalName();
+
+            $destinationPath = 'uploads/pengumuman';
+            // $pengumuman->gambar = $destinationPath.'/'.$filename;
+
+            $file->move(storage_path($destinationPath), $filename);
+
+            $filePath = storage_path($destinationPath.'/'.$filename);
+            // Upload using a stream...
+            Storage::disk('google')->put($filename, fopen($filePath, 'r+'));
+            
+            $model->desa = $this->getDesa()->id;
+            $model->tahun = $request->input('tahun');
+            $model->judul = $request->input('judul');
+            $model->keterangan = $request->input('keterangan');
+            $model->link = $filename;
+
+            if($model->save())
+            {
+                File::delete($filePath);
+                return redirect()->back();
+            }
+        }
+
+        if($model->save())
+        {
+            return redirect()->back();
+        }
+    }
+
     public function delete_dokumen($id)
     {
         $dokumen = DokumenDesa::findOrFail($id);
@@ -265,11 +386,47 @@ class ContentController extends Controller
         
     }
 
+    public function delete_galeri($id)
+    {
+        $galeri = GaleriDesa::findOrFail($id);
+
+        $proses = File::delete(public_path($galeri->link));
+
+        if($proses)
+        {
+            $galeri->delete();
+
+            return response()->json([
+                'message' => 'Berhasil menghapus Dokumen',
+                'status' => 'success'
+            ]);
+        }
+
+        // if($deletingFile)
+        // {
+        //     $galeri->delete();
+
+        //     return response()->json([
+        //         'message' => 'Berhasil menghapus Dokumen',
+        //         'status' => 'success'
+        //     ]);
+        // }
+        
+    }
+
     public function data_dokumen($id)
     {
         $dokumen = DokumenDesa::findOrFail($id);
 
         return $dokumen;
+        
+    }
+
+    public function data_galeri($id)
+    {
+        $data = GaleriDesa::findOrFail($id);
+
+        return $data;
         
     }
 

@@ -106,13 +106,13 @@ Route::group(['prefix' => 'admin_desa'], function () {
 
         Route::get('/list','AdminDesa\StoryController@anyData')->name('admin_desa.story.data');
     });
-
+    
     Route::group(['prefix' => 'konten_desa/'], function(){
-
+        
         Route::get('/', 'AdminDesa\ContentController@index')->name('admin_desa.content');
-
+        
         Route::get('edit/{slug}', 'AdminDesa\ContentController@edit')->name('admin_desa.content.edit');
-
+        
         Route::group(['prefix' => 'save'], function(){
             Route::post('selayang_pandang', 'AdminDesa\ContentController@selayang_pandang')->name('admin_desa.content.selayang_pandang.save');
             Route::post('profil_desa', 'AdminDesa\ContentController@profil_desa')->name('admin_desa.content.profil_desa.save');
@@ -124,6 +124,15 @@ Route::group(['prefix' => 'admin_desa'], function () {
             Route::post('dokumen_desa', 'AdminDesa\ContentController@dokumen_desa')->name('admin_desa.content.dokumen_desa.save');
         });
 
+        Route::group(['prefix' => 'update'], function(){
+            
+            Route::post('dokumen_desa', 'AdminDesa\ContentController@dokumen_desa_update')->name('admin_desa.content.dokumen_desa.update');
+            Route::post('galeri', 'AdminDesa\ContentController@galeri_desa_update')->name('admin_desa.content.galeri.update');
+        });
+        
+        Route::get('galeri/delete/{id}', 'AdminDesa\ContentController@delete_galeri')->name('admin_desa.content.galeri.delete');
+        Route::get('galeri/data/{id}', 'AdminDesa\ContentController@data_galeri')->name('admin_desa.content.galeri.data');
+        
         Route::get('dokumen_desa/delete/{id}', 'AdminDesa\ContentController@delete_dokumen')->name('admin_desa.content.dokumen_desa.delete');
         Route::get('dokumen_desa/data/{id}', 'AdminDesa\ContentController@data_dokumen')->name('admin_desa.content.dokumen_desa.data');
     });
