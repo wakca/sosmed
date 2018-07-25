@@ -14,6 +14,7 @@ use Hypweb\Flysystem\GoogleDrive\GoogleDriveAdapter;
 use File;
 
 use App\DokumenDesa;
+use App\GaleriDesa;
 
 use Auth;
 
@@ -169,12 +170,39 @@ class ContentController extends Controller
         }
     }
 
-    public function galeri_desa()
+    public function galeri_desa(Request $request)
     {
+        if ($request->hasFile('link')) {
+            // Load new Model
+            $model = new GaleriDesa;
+            
+            $file = $request->file('link');
 
-        return view('desa.content.galeri_desa', [
-            'data' => $this->getDesa()->galeri_desa
-        ]);
+            $randomNumber = rand(000,999);
+
+            $filename = $randomNumber.$file->getClientOriginalName();
+
+            $destinationPath = 'uploads/galeri_desa/'.$this->getDesa()->id.'/';
+            // $pengumuman->gambar = $destinationPath.'/'.$filename;
+
+            $file->move(public_path($destinationPath), $filename);
+
+            $finalDest = $destinationPath.'/'.$filename;
+            $filePath = public_path($finalDest);
+            // Upload using a stream...
+            Storage::disk('google')->put($filename, fopen($filePath, 'r+'));
+            
+            $model->desa = $this->getDesa()->id;
+            $model->judul = $request->input('judul');
+            $model->keterangan = $request->input('keterangan');
+            $model->link = $finalDest;
+
+            if($model->save())
+            {
+                return redirect()->back();
+            }
+        }
+        
     }
 
     public function proyek_desa()
@@ -262,6 +290,34 @@ class ContentController extends Controller
                 'status' => 'success'
             ]);
         }
+        
+    }
+
+    public function delete_galeri($id)
+    {
+        $galeri = GaleriDesa::findOrFail($id);
+
+        $proses = File::delete(public_path($galeri->link));
+
+        if($proses)
+        {
+            $galeri->delete();
+
+            return response()->json([
+                'message' => 'Berhasil menghapus Dokumen',
+                'status' => 'success'
+            ]);
+        }
+
+        // if($deletingFile)
+        // {
+        //     $galeri->delete();
+
+        //     return response()->json([
+        //         'message' => 'Berhasil menghapus Dokumen',
+        //         'status' => 'success'
+        //     ]);
+        // }
         
     }
 

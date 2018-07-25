@@ -19,7 +19,7 @@
                 <tbody>
                     @foreach($desa as $list_desa)
                     <tr>
-                        <td>{{ $list_desa->nama }} - {{ $list_desa->id }}</td>
+                        <td><a href="{{ route('profil_desa.beranda', $list_desa->id) }}">{{ $list_desa->nama }} - {{ $list_desa->id }}</a></td>
                         <td>{{ $list_desa->kecamatan->nama }} - {{ $list_desa->kecamatan->id }}</td>
                         <td>{{ $list_desa->kecamatan->kab->nama }} - {{ $list_desa->kecamatan->kab->id }}</td>
                         <td>{{ $list_desa->kecamatan->kab->prov->nama }} - {{ $list_desa->kecamatan->kab->prov->id }}</td>

@@ -43,6 +43,11 @@ class Desa extends Model
         return $this->hasMany('App\DokumenDesa', 'desa');
     }
 
+    public function galeri_desa()
+    {
+        return $this->hasMany('App\GaleriDesa', 'desa');
+    }
+
     public function organisasi_desa()
     {
         return $this->hasOne('App\OrganisasiDesa', 'desa');
