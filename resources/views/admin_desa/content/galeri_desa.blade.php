@@ -122,7 +122,9 @@
                 </h4>
             </div>
             <div class="modal-body">
-                <form enctype="multipart/form-data">
+                <form action="{{ route('admin_desa.content.galeri.update') }}" method="POST" enctype="multipart/form-data">
+                    {{ csrf_field() }}
+                    <input type="hidden" id="id_galeri" name="id_galeri">
                     <div class="form-group">
                         <label for="link">Nama Galeri</label>
                         <input type="text" class="form-control" name="judul" id="judul" required>
@@ -132,12 +134,8 @@
                         <input type="text" class="form-control" name="keterangan" id="keterangan" required>
                     </div>
                     <div class="form-group">
-                        <label for="link">Tahun</label>
-                        <input type="integer" class="form-control" name="tahun" id="tahun" required>
-                    </div>
-                    <div class="form-group">
                         <label for="link">Upload Galeri</label>
-                        <input type="file" class="form-control" name="link" id="file" required>
+                        <input type="file" class="form-control" name="link" id="file">
                     </div>
                     <div class="clearfix">
                         <div class="pull-right">
@@ -192,10 +190,10 @@
     function edit_galeri(id) {
         var galeri_id = id;
 
-        $.get('/admin_desa/konten_desa/galeri_desa/data/'+id, function(data){ 
+        $.get('/admin_desa/konten_desa/galeri/data/'+id, function(data){ 
             $('#judul').val(data['judul']);
+            $('#id_galeri').val(data['id']);
             $('#keterangan').val(data['keterangan']);
-            $('#tahun').val(data['tahun']);
 
             $("#title-edit").html('Edit Galeri ' + data['judul']);
         });

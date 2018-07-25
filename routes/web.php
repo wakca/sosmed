@@ -127,9 +127,12 @@ Route::group(['prefix' => 'admin_desa'], function () {
         Route::group(['prefix' => 'update'], function(){
             
             Route::post('dokumen_desa', 'AdminDesa\ContentController@dokumen_desa_update')->name('admin_desa.content.dokumen_desa.update');
+            Route::post('galeri', 'AdminDesa\ContentController@galeri_desa_update')->name('admin_desa.content.galeri.update');
         });
         
-        Route::get('galeri/delete/{id}', 'AdminDesa\ContentController@delete_galeri')->name('admin_desa.content.dokumen_desa.delete');
+        Route::get('galeri/delete/{id}', 'AdminDesa\ContentController@delete_galeri')->name('admin_desa.content.galeri.delete');
+        Route::get('galeri/data/{id}', 'AdminDesa\ContentController@data_galeri')->name('admin_desa.content.galeri.data');
+        
         Route::get('dokumen_desa/delete/{id}', 'AdminDesa\ContentController@delete_dokumen')->name('admin_desa.content.dokumen_desa.delete');
         Route::get('dokumen_desa/data/{id}', 'AdminDesa\ContentController@data_dokumen')->name('admin_desa.content.dokumen_desa.data');
     });

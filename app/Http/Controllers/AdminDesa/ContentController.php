@@ -205,6 +205,54 @@ class ContentController extends Controller
         
     }
 
+    public function galeri_desa_update(Request $request)
+    {
+        // return $request->all();
+
+        $id = $request->input('id_galeri');
+        $model = GaleriDesa::findOrFail($id);
+        $model->judul = $request->input('judul');
+        $model->keterangan = $request->input('keterangan');
+        if ($request->hasFile('link')) {
+            File::delete(public_path($model->link));
+            // Load new Model
+            
+            $file = $request->file('link');
+
+            $randomNumber = rand(000,999);
+
+            $filename = $randomNumber.$file->getClientOriginalName();
+
+            $destinationPath = 'uploads/galeri_desa/'.$this->getDesa()->id.'/';
+            // $pengumuman->gambar = $destinationPath.'/'.$filename;
+
+            $file->move(public_path($destinationPath), $filename);
+
+            $finalDest = $destinationPath.'/'.$filename;
+            $filePath = public_path($finalDest);
+            // Upload using a stream...
+            Storage::disk('google')->put($filename, fopen($filePath, 'r+'));
+            
+            $model->desa = $this->getDesa()->id;
+            $model->judul = $request->input('judul');
+            $model->keterangan = $request->input('keterangan');
+            $model->link = $finalDest;
+
+            if($model->save())
+            {
+                return redirect()->back();
+            }
+        }
+
+        if($model->save())
+        {
+            return redirect()->back();
+        }
+
+
+        
+    }
+
     public function proyek_desa()
     {
         return view('desa.content.proyek_desa', [
@@ -371,6 +419,14 @@ class ContentController extends Controller
         $dokumen = DokumenDesa::findOrFail($id);
 
         return $dokumen;
+        
+    }
+
+    public function data_galeri($id)
+    {
+        $data = GaleriDesa::findOrFail($id);
+
+        return $data;
         
     }
 
