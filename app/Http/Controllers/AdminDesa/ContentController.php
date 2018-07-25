@@ -265,6 +265,51 @@ class ContentController extends Controller
         }
     }
 
+    public function dokumen_desa_update(Request $request)
+    {
+        $id = $request->input('id_desa');
+        $model = DokumenDesa::findOrFail($id);
+        $model->tahun = $request->input('tahun');
+        $model->judul = $request->input('judul');
+        $model->keterangan = $request->input('keterangan');
+        
+        if ($request->hasFile('link')) {
+            // Load new Model
+            
+            $file = $request->file('link');
+
+            $randomNumber = rand(000,999);
+
+            $filename = $randomNumber.$file->getClientOriginalName();
+
+            $destinationPath = 'uploads/pengumuman';
+            // $pengumuman->gambar = $destinationPath.'/'.$filename;
+
+            $file->move(storage_path($destinationPath), $filename);
+
+            $filePath = storage_path($destinationPath.'/'.$filename);
+            // Upload using a stream...
+            Storage::disk('google')->put($filename, fopen($filePath, 'r+'));
+            
+            $model->desa = $this->getDesa()->id;
+            $model->tahun = $request->input('tahun');
+            $model->judul = $request->input('judul');
+            $model->keterangan = $request->input('keterangan');
+            $model->link = $filename;
+
+            if($model->save())
+            {
+                File::delete($filePath);
+                return redirect()->back();
+            }
+        }
+
+        if($model->save())
+        {
+            return redirect()->back();
+        }
+    }
+
     public function delete_dokumen($id)
     {
         $dokumen = DokumenDesa::findOrFail($id);

@@ -30,7 +30,7 @@
                             <td>{{ $doc->keterangan }}</td>
                             <td>{{ $doc->tahun }}</td>
                             <td>
-                                <a href="" class="btn btn-xs btn-info"><i class="fa fa-lg fa-eye"></i></a>
+                                <a href="{{ route('open_dokumen', $doc->id) }}" target="__blank" class="btn btn-xs btn-info"><i class="fa fa-lg fa-eye"></i></a>
                                 <button onclick="edit_dokumen({{ $doc->id }})" class="btn btn-xs btn-warning"><i class="fa fa-lg fa-pencil"></i></button>
                                 <button onclick="delete_dokumen({{ $doc->id }})" class="btn btn-xs btn-danger"><i class="fa fa-lg fa-trash"></i></button>
                             </td>
@@ -54,7 +54,7 @@
                 <h4 class="title">Upload Dokumen Desa</h4>
             </div>
             <div class="content">
-                <form action="{{ route('admin_desa.content.dokumen_desa.update') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('admin_desa.content.dokumen_desa.save') }}" method="POST" enctype="multipart/form-data">
                     {{ csrf_field() }}
                     <div class="form-group">
                         <label for="link">Nama Dokumen</label>
@@ -124,7 +124,9 @@
                 </h4>
             </div>
             <div class="modal-body">
-                <form enctype="multipart/form-data">
+                <form action="{{ route('admin_desa.content.dokumen_desa.update') }}" method="POST" enctype="multipart/form-data">
+                    {{ csrf_field() }}
+                    <input type="hidden" name="id_desa" id="id_desa">
                     <div class="form-group">
                         <label for="link">Nama Dokumen</label>
                         <input type="text" class="form-control" name="judul" id="judul" required>
@@ -139,7 +141,7 @@
                     </div>
                     <div class="form-group">
                         <label for="link">Upload Dokumen</label>
-                        <input type="file" class="form-control" name="link" id="file" required>
+                        <input type="file" class="form-control" name="link" id="file">
                     </div>
                     <div class="clearfix">
                         <div class="pull-right">
@@ -194,6 +196,7 @@
         var dokumen_id = id;
 
         $.get('/admin_desa/konten_desa/dokumen_desa/data/'+id, function(data){ 
+            $('#id_desa').val(data['id']);
             $('#judul').val(data['judul']);
             $('#keterangan').val(data['keterangan']);
             $('#tahun').val(data['tahun']);
