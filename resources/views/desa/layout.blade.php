@@ -97,7 +97,7 @@
                             <a href="{{ route('profil_desa.story', $desa->id) }}">Story</a>
                         </li>
                         <li class="pull-right">
-                            <a href="/">Beranda Wakca</a>
+                            <a href="/">Beranda Klipaa</a>
                         </li>
                     @endif
                     
