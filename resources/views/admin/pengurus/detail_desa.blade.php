@@ -29,7 +29,8 @@
                 <td>
                     <div id="pengurus">
                         @if($desa->admin_id)
-                        {{ $desa->pengurus->name }} <span class="label label-success"><i class="fa fa-lg fa-check"></i></span>
+                        @php $user = App\User::where('username', $desa->admin_id)->first(); @endphp
+                        {{ $user->name }} <span class="label label-success"><i class="fa fa-lg fa-check"></i></span>
                         @else
                         <span class="label label-danger">Belum Ada Pengurus</span>
                         @endif
