@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 use Hypweb\Flysystem\GoogleDrive\GoogleDriveAdapter;
 
+use Image;
 use File;
 
 use App\DokumenDesa;
@@ -111,14 +112,47 @@ class ContentController extends Controller
             $model->desa = $this->getDesa()->id;
         }
 
-        $model->konten = $request->input('konten');
+        
+        $content = $request->konten;
+        $dom = new \DomDocument();
+        libxml_use_internal_errors(true);
+        $dom->loadHtml('<?xml encoding="utf-8" ?>'.$content, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);    
+        $images = $dom->getElementsByTagName('img');
+        
+        $gambar = [];
+        
+        foreach($images as $k => $img){
+            $data = $img->getAttribute('src');
+            if(preg_match('/data:image/', $data)){                
+                // get the mimetype
+                preg_match('/data:image\/(?<mime>.*?)\;/', $data, $groups);
+                $mimetype = $groups['mime'];                
+                // Generating a random filename
+                $filename = Auth::Id().'_'.md5(time().$k.Auth()->Id());
+                $filepath = "images/$filename.$mimetype";    
+                // @see http://image.intervention.io/api/
+                $image = Image::make($data)
+                // resize if required
+                /* ->resize(300, 200) */
+                ->encode($mimetype, 100)  // encode file to the specified mimetype
+                ->save(public_path($filepath),50);                
+                
+                array_push($gambar, $filepath);
+                
+                $new_src = asset($filepath);
+                $img->removeAttribute('src');
+                $img->setAttribute('src', $new_src);
+            } // <!--endif
+        }
+        $content = $dom->saveHTML();
+        $model->konten = $content;
 
         if($model->save())
         {
             return redirect()->route('admin_desa.content');
         }
     }
-
+    
     public function organisasi_desa(Request $request)
     {
         $model = $this->getDesa()->organisasi_desa;
