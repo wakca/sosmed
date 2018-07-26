@@ -19,7 +19,8 @@ Route::get('ganti_konten', function(){
     
     foreach($story as $data)
     {
-        str_replace('localhost:8000', 'klipaa.com', $data->content);
+        $content = str_replace('localhost:8000', 'klipaa.com', $data->content);
+        $data->content = $content;
         $data->save();
 
     }
