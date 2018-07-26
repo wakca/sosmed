@@ -14,26 +14,16 @@
 Route::get('/', 'HomeController@index')->name('index');
 Route::get('/beranda','HomeController@beranda')->middleware(['auth','checkname']);
 
+Route::get('ganti_konten', function(){
+    $story = App\Story::all();
+    
+    foreach($story as $data)
+    {
+        str_replace('localhost:8000', 'klipaa.com', $data->content);
+        $data->save();
 
-Route::get('gdrive', function(){
-
-    $filename = 'test1121.txt';
-    // First we need to create a file to delete
-    Storage::cloud()->makeDirectory('Test Dir');
-    // Now find that file and use its ID (path) to delete it
-    $dir = '/';
-    $recursive = false; // Get subdirectories also?
-    $contents = collect(Storage::cloud()->listContents($dir, $recursive));
-    $file = $contents
-        ->where('type', '=', 'file')
-        ->where('filename', '=', pathinfo($filename, PATHINFO_FILENAME))
-        ->where('extension', '=', pathinfo($filename, PATHINFO_EXTENSION))
-        ->first(); // there can be duplicate file names!
-    Storage::cloud()->delete($file['path']);
-    return 'File was deleted from Google Drive';
+    }
 });
-
-
 
 Route::group(['prefix' => 'desa'], function(){
     Route::get('/', 'DesaController@index');

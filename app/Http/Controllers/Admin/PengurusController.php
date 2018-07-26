@@ -120,10 +120,9 @@ class PengurusController extends Controller
                 // return $label = '11';
                 if($desa->admin_id)
                 {
-                    // return $desa->admin_id;
-                    $pengurus = \App\User::where('desa', $desa->admin_id)->first();
+                    $pengurus = \App\User::where('username', $desa->admin_id)->first();
                  
-                    
+                 
                     return "<a href='/".$pengurus->username."' class='btn btn-xs btn-info'>".$pengurus->name ." / @".$pengurus->username."</a>";
                 } else {
                     return "<badge class='badge badge-danger'>Belum memiliki Pengurus</badge>";
@@ -218,7 +217,7 @@ class PengurusController extends Controller
         $user->save();
         $desa = $user->asal_desa;
 
-        $desa->admin_id = $user->id;
+        $desa->admin_id = $user->username;
         if($desa->save())
         {
             $respon = [
