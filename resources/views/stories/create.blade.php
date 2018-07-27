@@ -56,17 +56,20 @@ $(document).ready(function() {
         , beforeSend: function() {
             var percentVal='0%';
             progress.show();
-            bar.css('width', percentVal) bar.html(percentVal);
+            bar.css('width', percentVal);
+            bar.html(percentVal);
             btnPost.text('Sedang Membuat...');
             btnPost.attr('disabled', true);
         }
         , uploadProgress: function(event, position, total, percentComplete) {
             var percentVal=percentComplete + '%';
-            bar.css('width', percentVal) bar.html(percentVal);
+            bar.css('width', percentVal);
+            bar.html(percentVal);
         }
         , success: function() {
             var percentVal='100%';
-            bar.css('width', percentVal) bar.html(percentVal);
+            bar.css('width', percentVal);
+            bar.html(percentVal);
         }
         , complete: function(response) {
             if($.isEmptyObject(response.responseJSON.error)) {
