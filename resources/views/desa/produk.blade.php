@@ -16,7 +16,7 @@ Desa {{ $desa->nama }}
                 <div class='panel-body'>
                     {!! Getter::getStoryThumb($list_produk->konten,$list_produk->nama) !!}
                     <div class="caption">
-                        <h4><a href=''>{{ $list_produk->title }}</a></h4>
+                        <h4><a href='{{ route('desa.produk.detail', $list_produk->id) }}'>{{ $list_produk->title }}</a></h4>
                         <p>{{ strlen(strip_tags($list_produk->konten)) > 100 ? str_limit(strip_tags($list_produk->konten),100)."...":strip_tags($list_produk->konten) }}</p>
                         <div class="clearfix">
                             <div class="pull-right">

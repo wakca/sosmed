@@ -154,7 +154,7 @@
                         </div>
                         <br>
                         <div class="caption">
-                            <h4><a href='{{ route('story.view',['slug' => $list_produk->slug]) }}'>{{ $list_produk->nama }}</a></h4>
+                            <h4><a href='{{ route('desa.produk.detail', $list_produk->id) }}'>{{ $list_produk->nama }}</a></h4>
                             <p>{{ strlen(strip_tags($list_produk->konten)) > 100 ? str_limit(strip_tags($list_produk->konten),100)."...":strip_tags($list_produk->konten) }}</p>
                         </div>
                     </div>
