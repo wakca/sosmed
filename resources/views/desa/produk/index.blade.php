@@ -24,7 +24,7 @@ Desa {{ $desa->nama }}
             
             @foreach($produk as $list_produk)
                 <div class="panel-body">
-                    <h4><a href='#'>{{ $list_produk->nama }}</a></h4>
+                    <h4><a href='{{ route('desa.produk.detail', $list_produk->id) }}'>{{ $list_produk->nama }}</a></h4>
                     <p>{{ strlen(strip_tags($list_produk->konten)) > 250 ? str_limit(strip_tags($list_produk->konten),250)."...":strip_tags($list_produk->konten) }}</p>
                     <p><a href="{{ route('desa.produk.edit', ['id' => $list_produk->id]) }}" class="btn btn-xs btn-primary" role="button"><i class='glyphicon glyphicon-pencil'></i> Edit</a> <a href="javascript:void(0);"  onclick='deleteStory({{ $list_produk->id }});' class="btn btn-xs btn-default" role="button"><i class='glyphicon glyphicon-trash'></i> Hapus</a> <a href="{{ route('desa.produk.detail', $list_produk->id) }}" class="btn btn-xs btn-info">Lihat Produk</a>
                         <span class='pull-right small-text'>{{ Date::parse($list_produk->created_at)->ago() }}</span>
