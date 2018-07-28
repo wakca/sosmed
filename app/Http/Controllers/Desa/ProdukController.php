@@ -34,6 +34,15 @@ class ProdukController extends Controller
         ]);
     }
 
+    public function view($slug){
+        $numpage = Config::get('global.paginate_number');
+        $story = Story::where('slug',$slug)->first();
+        $profile = User::where('id',$story->user->id)->first();
+        $comments = Storycomment::where('story_id',$story->id)->orderBy('created_at','asc')->simplePaginate($numpage);
+        $random = Story::where('slug','!=',$slug)->inRandomOrder()->take(5)->get();
+        return view('story',['data' => 'view', 'story' => $story, 'profile' => $profile, 'random' => $random, 'comments' => $comments]);
+    }
+
     public function detail($id)
     {
         $numpage = Config::get('global.paginate_number');
