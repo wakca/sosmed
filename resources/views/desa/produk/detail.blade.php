@@ -7,7 +7,9 @@
             Detail Produk {{ $produk->nama }}
         </div>
         <div class="panel-body">
-            {!! $produk->konten !!}
+            <div class="container">
+                {!! $produk->konten !!}
+            </div>
         </div>
     </div>
 </div>
