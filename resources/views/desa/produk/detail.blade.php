@@ -16,7 +16,12 @@
                 </div>
             </div>
         </div>
+        
         <div class='col-md-3'>
+            @include('profile.card')
+            {{-- @if($data == "view") --}}
+                {{-- @include('stories.random') --}}
+            {{-- @e?ndif --}}
         </div>
     </div>
 </div>

@@ -47,12 +47,14 @@ class ProdukController extends Controller
     {
         $numpage = Config::get('global.paginate_number');
         $random = Produk::where('id','!=',$id)->inRandomOrder()->take(5)->get();
+        $profile = Auth::user();
 
         $produk = Produk::findOrFail($id);
 
         return view('desa.produk.detail', [
             'produk' => $produk,
-            'random' => $random
+            'random' => $random,
+            'profile' => $profile
         ]);
     }
 
