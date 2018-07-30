@@ -52,7 +52,7 @@
     	<div class="sidebar-wrapper">
             <div class="logo">
                 <a href="http://www.klipaa.com" class="simple-text">
-                    Admin Klipaa
+                    <img src="{{ asset('img/klipaa.png') }}" style="height: 40px; border-radius: 10px">
                 </a>
             </div>
 
