@@ -51,7 +51,7 @@
 
     	<div class="sidebar-wrapper">
             <div class="logo">
-                <a href="http://www.wakca.com" class="simple-text">
+                <a href="http://www.klipaa.com" class="simple-text">
                     Admin Klipaa
                 </a>
             </div>
@@ -138,7 +138,7 @@
                     </ul>
                 </nav> -->
                 <p class="copyright pull-right">
-                    &copy; <script>document.write(new Date().getFullYear())</script> <a href="http://www.wakca.com">Wakca Tim</a>, made with love for a better web
+                    &copy; <script>document.write(new Date().getFullYear())</script> <a href="http://www.klipaa.com">Klipaa Tim</a>, made with love for a better web
                 </p>
             </div>
         </footer>

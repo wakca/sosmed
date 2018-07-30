@@ -21,7 +21,7 @@ class CheckName
         if(isset($name)){
             return $next($request);
         }
-        Session::flash('message','Terima Kasih sudah bergabung bersama dengan wakca.com,  ajak orang satu desa dan kelurahan untuk bergabung, di wakca anda akan otomatis berteman secara menyenangkan !');
+        Session::flash('message','Terima Kasih sudah bergabung bersama dengan klipaa.com,  ajak orang satu desa dan kelurahan untuk bergabung, di klipaa anda akan otomatis berteman secara menyenangkan !');
         Session::flash('alert-class','alert-warning');
         return redirect()->route('profile.edit');
     }

@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Menghubungkan tetangga dan sahabat">
-    <meta content='Wakca.com' property='og:site_name'/>
+    <meta content='klipaa.com' property='og:site_name'/>
     <meta content='website' property='og:type'/>
     <meta content="{{ asset('img/wakca.png') }}" property="og:image"/>
     <meta content="@yield('title'){{ config('app.name', 'Laravel') }}" property='og:title'/>
@@ -55,7 +55,7 @@
                     @endif
                     <!-- Branding Image -->
                     <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Laravel') }}
+                        <img src="{{ asset('img/klipaa.png') }}" alt="Logo Klipaa.com" style="width: 150px">
                     </a>
                 </div>
                 
