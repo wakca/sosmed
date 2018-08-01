@@ -7,7 +7,7 @@
     <meta name="description" content="Media Digital Warga">
     <meta content='Klipaa.com' property='og:site_name'/>
     <meta content='website' property='og:type'/>
-    <meta content="{{ asset('img/wakca.png') }}" property="og:image"/>
+    <meta content="{{ asset('img/logo.png') }}" property="og:image"/>
     <meta content="@yield('title'){{ config('app.name', 'Laravel') }}" property='og:title'/>
     <meta content='{{ app('url')->current() }}' property='og:url'/>
     <meta content='Menghubungkan tetangga dan sahabat' property='og:description'/>
