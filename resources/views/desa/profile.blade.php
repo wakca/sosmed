@@ -6,16 +6,63 @@ Desa {{ $desa->nama }}
 @section('content')
 <div class="row">
 
-    <div class="col-md-9">
+    <div class="col-sm-12">
 
-        <h1>Selamat Datang</h1>
+        <h1>Selamat Datang di Desa {{ $desa->nama }}</h1>
 
         <!-- Berita -->
         <div class="row">
             <div class="col-md-12">
+                <table class="table">
+                    <tr>
+                        <td>Kepala Desa</td>
+                        <td>:</td>
+                        <td><strong>Belum Ada</strong></td>
+                    </tr>
+                    <tr>
+                        <td>Kecamatan</td>
+                        <td>:</td>
+                        <td><strong>{{ $desa->kecamatan->nama }}</strong> ({{ $desa->kecamatan->id }})</td>
+                    </tr>
+                    <tr>
+                        <td>Kota/Kabupaten</td>
+                        <td>:</td>
+                        <td><strong>{{ $desa->kecamatan->kab->nama }}</strong> ({{ $desa->kecamatan->kab->id }})</td>
+                    </tr>
+                    <tr>
+                        <td>Provinsi</td>
+                        <td>:</td>
+                        <td><strong>{{ $desa->kecamatan->kab->prov->nama }}</strong> ({{ $desa->kecamatan->kab->prov->id }})</td>
+                    </tr>
+                    <tr>
+                        <td>Admin Desa</td>
+                        <td>:</td>
+                        <td>
+                            @if($desa->pengurus)
+                                {{ $desa->pengurus->name }} / {{ "@".$desa->pengurus->username }}
+                            @else
+                                Belum ada Pengurus
+                            @endif
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Jumlah User Terdaftar</td>
+                        <td>:</td>
+                        <td>
+                            @if($desa->user)
+                            {{ $desa->user->count() }} user
+                            @else
+                            Belum ada User
+                            @endif
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="col-md-12">
                 <div class="blog-posts">
 
-                    @forelse($desa->stories as $listBerita)
+                    @forelse($desa->stories as $story)
                          
                         <article class="post post-large">
 
@@ -25,25 +72,29 @@ Desa {{ $desa->nama }}
                                     <div class="col-md-4">
                                         <br>
                                         <div class="post-image">
-                                            {!! Getter::getImageThumb($listBerita->content,$listBerita->title) !!}
-                                            {{-- <img class="responsive rounded" src="{{ asset($listBerita->gambar) }}" style="width: 100%" alt="{{ $listBerita->title }}"> --}}
+                                            {!! Getter::getImageThumb($story->content,$story->title) !!}
+                                            {{-- <img class="responsive rounded" src="{{ asset($story->gambar) }}" style="width: 100%" alt="{{ $story->title }}"> --}}
                                         </div>
                                     </div>
                                     <div class="col-md-8">
                                         <div class="post-date">
-                                            <span class="day">{{ $listBerita->created_at->format('d') }}</span>
-                                            <span class="month">{{ $listBerita->created_at->format('M') }}</span>
+                                            <span class="day">{{ $story->created_at->format('d') }}</span>
+                                            <span class="month">{{ $story->created_at->format('M') }}</span>
                                         </div>
                                         <h2>
-                                            <a href="{{ route('story.view', $listBerita->slug) }}">{{ $listBerita->title }}</a>
+                                            <a href="{{ route('story.view', $story->slug) }}">{{ $story->title }}</a>
                                         </h2>
-                                        @php $konten =  substr($listBerita->content,0, 500) @endphp
+                                        @php $konten =  substr($story->content,0, 500) @endphp
                                         {!! preg_replace("/<([a-z][a-z0-9]*)[^>]*?(\/?)>/i",'<$1$2>', $konten) !!}
                                         <div class="post-meta">
-                                            {{-- <span><i class="fa fa-user"></i> By <a href="{{ route('berita.by_user', $listBerita->user->username) }}">{{ $listBerita->user->name }}</a> </span> --}}
-                                            {{-- <span><i class="fa fa-tag"></i> <a href="{{ route('berita.by_kategori', $listBerita->kategori->slug) }}">{{ $listBerita->kategori->name }}</a> </span> --}}
-                                            <span><i class="fa fa-comments"></i> <a href="#">{{ count($listBerita->comment) }} komentar</a></span>
-                                            {{-- <span class="d-block d-sm-inline-block float-sm-right mt-3 mt-sm-0"><a href="{{ route('berita.read', $listBerita->slug) }}" class="btn btn-xs btn-primary">Read more...</a></span> --}}
+                                            {{-- <span><i class="fa fa-user"></i> By <a href="{{ route('berita.by_user', $story->user->username) }}">{{ $story->user->name }}</a> </span> --}}
+                                            {{-- <span><i class="fa fa-tag"></i> <a href="{{ route('berita.by_kategori', $story->kategori->slug) }}">{{ $story->kategori->name }}</a> </span> --}}
+                                            <span><i class="fa fa-comments"></i> <a href="#">{{ count($story->comment) }} komentar</a></span>
+                                            {{-- <span class="d-block d-sm-inline-block float-sm-right mt-3 mt-sm-0"><a href="{{ route('berita.read', $story->slug) }}" class="btn btn-xs btn-primary">Read more...</a></span> --}}
+                                            <br/>Tags : 
+                                            @foreach($story->tags as $tag)
+                                            <a class='label label-default' href='{{ route('story.tag',['tag' => $tag->name]) }}'>{{ ucfirst($tag->name) }}</a>
+                                            @endforeach
                                         </div>
                                     </div>
                                 </div>
@@ -52,9 +103,13 @@ Desa {{ $desa->nama }}
                         </article>
 
                     @empty
-                        <center>
-                            <h3>Tidak Ada Berita</h3>
-                        </center>
+
+                        <div class="col-md-6">
+                            <div class="alert alert-default">
+                                Belum ada Story pada Desa {{ $desa->nama }}<br/>
+                                <a href="/register" class="btn btn-success">Bergabunglah segera dengan Klipaa.com</a>
+                            </div>
+                        </div>
                     @endforelse
 
                 </div>
@@ -64,10 +119,6 @@ Desa {{ $desa->nama }}
         <!-- /Berita -->
 
     </div>
-    <div class="col-md-3 col-xs-6">
-        {{-- @include('desa.sidebar') --}}
-    </div>
-
 </div>
 @endsection
 
