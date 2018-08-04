@@ -1,22 +1,74 @@
-@extends('desa.layout')
+@extends('desa.template')
 @section('title')
 Desa {{ $desa->nama }}
 @endsection
 
 @section('content')
-<h2>
-    Desa {{ $desa->nama }}
-</h2>
+<div class="row">
 
-<div class="panel panel-primary">
-    <div class="panel-heading" id="judul_konten"><strong>Profil Desa</strong></div>
-    <div class="panel-body">
-        <div id="konten_desa">
-            
+    <div class="col-md-9">
+
+        <h1>Selamat Datang</h1>
+
+        <!-- Berita -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="blog-posts">
+
+                    @forelse($desa->stories as $listBerita)
+                         
+                        <article class="post post-large">
+
+                            <div class="post-content">
+
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <br>
+                                        <div class="post-image">
+                                            {!! Getter::getImageThumb($listBerita->content,$listBerita->title) !!}
+                                            {{-- <img class="responsive rounded" src="{{ asset($listBerita->gambar) }}" style="width: 100%" alt="{{ $listBerita->title }}"> --}}
+                                        </div>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="post-date">
+                                            <span class="day">{{ $listBerita->created_at->format('d') }}</span>
+                                            <span class="month">{{ $listBerita->created_at->format('M') }}</span>
+                                        </div>
+                                        <h2>
+                                            <a href="{{ route('story.view', $listBerita->slug) }}">{{ $listBerita->title }}</a>
+                                        </h2>
+                                        @php $konten =  substr($listBerita->content,0, 500) @endphp
+                                        {!! preg_replace("/<([a-z][a-z0-9]*)[^>]*?(\/?)>/i",'<$1$2>', $konten) !!}
+                                        <div class="post-meta">
+                                            {{-- <span><i class="fa fa-user"></i> By <a href="{{ route('berita.by_user', $listBerita->user->username) }}">{{ $listBerita->user->name }}</a> </span> --}}
+                                            {{-- <span><i class="fa fa-tag"></i> <a href="{{ route('berita.by_kategori', $listBerita->kategori->slug) }}">{{ $listBerita->kategori->name }}</a> </span> --}}
+                                            <span><i class="fa fa-comments"></i> <a href="#">{{ count($listBerita->comment) }} komentar</a></span>
+                                            {{-- <span class="d-block d-sm-inline-block float-sm-right mt-3 mt-sm-0"><a href="{{ route('berita.read', $listBerita->slug) }}" class="btn btn-xs btn-primary">Read more...</a></span> --}}
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </article>
+
+                    @empty
+                        <center>
+                            <h3>Tidak Ada Berita</h3>
+                        </center>
+                    @endforelse
+
+                </div>
+            </div>
+
         </div>
+        <!-- /Berita -->
+
     </div>
+    <div class="col-md-3 col-xs-6">
+        {{-- @include('desa.sidebar') --}}
+    </div>
+
 </div>
-<br>
 @endsection
 
 @section('scripts')
