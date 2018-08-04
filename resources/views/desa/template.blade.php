@@ -45,8 +45,6 @@
 		<link rel="stylesheet" href="{{ asset('frontend/vendor/rs-plugin/css/navigation.css') }}">
 		<link rel="stylesheet" href="{{ asset('frontend/vendor/circle-flip-slideshow/css/component.css') }}">
 
-		<!-- Sweetalert css -->
-		<link rel="stylesheet" href="{!! asset('assets/plugins/sweetalert/css/sweetalert.css') !!}">
 
 		<!-- Demo CSS -->
 
@@ -120,8 +118,6 @@
 		<script src="{{ asset('frontend/vendor/circle-flip-slideshow/js/jquery.flipshow.min.js') }}"></script>
 		<script src="{{ asset('frontend/js/views/view.home.js') }}"></script>
 
-		<!-- sweetalert js -->
-		<script src="{!! asset('assets/plugins/sweetalert/js/sweetalert.js') !!}"></script>
 
 		<!-- Theme Custom -->
 		<script src="{{ asset('frontend/js/custom.js') }}"></script>

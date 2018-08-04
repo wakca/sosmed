@@ -6,62 +6,19 @@
                     <div class="header-row">
                         <div class="header-logo">
                             <a href="{{ route('index') }}">
-                                <img alt="Klipaa.com" width="68" height="75" data-sticky-width="45" data-sticky-height="45" data-sticky-top="105" src="{{ asset('img/logo.png') }}">
+                                <img alt="Klipaa.com" width="69" height="75" data-sticky-width="45" data-sticky-height="45" data-sticky-top="105" src="{{ asset('img/logo.png') }}">
                             </a>
                         </div>
-                        <div class="header-logo" style="margin-left: 20px">
+                        <div width="140" height="75" style="margin-left: 20px; margin-top: 20px">
                             <h3>
-                                Desa
-                                <strong>{{ $desa ? $desa->nama : '' }}</strong>
+                                Desa <strong>{{ $desa ? $desa->nama : '' }}</strong><br/>
+                                <small>{{ $desa->kecamatan->nama }}</small><br/>
                                 <small>{{ $desa->kecamatan->kab->nama }}</small>
                             </h3>
                         </div>
                     </div>
                 </div>
-                <div class="header-column justify-content-end">
-                    <div class="header-row pt-3">
-                        <nav class="header-nav-top">
-
-                            <ul class="header-extra-info d-none d-md-flex align-items-center">
-                                {{-- <li>
-                                    <div class="feature-box feature-box-style-3 align-items-center">
-                                        <div class="feature-box-icon">
-                                            <i class="fa fa-users"></i>
-                                        </div>
-                                        <div class="feature-box-info">
-                                            <h4 class="mb-0">{{ $desa ? '@'. $desa->pengurus->username : '' }}</h4>
-                                            <p><small>Admin Desa</small></p>
-                                        </div>
-                                    </div>
-                                </li> --}}
-                                {{-- <li>
-                                    <div class="feature-box feature-box-style-3 align-items-center">
-                                        <div class="feature-box-icon">
-                                            <i class="fa fa-envelope"></i>
-                                        </div>
-                                        <div class="feature-box-info">
-                                            <h4 class="mb-0">{{ $desa ? $desa->email : '' }}</h4>
-                                            <p><small>Email Desa</small></p>
-                                        </div>
-                                    </div>
-                                </li> --}}
-                                {{-- <li>
-                                    <div class="header-search d-none d-md-block">
-                                        <form id="searchForm" action="{{ route('index') }}" method="get">
-                                            <div class="input-group">
-                                                <input type="text" class="form-control" name="query" id="q" placeholder="Search..." required>
-                                                <span class="input-group-btn">
-                                                    <button class="btn btn-light" type="submit"><i class="fa fa-search"></i></button>
-                                                </span>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </li> --}}
-                            </ul>
-
-                        </nav>
-                    </div>
-                </div>
+                
             </div>
         </div>
         <div class="header-nav-bar header-nav-bar-primary">
@@ -72,7 +29,7 @@
                             <div class="header-nav justify-content-start">
                                 <div class="header-nav-main header-nav-main-light header-nav-main-effect-1 header-nav-main-sub-effect-1">
                                     <nav class="collapse">
-                                        {{-- @include('desa.sidebar') --}}
+                                        @include('desa.navbar')
                                     </nav>
                                 </div>
                             </div>

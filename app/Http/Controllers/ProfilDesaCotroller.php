@@ -34,7 +34,7 @@ class ProfilDesaCotroller extends Controller
     public function produk($id_desa)
     {
         $desa = Desa::findOrFail($id_desa);
-        $produk = $desa->produk_unggulan()->orderBy('created_at','desc')->paginate(5);
+        $produk = $desa->produk_unggulan()->orderBy('created_at','desc')->paginate(8);
 
         return view('desa.produk', [
             'desa' => $desa,

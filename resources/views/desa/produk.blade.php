@@ -1,37 +1,130 @@
-@extends('desa.layout')
+@extends('desa.template')
 @section('title')
-Desa {{ $desa->nama }}
+Produk di Desa {{ $desa->nama }}
 @endsection
 
 @section('content')
-<h2>
-    Produk Unggulan di Desa {{ $desa->nama }}
-</h2>
+<h2>Produk Unggulan di Desa {{ $desa->nama }}</h2>
+<div class="masonry-loader masonry-loader-loaded">
+    <div class="row" data-plugin-masonry="" style="position: relative;">
+        
+        @forelse($produk as $product)
+        <div class="col-12 col-sm-6 col-lg-3 product">
+            <span class="product-thumb-info">
+                <a href="{{ route('desa.produk.detail', $product->id) }}">
+                    <span class="product-thumb-info-image">
+                        <span class="product-thumb-info-act">
+                            <span class="product-thumb-info-act-left"><em>View</em></span>
+                            <span class="product-thumb-info-act-right"><em><i class="fas fa-plus"></i> Details</em></span>
+                        </span>
+                        <img alt="" class="img-fluid" src="{{ Getter::getOnlyImgUrl($product->konten, $product->nama) }}" style="height: 200px">
+                    </span>
+                </a>
+                <span class="product-thumb-info-content">
+                    <center>
 
-<div id='story' class="col-md-12">
-    <div class='row story-container' id='list-story'>
-        @foreach($produk as $list_produk)
-            <div class='panel story panel-default'>
-                <div class='panel-heading'><strong><a href="">{{ $list_produk->nama }}</a> oleh <a href='{{ $list_produk->user->username }}'>{{ '@'.$list_produk->user->username }}</a></strong></div>
-                <div class='panel-body'>
-                    {!! Getter::getStoryThumb($list_produk->konten,$list_produk->nama) !!}
-                    <div class="caption">
-                        <h4><a href='{{ route('desa.produk.detail', $list_produk->id) }}'>{{ $list_produk->title }}</a></h4>
-                        <p>{{ strlen(strip_tags($list_produk->konten)) > 100 ? str_limit(strip_tags($list_produk->konten),100)."...":strip_tags($list_produk->konten) }}</p>
-                        <div class="clearfix">
-                            <div class="pull-right">
-                                <a href="{{ route('desa.produk.detail', $list_produk->id) }}" class="btn btn-primary">Lihat Produk</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        @endforeach
-        <div class="pull-right">
-            <div>{{ $produk-> links() }}</div>
-                <div class='center-text' id='load-more'>
-            </div>
+                        <a href="{{ route('desa.produk.detail', $product->id) }}">
+                            <h4>{{ $product->nama }}</h4>
+                        </a>
+                        <a href="/{{ $product->user->username }}" class="btn btn-xs btn-primary">Oleh : {{ '@'.$product->user->username }}</a>
+                    </center>
+                </span>
+            </span>
+            <br><hr>
         </div>
+        @empty
+        @endforelse
+        
     </div>
-</div>
+    {{ $produk->links('vendor.pagination.default') }}
+<div class="bounce-loader"><div class="bounce1"></div><div class="bounce2"></div><div class="bounce3"></div></div></div>
+@endsection
+
+@section('scripts')
+<script>
+    var id_desa = {{ $desa->id }};
+    var url =  "{{ url('/') }}/";
+
+    var judul = $("#judul_konten");
+    var konten = $("#konten_desa");
+
+    //Data Default - Profil
+    $.get(url+"api/konten_desa/"+id_desa+"/profil_desa", function(data){
+        judul.html('Profil Desa');
+        konten.html(data);
+    });
+
+    //selayang_pandang
+    $("#selayang_pandang").click(function(e){
+        $.get(url+"api/konten_desa/"+id_desa+"/selayang_pandang", function(data){
+            judul.html('Selayang Pandang');
+            konten.html(data);
+        });
+    });
+
+    //organisasi_desa
+    $("#organisasi_desa").click(function(e){
+        $.get(url+"api/konten_desa/"+id_desa+"/organisasi_desa", function(data){
+            judul.html('Organisasi Desa');
+            konten.html(data);
+        });
+    });
+
+    //galeri_desa
+    $("#galeri_desa").click(function(e){
+        $.get(url+"api/konten_desa/"+id_desa+"/galeri_desa", function(data){
+            judul.html('Galeri Desa');
+            konten.html(data);
+        });
+    });
+
+    //profil_desa
+    $("#profil_desa").click(function(e){
+        $.get(url+"api/konten_desa/"+id_desa+"/profil_desa", function(data){
+            judul.html('Profil Desa');
+            konten.html(data);
+        });
+    });
+
+    //produk_unggulan
+    $("#produk_unggulan").click(function(e){
+        $.get(url+"api/konten_desa/"+id_desa+"/produk_unggulan", function(data){
+            judul.html('Produk Unggulan');
+            konten.html(data);
+        });
+    });
+
+    //kabar_desa
+    $("#kabar_desa").click(function(e){
+        $.get(url+"api/konten_desa/"+id_desa+"/kabar_desa", function(data){
+            judul.html('Kabar Desa');
+            konten.html(data);
+        });
+    });
+
+    //profil_desa
+    $("#profil_desa").click(function(e){
+        $.get(url+"api/konten_desa/"+id_desa+"/profil_desa", function(data){
+            judul.html('Profil Desa');
+            konten.html(data);
+        });
+    });
+
+    //profil_desa
+    $("#dokumen_desa").click(function(e){
+        $.get(url+"api/konten_desa/"+id_desa+"/dokumen_desa", function(data){
+            judul.html('Dokumen Desa');
+            konten.html(data);
+        });
+    });
+
+    //proyek_desa
+    $("#proyek_desa").click(function(e){
+        $.get(url+"api/konten_desa/"+id_desa+"/proyek_desa", function(data){
+            judul.html('Proyek Desa');
+            konten.html(data);
+        });
+    });
+</script>
+
 @endsection
