@@ -70,6 +70,10 @@ Auth::routes();
 //Halaman Desa
 Route::group(['prefix' => 'profil_desa/{id_desa}'], function($id_desa){
     Route::get('/beranda', 'ProfilDesaCotroller@index')->name('profil_desa.beranda');
+    Route::get('/selayang_pandang', 'ProfilDesaCotroller@selayang_pandang')->name('profil_desa.selayang_pandang');
+    Route::get('/dokumen', 'ProfilDesaCotroller@dokumen')->name('profil_desa.dokumen');
+    Route::get('/organisasi', 'ProfilDesaCotroller@organisasi')->name('profil_desa.organisasi');
+    Route::get('/galeri', 'ProfilDesaCotroller@galeri')->name('profil_desa.galeri');
     Route::get('/produk', 'ProfilDesaCotroller@produk')->name('profil_desa.produk');
     Route::get('/story', 'ProfilDesaCotroller@story')->name('profil_desa.story');
     Route::get('/peta', 'ProfilDesaCotroller@peta')->name('profil_desa.peta');
