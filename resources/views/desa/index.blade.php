@@ -144,7 +144,7 @@
             <h2>Produk Unggulan Terbaru</h2>
             @foreach($produk as $list_produk)
                 <div class='panel story panel-default'>
-                    <div class='panel-heading'><img height='25' class='img-rounded' src='{{ asset('photos/'.(isset($list_produk->user->photo) ? $list_produk->user->photo : 'av-default.jpg')) }}'/> <strong><a href='{{ $list_produk->user->username }}'>{{ $list_produk->user->name }}</a></strong> <span class='pull-right'>{{ Date::parse($list_produk->created_at)->ago() }} &bull; <i class='glyphicon glyphicon-comment'></i> <strong>{{ count($list_produk->comment) }}</strong></span></div>
+                    <div class='panel-heading'><img height='25' class='img-rounded' src='{{ asset('photos/'.(isset($list_produk->user->photo) ? $list_produk->user->photo : 'av-default.jpg')) }}'/> <strong><a href='{{ $list_produk->user->username }}'>{{ $list_produk->user->name }}</a></strong> <span class='pull-right'>{{ Date::parse($list_produk->created_at)->ago() }} &bull; <i class='glyphicon glyphicon-comment'></i></span></div>
                     <div class='panel-body'>
                         {!! Getter::getStoryThumb($list_produk->konten,$list_produk->nama) !!}
                         <br>
