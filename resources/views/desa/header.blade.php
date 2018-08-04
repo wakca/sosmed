@@ -23,7 +23,7 @@
                         <nav class="header-nav-top">
 
                             <ul class="header-extra-info d-none d-md-flex align-items-center">
-                                <li>
+                                {{-- <li>
                                     <div class="feature-box feature-box-style-3 align-items-center">
                                         <div class="feature-box-icon">
                                             <i class="fa fa-users"></i>
@@ -33,7 +33,7 @@
                                             <p><small>Admin Desa</small></p>
                                         </div>
                                     </div>
-                                </li>
+                                </li> --}}
                                 {{-- <li>
                                     <div class="feature-box feature-box-style-3 align-items-center">
                                         <div class="feature-box-icon">
