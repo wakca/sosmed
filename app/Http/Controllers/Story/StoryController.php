@@ -19,11 +19,7 @@ use App\Storyimage;
 
 class StoryController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth',['except' => ['view','tag']]);
-    }
-    
+
     public function index(){
         $numpage = Config::get('global.paginate_number');
         $profile = User::where('id',Auth::Id())->first();

@@ -18,6 +18,20 @@
                         </div>
                     </div>
                 </div>
+                <div class="header-column justify-content-end">
+                    <div class="header-row pt-3">
+                        <nav class="header-nav-top">
+
+                            <ul class="header-extra-info d-none d-md-flex align-items-center">
+                                <li>
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                                        Kirim Pesan ke Admin Desa
+                                    </button>
+                                </li>
+
+                        </nav>
+                    </div>
+                </div>
                 
             </div>
         </div>
@@ -52,3 +66,23 @@
         </div>
     </div>
 </header>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Masukan Pesan Anda</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <textarea name="pesan" id="pesan" cols="30" rows="10" class="form-control"></textarea>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>

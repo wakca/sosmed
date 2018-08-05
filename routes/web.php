@@ -189,15 +189,15 @@ Route::group(['prefix' => 'admin'], function () {
 Route::group(['prefix' => 'story'], function () {
     Route::get('/', 'Story\StoryController@index')->name('story');
     Route::get('/tag/{tag}','Story\StoryController@tag')->name('story.tag');
-    Route::get('/create', 'Story\StoryController@create')->name('story.create');
-    Route::post('/create', 'Story\StoryController@save');
+    Route::get('/create', 'Story\StoryController@create')->name('story.create')->middleware('auth');
+    Route::post('/create', 'Story\StoryController@save')->middleware('auth');
     Route::get('/{slug}', 'Story\StoryController@view')->name('story.view');
-    Route::get('/{id}/edit', 'Story\StoryController@edit')->name('story.edit')->where('id','[0-9]+');
-    Route::post('/{id}/edit', 'Story\StoryController@update')->where('id','[0-9]+')->middleware('checkowner:story');;
-    Route::get('/{id}/delete', 'Story\StoryController@destroy')->name('story.delete')->where('id','[0-9]+')->middleware('checkowner:story');
-    Route::put('/comment','Story\StorycommentController@store')->name('story.comment.save');
+    Route::get('/{id}/edit', 'Story\StoryController@edit')->name('story.edit')->where('id','[0-9]+')->middleware('auth');
+    Route::post('/{id}/edit', 'Story\StoryController@update')->where('id','[0-9]+')->middleware('checkowner:story')->middleware('auth');
+    Route::get('/{id}/delete', 'Story\StoryController@destroy')->name('story.delete')->where('id','[0-9]+')->middleware('checkowner:story')->middleware('auth');
+    Route::put('/comment','Story\StorycommentController@store')->name('story.comment.save')->middleware('auth');
     Route::get('/comment/{id}/delete','Story\StorycommentController@destroy')->name('story.comment.delete')->where('id','[0-9]+')->middleware('checkowner:storycomment');
-    Route::get('/comment/{id}/edit','Story\StorycommentController@edit')->name('story.comment.edit')->where('id','[0-9]+');
+    Route::get('/comment/{id}/edit','Story\StorycommentController@edit')->name('story.comment.edit')->where('id','[0-9]+')->middleware('auth');
     Route::post('/comment/{id}','Story\StorycommentController@update')->name('story.comment.update')->where('id','[0-9]+')->middleware('checkowner:storycomment');
 });
 

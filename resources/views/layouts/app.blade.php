@@ -37,11 +37,26 @@
             <div class="container">
                 <div class="navbar-header">
                     @if (Auth::guest())
-                        <ul class="nav nav-pills navbar-toggle collapsed">
+                    <div class="collapse navbar-collapsed" id="1">
+
+                            <!-- Right Side Of Navbar -->
+                        <ul class="nav navbar-nav navbar-right">
                             <!-- Authentication Links -->
-                            <li><a href="{{ route('login') }}">Login</a></li>
-                            <li><a href="{{ route('register') }}">Daftar</a></li>
+                            
+                            <li><a href='/desa'>&nbsp;&nbsp;Kanal Desa <span id='message'></span></a></li>
+                            <li><a href="{{ route('login') }}">&nbsp;&nbsp;Login</a></li>
+                            <li><a href="{{ route('register') }}">&nbsp;&nbsp;Daftar</a></li>
                         </ul>
+                    </div>
+                    <!-- Collapsed Hamburger -->
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#1">
+                        <span class="sr-only">Toggle Navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span id='notif-icon' class='collapsed'></span>
+                        <span id='message-icon' class='collapsed'></span>
+                    </button>
                     @else
                     <!-- Collapsed Hamburger -->
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
