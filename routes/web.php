@@ -14,26 +14,17 @@
 Route::get('/', 'HomeController@index')->name('index');
 Route::get('/beranda','HomeController@beranda')->middleware(['auth','checkname']);
 
+Route::get('ganti_konten', function(){
+    $story = App\Story::all();
+    
+    foreach($story as $data)
+    {
+        $content = str_replace('wakca.itsinergi.id', 'klipaa.com', $data->content);
+        $data->content = $content;
+        $data->save();
 
-Route::get('gdrive', function(){
-
-    $filename = 'test1121.txt';
-    // First we need to create a file to delete
-    Storage::cloud()->makeDirectory('Test Dir');
-    // Now find that file and use its ID (path) to delete it
-    $dir = '/';
-    $recursive = false; // Get subdirectories also?
-    $contents = collect(Storage::cloud()->listContents($dir, $recursive));
-    $file = $contents
-        ->where('type', '=', 'file')
-        ->where('filename', '=', pathinfo($filename, PATHINFO_FILENAME))
-        ->where('extension', '=', pathinfo($filename, PATHINFO_EXTENSION))
-        ->first(); // there can be duplicate file names!
-    Storage::cloud()->delete($file['path']);
-    return 'File was deleted from Google Drive';
+    }
 });
-
-
 
 Route::group(['prefix' => 'desa'], function(){
     Route::get('/', 'DesaController@index');
@@ -79,6 +70,10 @@ Auth::routes();
 //Halaman Desa
 Route::group(['prefix' => 'profil_desa/{id_desa}'], function($id_desa){
     Route::get('/beranda', 'ProfilDesaCotroller@index')->name('profil_desa.beranda');
+    Route::get('/selayang_pandang', 'ProfilDesaCotroller@selayang_pandang')->name('profil_desa.selayang_pandang');
+    Route::get('/dokumen', 'ProfilDesaCotroller@dokumen')->name('profil_desa.dokumen');
+    Route::get('/organisasi', 'ProfilDesaCotroller@organisasi')->name('profil_desa.organisasi');
+    Route::get('/galeri', 'ProfilDesaCotroller@galeri')->name('profil_desa.galeri');
     Route::get('/produk', 'ProfilDesaCotroller@produk')->name('profil_desa.produk');
     Route::get('/story', 'ProfilDesaCotroller@story')->name('profil_desa.story');
     Route::get('/peta', 'ProfilDesaCotroller@peta')->name('profil_desa.peta');
@@ -194,15 +189,15 @@ Route::group(['prefix' => 'admin'], function () {
 Route::group(['prefix' => 'story'], function () {
     Route::get('/', 'Story\StoryController@index')->name('story');
     Route::get('/tag/{tag}','Story\StoryController@tag')->name('story.tag');
-    Route::get('/create', 'Story\StoryController@create')->name('story.create');
-    Route::post('/create', 'Story\StoryController@save');
+    Route::get('/create', 'Story\StoryController@create')->name('story.create')->middleware('auth');
+    Route::post('/create', 'Story\StoryController@save')->middleware('auth');
     Route::get('/{slug}', 'Story\StoryController@view')->name('story.view');
-    Route::get('/{id}/edit', 'Story\StoryController@edit')->name('story.edit')->where('id','[0-9]+');
-    Route::post('/{id}/edit', 'Story\StoryController@update')->where('id','[0-9]+')->middleware('checkowner:story');;
-    Route::get('/{id}/delete', 'Story\StoryController@destroy')->name('story.delete')->where('id','[0-9]+')->middleware('checkowner:story');
-    Route::put('/comment','Story\StorycommentController@store')->name('story.comment.save');
+    Route::get('/{id}/edit', 'Story\StoryController@edit')->name('story.edit')->where('id','[0-9]+')->middleware('auth');
+    Route::post('/{id}/edit', 'Story\StoryController@update')->where('id','[0-9]+')->middleware('checkowner:story')->middleware('auth');
+    Route::get('/{id}/delete', 'Story\StoryController@destroy')->name('story.delete')->where('id','[0-9]+')->middleware('checkowner:story')->middleware('auth');
+    Route::put('/comment','Story\StorycommentController@store')->name('story.comment.save')->middleware('auth');
     Route::get('/comment/{id}/delete','Story\StorycommentController@destroy')->name('story.comment.delete')->where('id','[0-9]+')->middleware('checkowner:storycomment');
-    Route::get('/comment/{id}/edit','Story\StorycommentController@edit')->name('story.comment.edit')->where('id','[0-9]+');
+    Route::get('/comment/{id}/edit','Story\StorycommentController@edit')->name('story.comment.edit')->where('id','[0-9]+')->middleware('auth');
     Route::post('/comment/{id}','Story\StorycommentController@update')->name('story.comment.update')->where('id','[0-9]+')->middleware('checkowner:storycomment');
 });
 

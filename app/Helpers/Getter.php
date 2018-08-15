@@ -236,6 +236,36 @@ class Getter
             return "<div class='thumbnail-story' style='background-image:url(".$images[0]->getAttribute('src').");' alt='$title' title='$title'></div>";
         }
     }
+
+    public static function getImageThumb($content,$title){
+        $dom = new \DomDocument();
+        libxml_use_internal_errors(true);
+        $dom->loadHtml($content, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);    
+        $images = $dom->getElementsByTagName('img');
+        if(isset($images[0])){
+            // return "<div class='thumbnail-story' style='background-image:url(".$images[0]->getAttribute('src').");' alt='$title' title='$title'></div>";
+            return "<img class='responsive rounded' src='".$images[0]->getAttribute('src')."' style='width: 100%' alt='$title'>";
+        } else {
+            // http://d2pa5gi5n2e1an.cloudfront.net/id/images/common/no_image_l.gif
+            return "<img class='responsive rounded' src='http://d2pa5gi5n2e1an.cloudfront.net/id/images/common/no_image_l.gif' style='width: 100%' alt='$title'>";
+        }
+    }
+
+    public static function getOnlyImgUrl($content, $title)
+    {
+        $dom = new \DomDocument();
+        libxml_use_internal_errors(true);
+        $dom->loadHtml($content, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);    
+        $images = $dom->getElementsByTagName('img');
+        if(isset($images[0])){
+            // return "<div class='thumbnail-story' style='background-image:url(".$images[0]->getAttribute('src').");' alt='$title' title='$title'></div>";
+            // return "<img class='responsive rounded' src='".."' style='width: 100%' alt='$title'>";
+            return $images[0]->getAttribute('src');
+        } else {
+            // http://d2pa5gi5n2e1an.cloudfront.net/id/images/common/no_image_l.gif
+            return 'http://d2pa5gi5n2e1an.cloudfront.net/id/images/common/no_image_l.gif';
+        }
+    }
     
     public static function getStorySlug($id){
         $story = Story::find($id);

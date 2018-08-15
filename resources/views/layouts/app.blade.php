@@ -5,9 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Menghubungkan tetangga dan sahabat">
-    <meta content='Wakca.com' property='og:site_name'/>
+    <meta content='klipaa.com' property='og:site_name'/>
     <meta content='website' property='og:type'/>
-    <meta content="{{ asset('img/wakca.png') }}" property="og:image"/>
+    <meta content="{{ asset('img/logo.png') }}" property="og:image"/>
     <meta content="@yield('title'){{ config('app.name', 'Laravel') }}" property='og:title'/>
     <meta content='{{ app('url')->current() }}' property='og:url'/>
     <meta content='Menghubungkan tetangga dan sahabat' property='og:description'/>
@@ -37,11 +37,26 @@
             <div class="container">
                 <div class="navbar-header">
                     @if (Auth::guest())
-                        <ul class="nav nav-pills navbar-toggle collapsed">
+                    <div class="collapse navbar-collapsed" id="1">
+
+                            <!-- Right Side Of Navbar -->
+                        <ul class="nav navbar-nav navbar-right">
                             <!-- Authentication Links -->
-                            <li><a href="{{ route('login') }}">Login</a></li>
-                            <li><a href="{{ route('register') }}">Daftar</a></li>
+                            
+                            <li><a href='/desa'>&nbsp;&nbsp;Kanal Desa <span id='message'></span></a></li>
+                            <li><a href="{{ route('login') }}">&nbsp;&nbsp;Login</a></li>
+                            <li><a href="{{ route('register') }}">&nbsp;&nbsp;Daftar</a></li>
                         </ul>
+                    </div>
+                    <!-- Collapsed Hamburger -->
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#1">
+                        <span class="sr-only">Toggle Navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span id='notif-icon' class='collapsed'></span>
+                        <span id='message-icon' class='collapsed'></span>
+                    </button>
                     @else
                     <!-- Collapsed Hamburger -->
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
@@ -55,7 +70,7 @@
                     @endif
                     <!-- Branding Image -->
                     <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Laravel') }}
+                        <img src="{{ asset('img/klipaa.png') }}" alt="Logo Klipaa.com" style="width: 150px">
                     </a>
                 </div>
                 
@@ -129,6 +144,11 @@
         </div>
     </div>
     <!-- Scripts -->
+
+    <script
+  src="https://code.jquery.com/jquery-1.12.4.min.js"
+  integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+  crossorigin="anonymous"></script>
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/ekko-lightbox.min.js') }}"></script>
     <script src="{{ asset('js/URI.min.js') }}"></script>

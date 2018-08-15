@@ -8,7 +8,7 @@ class ProdukUnggulan extends Model
 {
     protected $table = 'produk_unggulan';
 
-    public $timestamps = false;
+    public $timestamps = true;
 
     public function des()
     {

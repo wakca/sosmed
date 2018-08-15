@@ -1,0 +1,84 @@
+
+/* this is the bit that gives the border color */
+div.list-category h3.title
+{
+display: block;
+padding: 14px 0 15px 0;
+font-size: 20px;
+font-weight: 100;
+margin-bottom: 0px;
+border-bottom: 1px solid;
+}
+
+div.list-category span.list-footer
+{
+display: block;
+padding: 14px 0 15px 0;
+font-size: 20px;
+font-weight: 100;
+margin-bottom: 0px;
+border-bottom: 1px solid;
+}
+
+/* removes the border at the top of the list so it doesnt cover up the border above */
+div.list-category a.list-group-item:first-child
+{
+border-top: 0;
+}
+
+div.list-category .list-footer
+{
+margin-top:-15px;
+}
+
+div.list-category a.list-group-item  
+{
+border-left: 0;
+border-right: 0;
+border-radius: 0;
+border-bottom: 1px solid #E0E4E9;
+color: #4c4c4c; 
+text-decoration: none;
+padding-left: 0;
+padding-right: 0;
+overflow: hidden;
+}
+
+.truncate 
+{
+width: 80%;
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
+}
+
+.widget-title {
+	color: #404040;
+	text-transform: uppercase;
+	margin-bottom: 30px;
+	font-weight: bold;
+	font-size: 17px;
+	position: relative;
+	text-align: left;
+	margin-top: 30px;
+	padding-bottom: 5px;
+	float: none;
+}
+
+.widget-title a{
+	font-size: 20px;
+	line-height: 22px;
+	color: #404040;
+}
+
+.widget-title:before{
+	position: absolute;
+	margin: auto;
+	z-index: 1;
+	content: "";
+	width: 35%;
+	height: 2px;
+	background: #e96656;
+	bottom: -9px;
+	left: 0;
+}

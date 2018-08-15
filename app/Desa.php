@@ -25,7 +25,7 @@ class Desa extends Model
     }
 
     public function pengurus(){
-        return $this->belongsTo('App\User', 'admin_id');
+        return $this->belongsTo('App\User', 'admin_id', 'username');
     }
 
     public function penduduk()

@@ -47,7 +47,7 @@ class PasswordReset extends Notification
    {
        return (new MailMessage)
             ->greeting('Permintaan Reset Password !')
-            ->subject('Lupa Password Wakca.com')
+            ->subject('Lupa Password Klipaa.com')
             ->line('Silahkan klik tombol berikut untuk mereset password Anda.')
             ->action('Reset Password', route('password.reset', $this->token))
             ->line('Jika anda tidak memintanya, silahkan abaikan pesan ini.');
