@@ -21,6 +21,15 @@
         gtag('config', 'UA-62900800-2');
     </script>
 
+    <!-- Google Analytics -->
+    <script>
+        window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+        ga('create', 'UA-62900800-2', 'auto');
+        ga('send', 'pageview');
+    </script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+    <!-- End Google Analytics -->
+
     <link rel="canonical" href="{{ app('url')->current() }}" />
     
     <!-- CSRF Token -->
