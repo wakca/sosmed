@@ -11,6 +11,16 @@
     <meta content="@yield('title'){{ config('app.name', 'Laravel') }}" property='og:title'/>
     <meta content='{{ app('url')->current() }}' property='og:url'/>
     <meta content='Menghubungkan tetangga dan sahabat' property='og:description'/>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-62900800-2"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-62900800-2');
+    </script>
+
     <link rel="canonical" href="{{ app('url')->current() }}" />
     
     <!-- CSRF Token -->
