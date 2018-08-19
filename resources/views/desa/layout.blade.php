@@ -253,6 +253,10 @@
 
     </script>
 
+  
+
+
+
     @yield('scripts')
 
 </body>

@@ -112,4 +112,35 @@ class MessageController extends Controller
         Message::where([['conversation_id',$id],['recepient_id',$user_id]])->update(['del_receiver' => 'Y']);
         return Response()->json(['status'=>'success']);
     }
+
+
+    public function send_messsage(Request $request)
+    {
+        // return $request->all();
+
+        $pesan = Cache::put('pesan', $request->input('pesan'), 60);
+        $desa_id = $request->input('desa_id');
+
+        // return Cache::get('pesan');
+
+        $desa = Desa::findOrFail($desa_id);
+
+        if(Auth::check())
+        {
+            $data = [
+                'status' => 'success',
+                'message' => 'Anda sudah Login',
+                'data' => Auth::user()
+            ];
+            return response()->json($data);
+        }
+        else
+        {
+            $data = [
+                'status' => 'failed',
+                'message' => 'Anda belum sudah Login',
+            ];
+            return response()->json($data);
+        }
+    }
 }
