@@ -150,9 +150,11 @@ class MessageController extends Controller
                 'status' => 'success',
                 'message' => 'Pesan Anda telah berhasil dikirim ke Admin Desa'
             ];
+
+            Cache::flush();
             
-            return response()->json($desa);
-            // return redirect()->back();
+            // return response()->json($desa);
+            return redirect()->back();
    
         }
         else
