@@ -8,7 +8,10 @@ use App\Provinsi;
 use App\Desa;
 use App\Story;
 
-class ProfilDesaCotroller extends Controller
+use Auth;
+use Cache;
+
+class ProfilDesaController extends Controller
 {
     public function index($id_desa)
     {
@@ -86,5 +89,29 @@ class ProfilDesaCotroller extends Controller
             'desa' => $desa,
             'provinsi' => $provinsi
         ]);
+    }
+
+    public function kirim_pesan(Request $request)
+    {
+        // return $request->all();
+
+        $pesan = Cache::put('pesan', $request->input('pesan'), 60);
+        $desa_id = $request->input('desa_id');
+
+        // return Cache::get('pesan');
+
+        $desa = Desa::findOrFail($desa_id);
+
+        if(Auth::check())
+        {
+            return 'Anda sudah login';
+        }
+        else
+        {
+            return redirect()->route('login');
+            return 'Anda belum Login';
+        }
+
+
     }
 }
