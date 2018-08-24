@@ -81,7 +81,7 @@
                 <form action="{{ route('kirim_pesan', $desa->id) }}" method="POST">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <input type="hidden" name="desa_id" value="{{ $desa->id }}">
-                    <textarea name="pesan" id="pesan" cols="30" rows="10" class="form-control"></textarea>
+                    <textarea name="pesan" id="pesan" cols="30" rows="10" class="form-control">{{ Cache::get('pesan') }}</textarea>
                     <br>
                     <div class="clearfix">
                         <div class="pull-right">

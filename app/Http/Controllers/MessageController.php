@@ -13,12 +13,15 @@ use Validator;
 use App\Image;
 use Intervention\Image\ImageManagerStatic as Img;
 
+use Cache;
+use App\Desa;
+
 class MessageController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware('auth');
+    // }
     
     public function index(){
         $id = Auth::user()->id;
@@ -114,11 +117,12 @@ class MessageController extends Controller
     }
 
 
-    public function send_messsage(Request $request)
+    public function send_message(Request $request)
     {
         // return $request->all();
 
         $pesan = Cache::put('pesan', $request->input('pesan'), 60);
+        $get_pesan = Cache::get('pesan');
         $desa_id = $request->input('desa_id');
 
         // return Cache::get('pesan');
@@ -127,20 +131,33 @@ class MessageController extends Controller
 
         if(Auth::check())
         {
+            $pengurus = $desa->penduduk()->where('level', 2)->get();
+            
+            $conversation_id = Getter::getMaxConversationId();
+            if($conversation_id == 0){
+                $conversation_id = 1;
+            }
+            else{
+                $conversation_id = Getter::getConversationId($request->user_id,$request->recepient_id);
+            }
+            
+            foreach($pengurus as $recepient)
+            {
+                $message = Message::create(['message' => $get_pesan, 'user_id' => Auth::user()->id,'recepient_id' => $recepient->id, 'conversation_id' => $conversation_id,'has_image' => 'N']);
+            }
+
             $data = [
                 'status' => 'success',
-                'message' => 'Anda sudah Login',
-                'data' => Auth::user()
+                'message' => 'Pesan Anda telah berhasil dikirim ke Admin Desa'
             ];
-            return response()->json($data);
+            
+            return response()->json($desa);
+            // return redirect()->back();
+   
         }
         else
         {
-            $data = [
-                'status' => 'failed',
-                'message' => 'Anda belum sudah Login',
-            ];
-            return response()->json($data);
+            return redirect()->to('/login');
         }
     }
 }
