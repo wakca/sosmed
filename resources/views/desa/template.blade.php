@@ -156,6 +156,34 @@
 
 		</script>
 
+		  <!-- Kirim Pesan -->
+		<script>
+			$( "#kirim_pesan" ).submit(function( event ) {
+				event.preventDefault();
+				
+				var data = $("#kirim_pesan").serialize();;
+
+				console.log(data);
+
+				$.post('/profil_desa/{{ $desa->id }}/kirim_pesan', function( data ) {
+					console.log(data);
+				});
+			});
+
+			$( "#form_login" ).submit(function( event ) {
+				event.preventDefault();
+				
+				var data = $("#form_login").serialize();;
+
+				console.log(data)
+
+				$.post('/profil_desa/{{ $desa->id }}/kirim_pesan', function( data ) {
+					console.log(data);
+				});
+			});
+		</script>
+		<!-- End of Kirim Pesan -->
+
 		@stack('script')
 
 	</body>

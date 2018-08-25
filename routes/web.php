@@ -14,18 +14,6 @@
 Route::get('/', 'HomeController@index')->name('index');
 Route::get('/beranda','HomeController@beranda')->middleware(['auth','checkname']);
 
-Route::get('ganti_konten', function(){
-    $story = App\Story::all();
-    
-    foreach($story as $data)
-    {
-        $content = str_replace('wakca.itsinergi.id', 'klipaa.com', $data->content);
-        $data->content = $content;
-        $data->save();
-
-    }
-});
-
 Route::group(['prefix' => 'desa'], function(){
     Route::get('/', 'DesaController@index');
     
@@ -69,14 +57,16 @@ Auth::routes();
 
 //Halaman Desa
 Route::group(['prefix' => 'profil_desa/{id_desa}'], function($id_desa){
-    Route::get('/beranda', 'ProfilDesaCotroller@index')->name('profil_desa.beranda');
-    Route::get('/selayang_pandang', 'ProfilDesaCotroller@selayang_pandang')->name('profil_desa.selayang_pandang');
-    Route::get('/dokumen', 'ProfilDesaCotroller@dokumen')->name('profil_desa.dokumen');
-    Route::get('/organisasi', 'ProfilDesaCotroller@organisasi')->name('profil_desa.organisasi');
-    Route::get('/galeri', 'ProfilDesaCotroller@galeri')->name('profil_desa.galeri');
-    Route::get('/produk', 'ProfilDesaCotroller@produk')->name('profil_desa.produk');
-    Route::get('/story', 'ProfilDesaCotroller@story')->name('profil_desa.story');
-    Route::get('/peta', 'ProfilDesaCotroller@peta')->name('profil_desa.peta');
+    Route::get('/beranda', 'ProfilDesaController@index')->name('profil_desa.beranda');
+    Route::get('/selayang_pandang', 'ProfilDesaController@selayang_pandang')->name('profil_desa.selayang_pandang');
+    Route::get('/dokumen', 'ProfilDesaController@dokumen')->name('profil_desa.dokumen');
+    Route::get('/organisasi', 'ProfilDesaController@organisasi')->name('profil_desa.organisasi');
+    Route::get('/galeri', 'ProfilDesaController@galeri')->name('profil_desa.galeri');
+    Route::get('/produk', 'ProfilDesaController@produk')->name('profil_desa.produk');
+    Route::get('/story', 'ProfilDesaController@story')->name('profil_desa.story');
+    Route::get('/peta', 'ProfilDesaController@peta')->name('profil_desa.peta');
+
+    Route::post('kirim_pesan', 'MessageController@send_message')->name('kirim_pesan');
 });
 
 Route::get('dokumen_desa/{id}', 'Api\ContentController@open_dokumen')->name('open_dokumen');
