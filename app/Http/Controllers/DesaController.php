@@ -13,6 +13,8 @@ class DesaController extends Controller
 {
     public function index()
     {
+        return \App\Desa::first();
+
         $desa = null;
 
         $produk = Produk::orderBy('created_at', 'DESC')->take(5)->get();
