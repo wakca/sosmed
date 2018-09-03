@@ -47,7 +47,7 @@
                                         <td>{{ $desa->kecamatan->nama }} ({{ $desa->kecamatan->id }})</td>
                                     </tr>
                                     <tr>
-                                        <td>Kota/Kabupaten</td>
+                                        <td>Kota / Kabupaten</td>
                                         <td>:</td>
                                         <td>{{ $desa->kecamatan->kab->nama }} ({{ $desa->kecamatan->kab->id }})</td>
                                     </tr>
