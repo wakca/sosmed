@@ -171,8 +171,8 @@
                         {!! Getter::getStoryThumb($story->content,$story->title) !!}
                         <br>
                         <div class="btn-group">
-                            <a href="{{ route('profil_desa.beranda', $story->des->id) }}" class="btn btn-xs btn-primary">Desa {{ $story->des->nama }}</a>
-                            <a href="/{{ '@'.$story->user->username }}" class="btn btn-xs btn-info">{{ '@'.$story->user->username }}</a>
+                            {{-- <a href="{{ route('profil_desa.beranda', $story->des->id) }}" class="btn btn-xs btn-primary">Desa {{ $story->des->nama }}</a> --}}
+                            {{-- <a href="/{{ '@'.$story->user->username }}" class="btn btn-xs btn-info">{{ '@'.$story->user->username }}</a> --}}
                         </div>
                         <br>
                         <div class="caption">
