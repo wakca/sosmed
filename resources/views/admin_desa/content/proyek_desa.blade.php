@@ -9,7 +9,7 @@
         <form action="{{ route('admin_desa.content.proyek_desa.save') }}" method="POST">
             {{ csrf_field() }}
             <div class="form-group">
-                <textarea name="konten" id="konten" cols="30" rows="15" class="form-control">@if($data->konten) {{ $data->konten }} @endif</textarea>
+                <textarea name="konten" id="konten" cols="30" rows="15" class="form-control">@if($data) {{ $data[0]->konten }} @endif</textarea>
             </div>
             <div class="clearfix">
                 <div class="pull-right">
