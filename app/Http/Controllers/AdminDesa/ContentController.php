@@ -45,7 +45,7 @@ class ContentController extends Controller
 
     public function edit($slug)
     {
-        $data = $this->content($slug);
+        $data = $this->content($slug)[0];
 
         return view('admin_desa.content.'.$slug,[
             'data' => $data, 

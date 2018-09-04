@@ -3,7 +3,7 @@
 @section('content')
 <div class="card ">
     <div class="header">
-        <h4 class="title">Profil Desa</h4>
+        <h4 class="title">Organisasi Desa</h4>
     </div>
     <div class="content">
         <form action="{{ route('admin_desa.content.organisasi_desa.save') }}" method="POST">
