@@ -35,7 +35,7 @@
             </ul>  
         </div>
     </div>
-    <div class='col-md-9'>
+    <div class='col-md-9 col-xs-12'>
         <div class='mobile-tag'>
             <h1>Apa yang sedang terjadi ?<button onclick='openTags();' class='btn btn-sm btn-default pull-right'><i class='glyphicon glyphicon-tag'></i> {{ !Request::route('tag')?'Semua':ucwords(Request::route('tag')) }}</button></h1>
         </div>
