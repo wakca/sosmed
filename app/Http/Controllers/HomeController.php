@@ -12,6 +12,8 @@ use Date;
 use Config;
 use App\Tag;
 
+use App\Konten;
+
 class HomeController extends Controller
 {
     /**
@@ -48,5 +50,14 @@ class HomeController extends Controller
         $user = array_merge($user_desa,$following);
         $post = Post::whereIn('user_id',$user)->orWhere([['user_id','!=',$user_id],['recepient_id',$user_id]])->with('user')->orderBy('created_at','desc')->paginate($numpage);
         return view('home',['posts' => $post,'profile' => $profile]);
+    }
+
+    public function viewContent($slug)
+    {
+        $konten = Konten::where('slug', $slug)->first();
+
+        return view('konten', [
+            'konten' => $konten
+        ]);
     }
 }

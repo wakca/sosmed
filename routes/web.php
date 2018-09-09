@@ -12,6 +12,9 @@
 */
 
 Route::get('/', 'HomeController@index')->name('index');
+
+Route::get('/konten/{slug}', 'HomeController@viewContent')->name('view.content');
+
 Route::get('/beranda','HomeController@beranda')->middleware(['auth','checkname']);
 
 Route::group(['prefix' => 'desa'], function(){
