@@ -152,14 +152,14 @@
         <div class='margin-separator'></div>
         @yield('content')
         <div class='footer-page'>
-        <div class='container center-text'>
-            <ul class="nav nav-pills">
-                <li><a href="#">Tentang</a></li>
-                <li><a href="#">S & K</a></li>
-                <li><a href="#">Partner</a></li>
-                <li><a href="#">Kontak</a></li>
-            </ul>
-        </div>
+            <div class='container center-text'>
+                <ul class="nav nav-pills">
+                    <li><a href="{{ route('view.content', 'tentang') }}">Tentang</a></li>
+                    <li><a href="{{ route('view.content', 'syarat-dan-ketentuan') }}">S & K</a></li>
+                    <li><a href="{{ route('view.content', 'partner') }}">Partner</a></li>
+                    <li><a href="{{ route('view.content', 'kontak') }}">Kontak</a></li>
+                </ul>
+            </div>
         </div>
     </div>
     <!-- Scripts -->
