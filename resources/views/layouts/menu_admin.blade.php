@@ -45,6 +45,13 @@
             <p>Comment</p>
         </a>
     </li>
+
+    <li @if(Request::segment(2) == 'konten_desa') class="active" @endif>
+        <a href="{{ route('admin.konten.index') }}">
+            <i class="fa fa-list"></i>
+            <p>Konten Desa</p>
+        </a>
+    </li>
     <!-- /Super Admin -->
 
     <!-- Admin Desa -->
@@ -76,6 +83,7 @@
             <p>Story</p>
         </a>
     </li>
+    
     @endif
     <!-- /Admin Desa -->
 </ul>
