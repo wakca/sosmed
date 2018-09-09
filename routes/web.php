@@ -148,7 +148,14 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/comment/{id}/delete','Admin\CommentController@destroy')->name('admin.comment.delete');
     Route::get('/comment/{id}/edit','Admin\CommentController@edit')->name('admin.comment.edit');
     Route::post('/comment/{id}/edit','Admin\CommentController@update');
+    
 
+    Route::group(['prefix' => 'konten_desa'], function(){
+        Route::get('/', 'Admin\KontenController@index')->name('admin.konten.index');
+
+        Route::get('edit/{slug}', 'Admin\KontenController@edit')->name('admin.konten.edit');
+        Route::post('save', 'Admin\KontenController@save')->name('admin.konten.save');
+    });
 
     //Pengurus Desa
     Route::group(['prefix' => 'pengurus'], function(){
