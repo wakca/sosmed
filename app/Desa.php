@@ -65,7 +65,7 @@ class Desa extends Model
 
     public function proyek_desa()
     {
-        return $this->hasOne('App\ProyekDesa', 'desa');
+        return $this->hasMany('App\ProyekDesa', 'desa');
     }
 
     public function kabar_desa()
