@@ -287,11 +287,102 @@ class ContentController extends Controller
         
     }
 
-    public function proyek_desa()
+    public function proyek_desa(Request $request)
     {
-        return view('desa.content.proyek_desa', [
-            'data' => $this->getDesa()->proyek
-        ]);
+        // return $request->all();
+        $model = new \App\ProyekDesa;
+        $model->desa = $this->getDesa()->id;
+        
+        $content = $request->keterangan;
+        $dom = new \DomDocument();
+        libxml_use_internal_errors(true);
+        $dom->loadHtml('<?xml encoding="utf-8" ?>'.$content, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);    
+        $images = $dom->getElementsByTagName('img');
+        
+        $gambar = [];
+        
+        foreach($images as $k => $img){
+            $data = $img->getAttribute('src');
+            if(preg_match('/data:image/', $data)){                
+                // get the mimetype
+                preg_match('/data:image\/(?<mime>.*?)\;/', $data, $groups);
+                $mimetype = $groups['mime'];                
+                // Generating a random filename
+                $filename = Auth::Id().'_'.md5(time().$k.Auth()->Id());
+                $filepath = "/images/$filename.$mimetype";    
+                // @see http://image.intervention.io/api/
+                $image = Image::make($data)
+                  // resize if required
+                  /* ->resize(300, 200) */
+                  ->encode($mimetype, 100)  // encode file to the specified mimetype
+                  ->save(public_path($filepath),50);                
+
+                array_push($gambar, $filepath);
+                
+                $new_src = asset($filepath);
+                $img->removeAttribute('src');
+                $img->setAttribute('src', $new_src);
+            } // <!--endif
+        }
+        $content = $dom->saveHTML();
+
+        $model->keterangan = $content;
+        $model->tahun = $request->tahun;
+        $model->judul = $request->judul;
+
+        if($model->save())
+        {
+            return redirect()->route('admin_desa.content');
+        }
+    }
+
+    public function proyek_desa_update(Request $request)
+    {
+        // return $request->all();
+        $model =  \App\ProyekDesa::findOrFail($request->id_proyek);
+        $model->desa = $this->getDesa()->id;
+        
+        $content = $request->keterangan;
+        $dom = new \DomDocument();
+        libxml_use_internal_errors(true);
+        $dom->loadHtml('<?xml encoding="utf-8" ?>'.$content, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);    
+        $images = $dom->getElementsByTagName('img');
+        
+        $gambar = [];
+        
+        foreach($images as $k => $img){
+            $data = $img->getAttribute('src');
+            if(preg_match('/data:image/', $data)){                
+                // get the mimetype
+                preg_match('/data:image\/(?<mime>.*?)\;/', $data, $groups);
+                $mimetype = $groups['mime'];                
+                // Generating a random filename
+                $filename = Auth::Id().'_'.md5(time().$k.Auth()->Id());
+                $filepath = "/images/$filename.$mimetype";    
+                // @see http://image.intervention.io/api/
+                $image = Image::make($data)
+                  // resize if required
+                  /* ->resize(300, 200) */
+                  ->encode($mimetype, 100)  // encode file to the specified mimetype
+                  ->save(public_path($filepath),50);                
+
+                array_push($gambar, $filepath);
+                
+                $new_src = asset($filepath);
+                $img->removeAttribute('src');
+                $img->setAttribute('src', $new_src);
+            } // <!--endif
+        }
+        $content = $dom->saveHTML();
+
+        $model->keterangan = $content;
+        $model->tahun = $request->tahun;
+        $model->judul = $request->judul;
+
+        if($model->save())
+        {
+            return redirect()->back();
+        }
     }
 
     public function profil_desa(Request $request)
@@ -448,6 +539,19 @@ class ContentController extends Controller
         
     }
 
+    public function delete_proyek($id)
+    {
+        $proyek = \App\ProyekDesa::findOrFail($id);
+
+        $proyek->delete();
+
+        return response()->json([
+            'message' => 'Berhasil menghapus Proyek',
+            'status' => 'success'
+        ]);
+        
+    }
+
     public function data_dokumen($id)
     {
         $dokumen = DokumenDesa::findOrFail($id);
@@ -459,6 +563,14 @@ class ContentController extends Controller
     public function data_galeri($id)
     {
         $data = GaleriDesa::findOrFail($id);
+
+        return $data;
+        
+    }
+
+    public function data_proyek($id)
+    {
+        $data = \App\ProyekDesa::findOrFail($id);
 
         return $data;
         
