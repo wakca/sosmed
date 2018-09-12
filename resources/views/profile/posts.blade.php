@@ -55,5 +55,5 @@
             <h3>Tidak ada post lain untuk ditampilkan.</h3>
         </center>
     </div>
-@endforeach
+@endforelse
 <div class='hidden-div'>{{ $posts->links() }}</div>
