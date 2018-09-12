@@ -41,7 +41,6 @@ class ProfileController extends Controller
         if(Auth::check()){
             $follow     = Follows::where([['user_id', Auth::user()->id], ['following_id',$profil->id]])->first();
         }
-
         $posts      = Post::where([['user_id',$profil->id],['recepient_id',$profil->id]])->orWhere([['user_id','!=',$profil->id],['recepient_id',$profil->id]])->orderBy('created_at','desc')->paginate($numpaginate);
         return view('profile',['profile' => $profil, 'follow' => $follow, 'follower' => $follower, 'following' => $following,'posts' => $posts]);
     }

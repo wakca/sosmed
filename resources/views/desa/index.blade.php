@@ -19,7 +19,11 @@
     {{-- <input type="text" class="form-control" onkeyup="suggest(this.value);" id="search" name="search" placeholder="Cari Desa Berdasarkan Nama Desa atau Kode Desa"> --}}
     <br>
     <div id="suggest"></div>
+<<<<<<< HEAD
     @if($desa)
+=======
+    @if($desa != null)
+>>>>>>> d6492af6552eb6ed9604747ac8a1697aff8d1654
     <div class='row'>
         <div class="col-md-6">
             <div class="row">

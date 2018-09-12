@@ -172,6 +172,7 @@
                     <li><a href="{{ route('syarat_ketentuan') }}">S & K</a></li>
                     <li><a href="{{ route('partner') }}">Partner</a></li>
                     <li><a href="{{ route('kontak') }}">Kontak</a></li>
+
                 </ul>
             </div>
         </div>

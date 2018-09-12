@@ -119,6 +119,11 @@
             $(this).attr('href',$(this).attr('href')+'#comments');
           });
         });
+    $(document).ready(function(){
+      $(".pagination a").each(function(i,v){
+        $(this).attr('href',$(this).attr('href')+'#comments');
+      });
+    });
         function editComment(id) {
             var comment_id = id;
             $("#modal-edit-comment").modal('show');

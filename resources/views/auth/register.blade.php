@@ -37,6 +37,7 @@
                                     </span>
                                 @endif
                                 <div class='small-text'>Username tidak boleh menggunakan spasi dan tidak bisa dirubah. Hanya berupa hurup dan angka</div>
+
                             </div>
                         </div>
 

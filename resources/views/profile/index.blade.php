@@ -1,4 +1,6 @@
+<<<<<<< HEAD
 @if(Auth::check())
+
 <div class="panel panel-default">
     <div class="panel-body">
         <form id='postForm' action="/post" class="form-horizontal" method='POST'>

@@ -41,8 +41,9 @@ class PostController extends Controller
         $uploadcount = 0;
 
         if($files[0] != ''){
-            
+
             $post = Post::create(['content' => $request->content, 'user_id' => auth()->user()->id,'recepient_id' => $request->recepient_id,'has_image' => 'Y']);
+
             if($request->user_id != $request->recepient_id){
                 DBFunction::saveNotification($post->id,$request->user_id,$request->recepient_id,6,'N','N');
             }

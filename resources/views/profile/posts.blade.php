@@ -1,3 +1,4 @@
+
 @forelse($posts as $post)
     <div class="panel posts panel-default" id='post-{{ $post->id }}' data-post-id="{{ $post->id }}">
         <div class="btn-group pull-right">
@@ -54,5 +55,5 @@
             <h3>Tidak ada post lain untuk ditampilkan.</h3>
         </center>
     </div>
-@endforelse
+@endforeach
 <div class='hidden-div'>{{ $posts->links() }}</div>

@@ -19,6 +19,7 @@
                                 @if ($errors->has('username'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('username') }} || <a href="{{route('register')}}">Daftar Sekarang</a></strong>
+
                                     </span>
                                 @endif
                             </div>

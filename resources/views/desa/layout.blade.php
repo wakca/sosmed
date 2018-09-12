@@ -237,8 +237,6 @@
 
     <script src="{!! asset('js/sosmed_share.min.js') !!}"></script>
 
-    {{--<script async src="//platform-api.sharethis.com/js/sharethis.js#property=5b98b3bac265ef0011d17403&product="sticky-share-buttons"></script>--}}
-
 
     <!--Social Links -->
     <script type="text/javascript">

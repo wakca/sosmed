@@ -63,7 +63,6 @@ class ProfilDesaController extends Controller
         $stories = $desa->stories()->orderBy('created_at','desc')->paginate(5);
 
 
-
         return view('desa.story', [
             'desa' => $desa,
             'stories' => $stories

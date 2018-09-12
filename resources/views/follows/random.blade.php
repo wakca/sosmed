@@ -1,4 +1,5 @@
-@forelse(Getter::getSuggestFollows() as $suggest)
+
+@forelse(Getter::getSuggestFollows(Auth::Id()) as $suggest)
     <div class="media user" data-user-id="{{ $suggest->id }}" id="user-{{ $suggest->id }}">
         <div class="media-left">
           <a href="#">

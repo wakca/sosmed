@@ -62,6 +62,7 @@ class HomeController extends Controller
             'konten' => $konten
         ]);
     }
+<<<<<<< HEAD
 
     public function syarat_ketentuan()
     {
@@ -83,4 +84,6 @@ class HomeController extends Controller
         return view('kontak');
     }
 
+=======
+>>>>>>> d6492af6552eb6ed9604747ac8a1697aff8d1654
 }
