@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 @if(Auth::check())
 
 <div class="panel panel-default">
