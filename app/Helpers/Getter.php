@@ -65,8 +65,7 @@ class Getter
     public static function getNumFollowing($id){
         return User::find($id)->following()->count();
     }
-    
-<<<<<<< HEAD
+
     public static function getSuggestFollows(){
         if(auth()->check()){
             $username   = Route::current()->parameters('username');
@@ -92,19 +91,6 @@ class Getter
             }
         }
 
-=======
-    public static function getSuggestFollows($id){
-        $username   = Route::current()->parameters('username');
-        $limit      = Config::get('global.limit_number');
-        $following  = User::find($id)->following()->pluck('following_id')->toArray();
-        $user       = array_prepend($following,$id);
-        if($username != null){
-            return User::whereNotIn('id',$user)->where([['name','!=',''],['username','!=',$username]])->inRandomOrder()->take($limit)->get();
-        }
-        else{
-            return User::whereNotIn('id',$user)->where('name','!=','')->inRandomOrder()->take($limit)->get();
-        }
->>>>>>> d6492af6552eb6ed9604747ac8a1697aff8d1654
     }
     
     public static function getSummaryPost($content){
