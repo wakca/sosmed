@@ -1,0 +1,31 @@
+Please don't delete this File...
+
+07/11/2018 - 10:55 WIB by WA Call.
+@antoniosai ::: -- Start
+Profil Desa akan dibuat :
+--------------------------
+1. Selayang pandang (Using Text Editor @Web Admin / CKEditor)
+2. Organisasi desa (Using Text Editor @Web Admin / CKEditor)
+3. Produk unggulan (Using Text Editor @Web Admin / CKEditor)
+4. Photo
+5. Peta (Gathering Maps Data from Klikdesa.com)
+6. Proyek Desa (Order By Year)
+7. Profil Desa (Using Text Editor @Web Admin / CKEditor)
+--------------------------
+Changes
+1. Penambahan table selayang_pandang & Model App\SelayangPandang.php
+2. Penambahan table organisasi_desa & Model App\OrganisasiDesa.php
+3. Penambahan table produk_unggulan & Model App\ProdukUnggulan.php
+4. Penambahan table galeri_desa & Model App\GaleriDesa.php
+5. Penambahan table proyek_desa & Model App\ProyekDesa.php
+6. Penambahan table profil_desa & Model App\ProfilDesa.php
+::: Ends
+
+07/11/2018 - 10:55 WIB by WA Call.
+@antoniosai ::: --Start
+Dokumen Desa
+1. Dokumen desa (bukan text editor tetapi list dokumen yg bisa di download) misalnya download perdes, dll
+-----------------------
+Changes :
+1. Penambahan table dokumen_desa & Model App\DokumenDesa.php
+::: Ends

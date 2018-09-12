@@ -1,0 +1,228 @@
+<header id="header" class="header-no-border-bottom" data-plugin-options="{'stickyEnabled': true, 'stickyEnableOnBoxed': true, 'stickyEnableOnMobile': true, 'stickyStartAt': 113, 'stickySetTop': '-113px', 'stickyChangeLogo': true}">
+    <div class="header-body">
+        <div class="header-container container">
+            <div class="header-row">
+                <div class="header-column">
+                    <div class="header-row">
+                        <div class="header-logo">
+                            <a href="{{ route('index') }}">
+                                <img alt="Klipaa.com" width="69" height="75" data-sticky-width="45" data-sticky-height="45" data-sticky-top="105" src="{{ asset('img/logo.png') }}">
+                            </a>
+                        </div>
+                        <div width="140" height="75" style="margin-left: 20px; margin-top: 20px">
+                            <h3>
+                                Desa <strong>{{ $desa ? $desa->nama : '' }}</strong><br/>
+                                <small>{{ $desa->kecamatan->nama }}</small><br/>
+                                <small>{{ $desa->kecamatan->kab->nama }}</small>
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="header-column justify-content-end">
+                    <div class="header-row pt-3">
+                        <nav class="header-nav-top">
+
+                            <ul class="header-extra-info d-none d-md-flex align-items-center">
+                                <li>
+                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#send_message">
+                                        Kirim Pesan ke Admin Desa
+                                    </button>
+                                </li>
+
+                        </nav>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        <div class="header-nav-bar header-nav-bar-primary">
+            <div class="header-container container">
+                <div class="header-row">
+                    <div class="header-column">
+                        <div class="header-row">
+                            <div class="header-nav justify-content-start">
+                                <div class="header-nav-main header-nav-main-light header-nav-main-effect-1 header-nav-main-sub-effect-1">
+                                    <nav class="collapse">
+                                        @include('desa.navbar')
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="header-column justify-content-end">
+                        <div class="header-row">
+                            <ul class="header-social-icons social-icons d-none d-sm-block">
+                                <li class="social-icons-facebook"><a href="{{ $desa ?  $desa->facebook : '#'}}" target="_blank" title="Facebook"><i class="fa fa-facebook"></i></a></li>
+                                <li class="social-icons-twitter"><a href="{{ $desa ? $desa->twitter : '#' }}" target="_blank" title="Twitter"><i class="fa fa-twitter"></i></a></li>
+                                <li class="social-icons-instagram"><a href="{{ $desa ? $desa->instagram : '#' }}" target="_blank" title="Linkedin"><i class="fa fa-instagram"></i></a></li>
+                            </ul>
+                            <button class="btn header-btn-collapse-nav" data-toggle="collapse" data-target=".header-nav-main nav">
+                                <i class="fa fa-bars"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Modal Send Message -->
+<div class="modal fade" id="send_message" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Masukan Pesan Anda</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="{{ route('kirim_pesan', $desa->id) }}" method="POST">
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                    <input type="hidden" name="desa_id" value="{{ $desa->id }}">
+                    <textarea name="pesan" id="pesan" cols="30" rows="10" class="form-control">{{ Cache::get('pesan') }}</textarea>
+                    <br>
+                    <div class="clearfix">
+                        <div class="pull-right">
+                            <button type="submit" class="btn btn-primary">Kirim Pesan</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End of Modal Send Message -->
+
+
+<!-- Modal Send Message -->
+<div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Login Klipaa.com</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-warning">
+                    <p>Login/Register Klipaa.com terlebih dahulu untuk mengirim pesan kepada Admin</p>
+                </div>
+
+                <div class="tabs">
+                    <ul class="nav nav-tabs">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="#popular" data-toggle="tab">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#recent" data-toggle="tab">Register</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div id="popular" class="tab-pane active">
+
+                            <form id="form_login" method="post">
+                                {{ csrf_field() }}
+                                <div class="form-row">
+                                    <div class="form-group col">
+                                        <label>Username</label>
+                                        <input type="text" name="username" value="" class="form-control form-control-lg">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col">
+                                        <label>Password</label>
+                                        <input type="password" name="password" value="" class="form-control form-control-lg">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-lg-6">
+                                        <div class="form-check form-check-inline">
+                                            <label class="form-check-label">
+                                                <input class="form-check-input" type="checkbox" id="rememberme" name="rememberme"> Remember Me
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-lg-6">
+                                        <button type="submit" class="btn btn-primary float-right mb-5" data-loading-text="Loading...">Login</button>
+                                    </div>
+                                </div>
+                            </form>
+
+                        </div>
+                        <div id="recent" class="tab-pane">
+                            <!-- Form Register -->
+                            <form class="form-horizontal" role="form" method="POST" id="form_register">
+                                {{ csrf_field() }}
+        
+                                <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
+                                    <label for="name" class="col-md-4 control-label">Username</label>
+        
+                                    <div class="col-md-12">
+                                        <input id="username" type="text" class="form-control" name="username" value="{{ old('username') }}" required autofocus>
+        
+                                        @if ($errors->has('username'))
+                                            <span class="help-block">
+                                                <strong>{{ $errors->first('username') }}</strong>
+                                            </span>
+                                        @endif
+                                        <div class='small-text'>Username tidak bisa dirubah. Hanya berupa hurup dan angka</div>
+                                    </div>
+                                </div>
+        
+                                <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                                    <label for="email" class="col-md-4 control-label">E-Mail</label>
+        
+                                    <div class="col-md-12">
+                                        <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
+        
+                                        @if ($errors->has('email'))
+                                            <span class="help-block">
+                                                <strong>{{ $errors->first('email') }}</strong>
+                                            </span>
+                                        @endif
+                                    </div>
+                                </div>
+                                    
+                                <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+                                    <label for="password" class="col-md-4 control-label">Password</label>
+        
+                                    <div class="col-md-12">
+                                        <input id="password" type="password" class="form-control" name="password" required>
+        
+                                        @if ($errors->has('password'))
+                                            <span class="help-block">
+                                                <strong>{{ $errors->first('password') }}</strong>
+                                            </span>
+                                        @endif
+                                    </div>
+                                </div>
+        
+                                <div class="form-group">
+                                    <label for="password-confirm" class="col-md-4 control-label">Konfirmasi Password</label>
+        
+                                    <div class="col-md-12">
+                                        <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
+                                    </div>
+                                </div>
+        
+                                <div class="form-group">
+                                    <div class="col-md-6 col-md-offset-4">
+                                        <button type="submit" class="btn btn-primary">
+                                            Mendaftar
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                            <!-- End of Form Register -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End of Modal Send Message -->
+    
