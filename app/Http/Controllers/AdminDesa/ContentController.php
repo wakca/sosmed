@@ -10,6 +10,7 @@ use League\Flysystem\Filesystem;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 use Hypweb\Flysystem\GoogleDrive\GoogleDriveAdapter;
+use App\Traits\ImageUploader;
 
 use Image;
 use File;
@@ -21,6 +22,9 @@ use Auth;
 
 class ContentController extends Controller
 {
+    use ImageUploader;
+
+
     private function getDesa()
     {
         return Auth::user()->des;
@@ -52,10 +56,12 @@ class ContentController extends Controller
     public function edit($slug)
     {
         $data = $this->content($slug);
-//        dd($data);
-        return view('admin_desa.content.'.$slug,[
-            'data' => $data,
-        ]);
+        $option = [
+            'data'=>$data,
+            'desa'=>$this->getDesa()
+        ];
+
+        return view('admin_desa.content.'.$slug, $option);
     }
 
     public function index()
@@ -395,18 +401,40 @@ class ContentController extends Controller
 
     public function profil_desa(Request $request)
     {
+//        $this->validate($request, [
+//            'nama'=>'required',
+//            'nip'=>'required',
+//            'nama_kades'=>'required',
+//        ]);
+
+//        dd($request->all());
+
         $model = $this->getDesa()->profil_desa;
+        $desa = $this->getDesa();
+        $desa->nip = $request->get('nip');
+        $desa->nama_kades = $request->get('nama_kades');
 
         if(!$model)
         {
             $model = new \App\ProfilDesa;
             $model->desa = $this->getDesa()->id;
         }
+
         $model->konten = $request->input('konten');
 
-        if($model->save())
+        if($request->hasFile('foto_desa')){
+
+            $desa->foto_desa = $this->uploadImage($request->file('foto_desa'));
+        }
+
+        if($request->hasFile('foto_kades')){
+
+            $desa->foto_kades = $this->uploadImage($request->file('foto_kades'));
+        }
+
+        if($model->save() && $desa->save())
         {
-            return redirect()->route('admin_desa.content');
+            return redirect('/admin_desa/konten_desa/edit/profil_desa');
         }
     }
 

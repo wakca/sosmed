@@ -12,6 +12,7 @@
 */
 
 Route::get('/', 'HomeController@index')->name('index');
+Route::get('/storage/{id_foto}', 'ImageController@get_foto');
 
 Route::get('/konten/{slug}', 'HomeController@viewContent')->name('view.content');
 

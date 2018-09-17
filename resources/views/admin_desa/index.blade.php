@@ -21,9 +21,9 @@
                                     <td>{{ $desa->id }}</td>
                                 </tr>
                                 <tr>
-                                    <td>Kepala Desa</td>
+                                    <td>Kepala Desa/Kelurahan</td>
                                     <td>:</td>
-                                    <td><strong>Belum Ada</strong></td>
+                                    <td><strong>{{$desa ? $desa->nama_kades ? $desa->nama_kades : 'Belum di Set' : 'Belum di Set'}}</strong></td>
                                 </tr>
                                 <tr>
                                     <td>Kecamatan</td>
