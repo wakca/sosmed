@@ -39,7 +39,7 @@ class UpdateTabelProyekDesa extends Migration
                     $table->removeColumn('keterangan');
                 }
 
-                if(Schema::hasColumn('proyek_desa', 'kontent')){
+                if(Schema::hasColumn('proyek_desa', 'konten')){
                     $table->removeColumn('konten');
                 }
             });
