@@ -140,7 +140,7 @@
                     <input type="hidden" id="id_proyek" name="id_proyek">
                     <div class="form-group">
                         <label for="link">Nama Proyek</label>
-                        <input type="text" class="form-control" name="judul" id="edit-judul" required>
+                        <input type="text"  class="form-control" name="judul" id="edit-judul" required>
                     </div>
                     <div class="form-group">
                         <label for="link">Tahun</label>
@@ -175,6 +175,13 @@
 
 <script src="{{ asset('js/summernote.min.js') }}"></script>
 <script>
+    $('#myModal').on('hide.bs.modal', function(){
+        console.log('Hide modal');
+        $(this)
+            .find("input,textarea,select")
+            .val('')
+            .end();
+    });
 $("#add-keterangan").summernote( {
     height: 200, toolbar: [ // [groupName, [list of button]]
     ['style', ['bold', 'italic', 'underline', 'clear']], ['insert', ['picture', 'video', 'link', 'table']], ['font', ['strikethrough', 'superscript', 'subscript']], ['fontsize', ['fontsize']], ['color', ['color']], ['para', ['ul', 'ol', 'paragraph']], ['height', ['height']], ['misc', ['fullscreen']], ],
@@ -232,5 +239,7 @@ $("#edit-keterangan").summernote( {
             proyek_id = 0;
         });
     }
+
+
 </script>
 @endsection

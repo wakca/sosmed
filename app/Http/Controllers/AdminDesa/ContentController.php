@@ -289,44 +289,46 @@ class ContentController extends Controller
 
     public function proyek_desa(Request $request)
     {
-        // return $request->all();
+//         return $request->all();
         $model = new \App\ProyekDesa;
         $model->desa = $this->getDesa()->id;
-        
+
         $content = $request->keterangan;
         $dom = new \DomDocument();
         libxml_use_internal_errors(true);
-        $dom->loadHtml('<?xml encoding="utf-8" ?>'.$content, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);    
+        $dom->loadHtml('<?xml encoding="utf-8" ?>'.$content, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
         $images = $dom->getElementsByTagName('img');
-        
+
+//        return dd($images[0]->getAttribute('src'));
+//
         $gambar = [];
-        
+
         foreach($images as $k => $img){
             $data = $img->getAttribute('src');
-            if(preg_match('/data:image/', $data)){                
+            if(preg_match('/data:image/', $data)){
                 // get the mimetype
                 preg_match('/data:image\/(?<mime>.*?)\;/', $data, $groups);
-                $mimetype = $groups['mime'];                
+                $mimetype = $groups['mime'];
                 // Generating a random filename
                 $filename = Auth::Id().'_'.md5(time().$k.Auth()->Id());
-                $filepath = "/images/$filename.$mimetype";    
+                $filepath = "/images/$filename.$mimetype";
                 // @see http://image.intervention.io/api/
                 $image = Image::make($data)
                   // resize if required
                   /* ->resize(300, 200) */
                   ->encode($mimetype, 100)  // encode file to the specified mimetype
-                  ->save(public_path($filepath),50);                
+                  ->save(public_path($filepath),50);
 
                 array_push($gambar, $filepath);
-                
+
                 $new_src = asset($filepath);
                 $img->removeAttribute('src');
                 $img->setAttribute('src', $new_src);
             } // <!--endif
         }
         $content = $dom->saveHTML();
-
-        $model->keterangan = $content;
+//        return dd($dom->saveHTML());
+        $model->konten = $content;
         $model->tahun = $request->tahun;
         $model->judul = $request->judul;
 
