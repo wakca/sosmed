@@ -4,6 +4,8 @@ Desa {{ $desa->nama }}
 @endsection
 
 @section('content')
+        <img src="{{$desa ? $desa->foto_desa ? url('/storage/'.$desa->foto_desa) : url('/img/banner.png') : ''}}" class="img img-responsive img-thumbnail" width="100%"  alt="img">
+
 <div class="row">
 
     <div class="col-sm-12">
@@ -17,7 +19,7 @@ Desa {{ $desa->nama }}
                     <tr>
                         <td>Kepala Desa</td>
                         <td>:</td>
-                        <td><strong>Belum Ada</strong></td>
+                        <td><strong>{{$desa ? $desa->nama_kades ? $desa->nama_kades : 'Belum di Set' : 'Belum di Set'}}</strong></td>
                     </tr>
                     <tr>
                         <td>Kecamatan</td>
