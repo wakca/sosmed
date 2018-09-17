@@ -340,7 +340,7 @@ class ContentController extends Controller
 
         if($model->save())
         {
-            return redirect()->route('admin_desa.content');
+            return redirect('/admin_desa/konten_desa/edit/proyek_desa');
         }
     }
 
