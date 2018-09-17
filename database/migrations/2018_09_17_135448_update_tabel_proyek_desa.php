@@ -36,11 +36,11 @@ class UpdateTabelProyekDesa extends Migration
         if(Schema::hasTable('proyek_desa')){
             Schema::table('proyek_desa', function(Blueprint $table){
                 if(Schema::hasColumn('proyek_desa', 'keterangan')){
-                    $table->removeColumn('keterangan');
+                    $table->dropColumn('keterangan');
                 }
 
                 if(Schema::hasColumn('proyek_desa', 'konten')){
-                    $table->removeColumn('konten');
+                    $table->dropColumn('konten');
                 }
             });
         }
