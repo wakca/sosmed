@@ -13,7 +13,7 @@ class AddingForeignTags extends Migration
      */
     public function up()
     {
-        if(!Schema::hasTable('storytags')){
+        if(Schema::hasTable('storytags')){
             Schema::table('storytags', function (Blueprint $table) {
                 $table->foreign('story_id') // foreignKey
                 ->references('id') // dari kolom id
