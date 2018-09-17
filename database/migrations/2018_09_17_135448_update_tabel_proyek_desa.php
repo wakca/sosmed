@@ -19,7 +19,7 @@ class UpdateTabelProyekDesa extends Migration
                     $table->text('keterangan')->nullable;
                 }
 
-                if(!Schema::hasColumn('proyek_desa', 'kontent')){
+                if(!Schema::hasColumn('proyek_desa', 'konten')){
                     $table->text('konten')->nullable;
                 }
             });
