@@ -39,6 +39,12 @@ class ContentController extends Controller
             'kabar_desa' => $this->getDesa()->kabar_desa,
         ];
 
+//        switch ($slug) {
+//            case 'selayang_pandang' : return ;
+//
+//            default : return ;
+//        }
+
         return $konten[$slug];
         // return $this->getDesa();
     }
@@ -46,9 +52,9 @@ class ContentController extends Controller
     public function edit($slug)
     {
         $data = $this->content($slug);
-
+//        dd($data);
         return view('admin_desa.content.'.$slug,[
-            'data' => $data, 
+            'data' => $data,
         ]);
     }
 

@@ -24,6 +24,14 @@ class KontenController extends Controller
     public function edit($slug)
     {
         $konten = Konten::where('slug', $slug)->first();
+//        $params = [];
+//        if($konten){
+//            array_push($params, ['konten'=>compact('konten')]);
+//        }
+//
+//        while($kon){
+//
+//        }
 
         return view('admin.konten.edit', [
             'konten' => $konten
