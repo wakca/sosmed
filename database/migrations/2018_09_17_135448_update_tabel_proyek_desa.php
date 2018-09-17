@@ -16,11 +16,11 @@ class UpdateTabelProyekDesa extends Migration
         if(Schema::hasTable('proyek_desa')){
             Schema::table('proyek_desa', function(Blueprint $table){
                 if(!Schema::hasColumn('proyek_desa', 'keterangan')){
-                    $table->text('keterangan')->nullable;
+                    $table->text('keterangan')->nullable();
                 }
 
                 if(!Schema::hasColumn('proyek_desa', 'konten')){
-                    $table->text('konten')->nullable;
+                    $table->text('konten')->nullable();
                 }
             });
         }
