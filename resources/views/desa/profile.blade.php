@@ -5,7 +5,7 @@ Desa {{ $desa->nama }}
 
 @section('content')
         <img src="{{$desa ? $desa->foto_desa ? url('/storage/'.$desa->foto_desa) : url('/img/banner.png') : ''}}" class="img img-responsive img-thumbnail" width="100%"  alt="img">
-
+<br /><br /><br />
 <div class="row">
 
     <div class="col-sm-12">
