@@ -10,7 +10,8 @@
                 <div class="media message-link" onclick="window.location='/messages/{{ $user->sender->username }}'">
                   <div class="avatar">
                     <a href="#">
-                        <img class="media-object" width='100%' src="/photos/{{ isset($user->sender->photo) ? $user->sender->photo : 'av-default.jpg' }}" alt="{{ $user->sender->name }}">
+{{--                        <img class="media-object" width='100%' src="/photos/{{ isset($user->sender->photo) ? $user->sender->photo : 'av-default.jpg' }}" alt="{{ $user->sender->name }}">--}}
+                        <img class="media-object" width='100%' src="{{$user->sender->photo ? url('/storage/'.$user->sender->photo) : url('/photos/av-default.jpg')}}" alt="{{ $user->sender->name }}">
                     </a>
                   </div>
                   <div class="content">
@@ -35,7 +36,8 @@
                 <div class="media message-link" onclick="window.location='/messages/{{ $user->receiver->username }}'">
                   <div class="avatar">
                     <a href="#">
-                        <img class="media-object" width='100%' src="/photos/{{ isset($user->receiver->photo) ? $user->receiver->photo : 'av-default.jpg' }}" alt="{{ $user->receiver->name }}">
+                        {{--<img class="media-object" width='100%' src="/photos/{{ isset($user->receiver->photo) ? $user->receiver->photo : 'av-default.jpg' }}" alt="{{ $user->receiver->name }}">--}}
+                        <img class="media-object" width='100%' src="{{$user->receiver->photo ? url('/storage/'.$user->receiver->photo) : url('/photos/av-default.jpg')}}" alt="{{ $user->receiver->name }}">
                     </a>
                   </div>
                   <div class="content">

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Traits\ImageUploader;
 use Illuminate\Http\Request;
 use App\User;
 use App\Provinsi;
@@ -16,6 +17,7 @@ use App\Post;
 
 class ProfileController extends Controller
 {
+    use ImageUploader;
     public function __construct()
     {
         $this->middleware('auth', ['except'=>['show', 'media', 'posts']]);
@@ -86,21 +88,25 @@ class ProfileController extends Controller
         $tgl_lahir = $request->thn.'-'.$request->bln.'-'.$request->tgl;
         $previmage = Auth::user()->photo;
         $dest = public_path('/photos');
-        $image = $request->photo;
-        if($image != ''){
-            $imagename = time().'.'.$image->getClientOriginalExtension();
-            $img = Image::make($image->getRealPath());
-            $img->fit(300,300,function ($constraint) {
-                $constraint->upsize();
-            });
-            $img->save($dest.'/'.$imagename,50);
+        $imagename = $previmage;
+        if($request->hasFile('photo')){
+            $imagename = $this->uploadImage($request->file('photo'));
         }
-        else{
-            $imagename = $previmage;
-        }
-        if($previmage != '' && $image != ''){
-            File::delete($dest.'/'.$previmage);
-        }
+//        $image = $request->photo;
+//        if($image != ''){
+//            $imagename = time().'.'.$image->getClientOriginalExtension();
+//            $img = Image::make($image->getRealPath());
+//            $img->fit(300,300,function ($constraint) {
+//                $constraint->upsize();
+//            });
+//            $img->save($dest.'/'.$imagename,50);
+//        }
+//        else{
+//            $imagename = $previmage;
+//        }
+//        if($previmage != '' && $image != ''){
+//            File::delete($dest.'/'.$previmage);
+//        }
         
         User::where('id',$id)->update([
                       'name' => $request->name,

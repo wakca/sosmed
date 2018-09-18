@@ -3,7 +3,8 @@
     <div class="media user" data-user-id="{{ $suggest->id }}" id="user-{{ $suggest->id }}">
         <div class="media-left">
           <a href="#">
-            <img class="media-object" width='55' src="/photos/{{ isset($suggest->photo) ? $suggest->photo : 'av-default.jpg' }}" alt="{{ $suggest->name }}">
+            {{--<img class="media-object" width='55' src="/photos/{{ isset($suggest->photo) ? $suggest->photo : 'av-default.jpg' }}" alt="{{ $suggest->name }}">--}}
+            <img class="media-object" width='55' src="{{$suggest->photo ? url('/storage/'.$suggest->photo) : url('/photos/av-default.jpg')}}" alt="{{ $suggest->name }}">
           </a>
         </div>
         <div class="media-body">

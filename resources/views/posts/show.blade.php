@@ -18,7 +18,8 @@
         <div class="media">
           <div class="avatar">
             <a href="#">
-              <img class="media-object" width='100%' src="/photos/{{ isset($post->user->photo) ? $post->user->photo : 'av-default.jpg' }}" alt="{{ $post->user->name }}">
+              {{--<img class="media-object" width='100%' src="/photos/{{ isset($post->user->photo) ? $post->user->photo : 'av-default.jpg' }}" alt="{{ $post->user->name }}">--}}
+              <img class="media-object" width='100%' src="{{$post->user->photo ? url('/storage/'.$post->user->photo) : url('/photos/av-default.jpg')}}" alt="{{ $post->user->name }}">
             </a>
           </div>
           <div class="content">

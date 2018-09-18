@@ -20,7 +20,8 @@
       <div class='media'>
         <div class='avatar'>
           <a href='#'>
-            <img class='media-object' src='/photos/{{ isset($comment->user->photo) ? $comment->user->photo : 'av-default.jpg'}} ' width='100%' alt='{{ $comment->user->name }}'>
+            {{--<img class='media-object' src='/photos/{{ isset($comment->user->photo) ? $comment->user->photo : 'av-default.jpg'}} ' width='100%' alt='{{ $comment->user->name }}'>--}}
+            <img class='media-object' src='{{$comment->user->photo ? url('/storage/'.$comment->user->photo) : url('/photos/av-default.jpg')}}' width='100%' alt='{{ $comment->user->name }}'>
           </a>
         </div>
         <div class='content'>

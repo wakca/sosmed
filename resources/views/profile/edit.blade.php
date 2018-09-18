@@ -20,7 +20,8 @@
                             <div class="row">
                                 <div class="col-xs-6 col-md-3">
                                   <a href="#" class="thumbnail">
-                                    <img src="/photos/{{ isset($profil->photo) ? $profil->photo : 'av-default.jpg' }}" alt="Foto Profil">
+                                    {{--<img src="/photos/{{ isset($profil->photo) ? $profil->photo : 'av-default.jpg' }}" alt="Foto Profil">--}}
+                                    <img src="{{$profil->photo ? url('/storage/'.$profil->photo) : url('/photos/av-default.jpg')}}" alt="Foto Profil">
                                   </a>
                                 </div>
                             </div>

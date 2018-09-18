@@ -10,7 +10,8 @@
                     <div class="media user" data-user-id="{{ $result->id }}" id="user-{{ $result->id }}">
                         <div class="media-left">
                           <a href="#">
-                            <img class="media-object" width='55' src="/photos/{{ isset($result->photo) ? $result->photo : 'av-default.jpg' }}" alt="{{ $result->name }}">
+                            {{--<img class="media-object" width='55' src="/photos/{{ isset($result->photo) ? $result->photo : 'av-default.jpg' }}" alt="{{ $result->name }}">--}}
+                            <img class="media-object" width='55' src="{{$result->photo ? url('/storage/'.$result->photo) : url('/photos/av-default.jpg')}}" alt="{{ $result->name }}">
                           </a>
                         </div>
                         <div class="media-body">

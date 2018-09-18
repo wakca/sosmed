@@ -7,7 +7,8 @@
                     <div class="media user" data-user-id="{{ $follower->id }}" id="user-{{ $follower->id }}">
                         <div class="media-left">
                           <a href="#">
-                            <img class="media-object" width='55' src="/photos/{{ isset($follower->photo) ? $follower->photo : 'av-default.jpg' }}" alt="{{ $follower->name }}">
+                            {{--<img class="media-object" width='55' src="/photos/{{ isset($follower->photo) ? $follower->photo : 'av-default.jpg' }}" alt="{{ $follower->name }}">--}}
+                            <img class="media-object" width='55' src="{{$follower->photo ? url('/storage/'.$follower->photo) : url('/photos/av-default.jpg')}}" alt="{{ $follower->name }}">
                           </a>
                         </div>
                         <div class="media-body">

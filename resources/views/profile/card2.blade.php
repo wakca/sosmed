@@ -1,6 +1,7 @@
 <div class='panel panel-default profile-card ' id="user-{{ $profile->id }}">
     <div class='panel-heading'>
-        <img class="media-object" width='100%' src="/photos/{{ isset($profile->photo) ? $profile->photo : 'av-default.jpg' }}" alt="{{ $profile->name }}">
+        {{--<img class="media-object" width='100%' src="/photos/{{ isset($profile->photo) ? $profile->photo : 'av-default.jpg' }}" alt="{{ $profile->name }}">--}}
+        <img class="media-object" width='100%' src="{{$profile->photo ? url('/storage/'.$profile->photo) : url('/photos/av-default.jpg')}}" alt="{{ $profile->name }}">
         <h2 class="media-heading margin-top"  title='{{ $profile->name }} &#64;{{ $profile->username }}'>{{ $profile->name }}</h2>
         &#64;{{ $profile->username }} {!! Getter::getVerified($profile->verified) !!}
         @if(Auth::Id() != $profile->id)

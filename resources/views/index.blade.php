@@ -44,7 +44,10 @@
                 <div class='row story-container' id='list-story'>
                 @foreach($stories as $story)
                     <div class='panel story panel-default'>
-                        <div class='panel-heading'><img height='25' class='img-rounded' src='{{ asset('photos/'.(isset($story->user->photo) ? $story->user->photo : 'av-default.jpg')) }}'/> <strong><a href='{{ $story->user->username }}'>{{ $story->user->name }}</a></strong> <span class='pull-right'>{{ Date::parse($story->created_at)->ago() }} &bull; <i class='glyphicon glyphicon-comment'></i> <strong>{{ count($story->comment) }}</strong></span></div>
+{{--                        <div class='panel-heading'><img height='25' class='img-rounded' src='{{ asset('photos/'.(isset($story->user->photo) ? $story->user->photo : 'av-default.jpg')) }}'/> <strong><a href='{{ $story->user->username }}'>{{ $story->user->name }}</a></strong> <span class='pull-right'>{{ Date::parse($story->created_at)->ago() }} &bull; <i class='glyphicon glyphicon-comment'></i> <strong>{{ count($story->comment) }}</strong></span></div>--}}
+                        <div class='panel-heading'>
+                            <img height='25' class='img-rounded' src='{{ $story->user->photo ? url('/storage/'.$story->user->photo) : url('/photos/av-default.jpg') }}'/> <strong><a href='{{ $story->user->username }}'>{{ $story->user->name }}</a></strong> <span class='pull-right'>{{ Date::parse($story->created_at)->ago() }} &bull; <i class='glyphicon glyphicon-comment'></i> <strong>{{ count($story->comment) }}</strong></span>
+                        </div>
                         <div class='panel-body'>
                             {!! Getter::getStoryThumb($story->content,$story->title) !!}
                             <div class="caption">

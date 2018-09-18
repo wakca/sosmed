@@ -6,7 +6,8 @@
         <div class="media other">
           <div class="avatar">
             <a href="#">
-              <img class="media-object" width='100%' src="/photos/{{ isset($message->user->photo) ? $message->user->photo : 'av-default.jpg' }}" alt="{{ $message->user->name }}">
+              {{--<img class="media-object" width='100%' src="/photos/{{ isset($message->user->photo) ? $message->user->photo : 'av-default.jpg' }}" alt="{{ $message->user->name }}">--}}
+              <img class="media-object" width='100%' src="{{$message->user->photo ? url('/storage/'.$message->user->photo) : url('/photos/av-default.jpg')}}" alt="{{ $message->user->name }}">
             </a>
           </div>
           <div class="content">
@@ -39,7 +40,8 @@
         </div>
         <div class="avatar">
           <a href="#">
-            <img class="media-object" width='100%' src="/photos/{{ isset($profile->photo) ? $profile->photo : 'av-default.jpg' }}" alt="{{ $profile->name }}">
+            {{--<img class="media-object" width='100%' src="/photos/{{ isset($profile->photo) ? $profile->photo : 'av-default.jpg' }}" alt="{{ $profile->name }}">--}}
+            <img class="media-object" width='100%' src="{{$profile->photo ? url('/storage/'.$profile->photo) : url('/photos/av-default.jpg')}}" alt="{{ $profile->name }}">
           </a>
         </div>
       </div>

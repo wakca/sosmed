@@ -3,7 +3,8 @@
         <div class="media">
             <div class="media-left">
               <a href="#">
-                <img class="media-object" width='70' src="/photos/{{ isset($profile->photo) ? $profile->photo : 'av-default.jpg' }}" alt="{{ $profile->name }}">
+                {{--<img class="media-object" width='70' src="/photos/{{ isset($profile->photo) ? $profile->photo : 'av-default.jpg' }}" alt="{{ $profile->name }}">--}}
+                <img class="media-object" width='70' src="{{$profile->photo ? url('/storage/'.$profile->photo) : url('/photos/av-default.jpg')}}" alt="{{ $profile->name }}">
               </a>
             </div>
             <div class="media-body">

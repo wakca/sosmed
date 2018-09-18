@@ -7,7 +7,9 @@
         <div class="media other">
           <div class="avatar">
             <a href="#">
-              <img class="media-object" width='100%' src="/photos/{{ isset($receiver->photo) ? $receiver->photo : 'av-default.jpg' }}" alt="{{ $receiver->name }}">
+              {{--<img class="media-object" width='100%' src="/photos/{{ isset($receiver->photo) ? $receiver->photo : 'av-default.jpg' }}" alt="{{ $receiver->name }}">--}}
+              <img class="media-object" width='100%' src="{{$receiver->photo ? url('/storage/'.$receiver->photo) : url('/photos/av-default.jpg')}}" alt="{{ $receive->name }}">
+
             </a>
           </div>
           <div class="content">
@@ -41,7 +43,10 @@
         </div>
         <div class="avatar">
           <a href="#">
-            <img class="media-object" width='100%' src="/photos/{{ isset($profile->photo) ? $profile->photo : 'av-default.jpg' }}" alt="{{ $profile->name }}">
+            <img class="media-object" width='100%' src="{{$profile->photo ? url('/storage/'.$profile->photo) : url('/photos/av-default.jpg')}}" alt="{{ $profile->name }}">
+
+            {{--<img class="media-object" width='100%' src="/photos/{{ isset($profile->photo) ? $profile->photo : 'av-default.jpg' }}" alt="{{ $profile->name }}">--}}
+
           </a>
         </div>
       </div>

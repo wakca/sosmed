@@ -2,7 +2,8 @@
     <div class="media likers" data-user-id="{{ $like->user->id }}" id="user-{{ $like->user->id }}">
         <div class="media-left">
           <a href="#">
-            <img class="media-object" width='55' src="/photos/{{ isset($like->user->photo) ? $like->user->photo : 'av-default.jpg' }}" alt="{{ $like->user->name }}">
+            {{--<img class="media-object" width='55' src="/photos/{{ isset($like->user->photo) ? $like->user->photo : 'av-default.jpg' }}" alt="{{ $like->user->name }}">--}}
+            <img class="media-object" width='55' src="{{$like->user->photo ? url('/storage/'.$like->user->photo) : url('/photos/av-default.jpg')}}" alt="{{ $like->user->name }}">
           </a>
         </div>
         <div class="media-body">
