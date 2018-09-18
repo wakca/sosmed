@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Provinsi;
 use Auth;
+use Illuminate\Support\Facades\Storage;
 use Session;
 use Intervention\Image\ImageManagerStatic as Image;
 use IndoTgl;
@@ -88,9 +89,20 @@ class ProfileController extends Controller
         $tgl_lahir = $request->thn.'-'.$request->bln.'-'.$request->tgl;
         $previmage = Auth::user()->photo;
         $dest = public_path('/photos');
-        $imagename = $previmage;
+        $imagename = '';
         if($request->hasFile('photo')){
-            $imagename = $this->uploadImage($request->file('photo'));
+            $image = $request->file('photo');
+            $img = Image::make($image->getRealPath());
+            $img->fit(300,300,function ($constraint) {
+                $constraint->upsize();
+            });
+            $ext = $image->getClientOriginalExtension();
+//            dd($img);
+            $namaFoto = \Webpatser\Uuid\Uuid::generate()->string.'.'.$ext;
+            if(Storage::disk('google')->put($namaFoto, $img->encode())){
+                $imagename = $namaFoto;
+
+            }
         }
 //        $image = $request->photo;
 //        if($image != ''){
@@ -107,7 +119,7 @@ class ProfileController extends Controller
 //        if($previmage != '' && $image != ''){
 //            File::delete($dest.'/'.$previmage);
 //        }
-        
+//        dd($imagename);
         User::where('id',$id)->update([
                       'name' => $request->name,
                       'photo' => $imagename,
