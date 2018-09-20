@@ -175,13 +175,13 @@
 
 <script src="{{ asset('js/summernote.min.js') }}"></script>
 <script>
-    $('#myModal').on('hide.bs.modal', function(){
-        console.log('Hide modal');
-        $(this)
-            .find("input,textarea,select")
-            .val('')
-            .end();
-    });
+    // $('#myModal').on('hide.bs.modal', function(){
+    //     console.log('Hide modal');
+    //     $(this)
+    //         .find("input,textarea,select")
+    //         .val('')
+    //         .end();
+    // });
 $("#add-keterangan").summernote( {
     height: 200, toolbar: [ // [groupName, [list of button]]
     ['style', ['bold', 'italic', 'underline', 'clear']], ['insert', ['picture', 'video', 'link', 'table']], ['font', ['strikethrough', 'superscript', 'subscript']], ['fontsize', ['fontsize']], ['color', ['color']], ['para', ['ul', 'ol', 'paragraph']], ['height', ['height']], ['misc', ['fullscreen']], ],
@@ -228,7 +228,11 @@ $("#edit-keterangan").summernote( {
             $('#edit-judul').val(data['judul']);
             $('#id_proyek').val(data['id']);
             $('#edit-tahun').val(data['tahun']);
-            $('textarea#edit-keterangan').summernote('code', data['keterangan']);
+            $('#edit-keterangan').summernote('code', data['konten']);
+            // $("#edit-keterangan").summernote( {
+            //     height: 200, toolbar: [ // [groupName, [list of button]]
+            //         ['style', ['bold', 'italic', 'underline', 'clear']], ['insert', ['picture', 'video', 'link', 'table']], ['font', ['strikethrough', 'superscript', 'subscript']], ['fontsize', ['fontsize']], ['color', ['color']], ['para', ['ul', 'ol', 'paragraph']], ['height', ['height']], ['misc', ['fullscreen']], ],
+            // }
 
             $("#title-edit").html('Edit Proyek ' + data['judul']);
         });

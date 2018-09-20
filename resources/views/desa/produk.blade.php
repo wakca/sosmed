@@ -6,11 +6,10 @@ Produk di Desa {{ $desa->nama }}
 @section('content')
 <h2>Produk Unggulan di Desa {{ $desa->nama }}</h2>
 <div class="masonry-loader masonry-loader-loaded">
-    <div class="row" data-plugin-masonry="" style="position: relative;">
-        
-        <center>
+    <div class="row">
+
         @forelse($produk as $product)
-        <div class="col-12 col-sm-6 col-lg-3 product">
+        <div class="col-12 col-sm-6 col-lg-4 product">
             <span class="product-thumb-info">
                 <a href="{{ route('desa.produk.detail', $product->id) }}">
                     <span class="product-thumb-info-image">
@@ -42,7 +41,6 @@ Produk di Desa {{ $desa->nama }}
             </div>
         </div>
         @endforelse
-        </center>
         
     </div>
     {{ $produk->links('vendor.pagination.bootstrap-4') }}

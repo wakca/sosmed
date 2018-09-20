@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\ProyekDesa;
 use Illuminate\Http\Request;
 
 use App\Provinsi;
@@ -77,6 +78,27 @@ class ProfilDesaController extends Controller
         return view('desa.produk', [
             'desa' => $desa,
             'produk' => $produk
+        ]);
+    }
+
+    public function proyek($id_desa)
+    {
+        $desa = Desa::findOrFail($id_desa);
+        $proyek = $desa->proyek_desa()->orderBy('created_at','desc')->paginate(10);
+
+        return view('desa.proyek', [
+            'desa' => $desa,
+            'list_proyek' => $proyek
+        ]);
+    }
+
+    public function detail_proyek($id_desa, $id_proyek)
+    {
+        $desa = Desa::findOrFail($id_desa);
+        $proyek = ProyekDesa::findOrFail($id_proyek);
+        return view('desa.detail_proyek', [
+            'desa' => $desa,
+            'proyek' => $proyek
         ]);
     }
 

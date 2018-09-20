@@ -72,6 +72,8 @@ Route::group(['prefix' => 'profil_desa/{id_desa}'], function($id_desa){
     Route::get('/organisasi', 'ProfilDesaController@organisasi')->name('profil_desa.organisasi');
     Route::get('/galeri', 'ProfilDesaController@galeri')->name('profil_desa.galeri');
     Route::get('/produk', 'ProfilDesaController@produk')->name('profil_desa.produk');
+    Route::get('/proyek', 'ProfilDesaController@proyek')->name('profil_desa.proyek');
+    Route::get('/proyek/{id}', 'ProfilDesaController@detail_proyek')->name('profil_desa.proyek.detail');
     Route::get('/story', 'ProfilDesaController@story')->name('profil_desa.story');
     Route::get('/peta', 'ProfilDesaController@peta')->name('profil_desa.peta');
 

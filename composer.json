@@ -7,6 +7,7 @@
     "require": {
         "php": ">=5.6.4",
         "caouecs/sirtrevorjs": "^2.5",
+        "doctrine/dbal": "^2.8",
         "intervention/image": "^2.3",
         "jenssegers/date": "^3.2",
         "laravel/framework": "5.4.*",

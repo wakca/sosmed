@@ -22,3 +22,14 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'remember_token' => str_random(10),
     ];
 });
+
+$factory->define(App\ProyekDesa::class, function (Faker\Generator $faker) {
+    static $password;
+
+    return [
+        'desa' => '3205170015',
+        'judul'=>$faker->sentence,
+        'tahun'=>$faker->year,
+        'konten'=>$faker->paragraph
+    ];
+});

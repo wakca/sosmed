@@ -6,6 +6,7 @@ Desa {{ $desa->nama }}
 @section('content')
         <img src="{{$desa ? $desa->foto_desa ? url('/storage/'.$desa->foto_desa) : url('/img/banner.png') : ''}}" class="img img-responsive img-thumbnail" width="100%"  alt="img">
 <br /><br /><br />
+        <hr class="tall">
 <div class="row">
 
     <div class="col-sm-12">
@@ -14,7 +15,7 @@ Desa {{ $desa->nama }}
 
         <!-- Berita -->
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-8">
                 <table class="table">
                     <tr>
                         <td>Kepala Desa</td>
@@ -60,49 +61,52 @@ Desa {{ $desa->nama }}
                     </tr>
                 </table>
             </div>
+            <div class="col-md-4">
+                <img src="{{$desa->foto_kades ? url('/storage/'.$desa->foto_kades): url('/img/kades.png')}}" class="img img-thumbnail" alt="img">
+            </div>
 
-            <div class="col-md-12">
-                <div class="blog-posts">
 
-                    @forelse($desa->stories as $story)
-                         
-                        <article class="post post-large">
-
-                            <div class="post-content">
-
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <br>
-                                        <div class="post-image">
-                                            {!! Getter::getImageThumb($story->content,$story->title) !!}
-                                            {{-- <img class="responsive rounded" src="{{ asset($story->gambar) }}" style="width: 100%" alt="{{ $story->title }}"> --}}
-                                        </div>
-                                    </div>
-                                    <div class="col-md-8">
-                                        <div class="post-date">
-                                            <span class="day">{{ $story->created_at->format('d') }}</span>
-                                            <span class="month">{{ $story->created_at->format('M') }}</span>
-                                        </div>
-                                        <h2>
-                                            <a href="{{ route('story.view', $story->slug) }}">{{ $story->title }}</a>
-                                        </h2>
+        </div>
+        <hr class="tall">
+        <!-- /Berita -->
+        <section class="section mt-0 section-footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <h2>Story <strong> Warga</strong></h2>
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    @forelse($desa->stories()->limit(4)->get() as $story)
+                        <div class="col-lg-3">
+                            {!! Getter::getImageThumbProfil($story->content,$story->title) !!}
+                            {{--<img class="img-fluid" src="img/blog/blog-vintage-1.jpg" alt="Blog">--}}
+                            <div class="recent-posts mt-3 mb-4">
+                                <article class="post">
+                                    <h5><a class="text-dark" href="{{ route('story.view', $story->slug) }}">{{$story->title}}</a></h5>
+                                    <p>
                                         @php $konten =  substr($story->content,0, 500) @endphp
-                                        {!! preg_replace("/<([a-z][a-z0-9]*)[^>]*?(\/?)>/i",'<$1$2>', $konten) !!}
-                                        <div class="post-meta">
-                                            {{-- <span><i class="fa fa-user"></i> By <a href="{{ route('berita.by_user', $story->user->username) }}">{{ $story->user->name }}</a> </span> --}}
-                                            {{-- <span><i class="fa fa-tag"></i> <a href="{{ route('berita.by_kategori', $story->kategori->slug) }}">{{ $story->kategori->name }}</a> </span> --}}
-                                            <span><i class="fa fa-comments"></i> <a href="#">{{ count($story->comment) }} komentar</a></span>
-                                            {{-- <span class="d-block d-sm-inline-block float-sm-right mt-3 mt-sm-0"><a href="{{ route('berita.read', $story->slug) }}" class="btn btn-xs btn-primary">Read more...</a></span> --}}
-                                            <br/>Tags : 
+                                        @php $konten =  preg_replace('#<img[^>]*>#i','', $konten) @endphp
+                                        @php
+                                            //$pattern = "/<p[^>]*><\\/p[^>]*>/";
+                                            $pattern = "/<[^\/>]*>([\s]?)*<\/[^>]*>/";
+                                        @endphp
+                                        {!! preg_replace($pattern, '', $konten) !!}
+                                    </p>
+                                    <div class="post-meta">
+                                        <span><i class="fa fa-calendar"></i> {{$story->created_at->format('d-m-Y')}} </span>
+                                        <span><i class="fa fa-user"></i> By <a href="#">{{$story->user->name}}</a> </span>
+                                        <span><i class="fa fa-tag"></i>
                                             @foreach($story->tags as $tag)
-                                            <a class='label label-default' href='{{ route('story.tag',['tag' => $tag->name]) }}'>{{ ucfirst($tag->name) }}</a>
+                                                <a class='label label-default' href='{{ route('story.tag',['tag' => $tag->name]) }}'>{{ ucfirst($tag->name) }}</a>
                                             @endforeach
-                                        </div>
+                                            <a href="#">Duis</a>, <a href="#">News</a>
+                                        </span>
+                                        <span><i class="fa fa-comments"></i> <a href="#">12 Comments</a></span>
                                     </div>
-                                </div>
-
+                                </article>
                             </div>
-                        </article>
+                        </div>
 
                     @empty
 
@@ -116,10 +120,7 @@ Desa {{ $desa->nama }}
 
                 </div>
             </div>
-
-        </div>
-        <!-- /Berita -->
-
+        </section>
     </div>
 </div>
 @endsection

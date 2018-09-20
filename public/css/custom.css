@@ -137,7 +137,7 @@ a{color:#304FFE;}
     color:#777;
 }
 .margin-separator{
-    margin-top:100px;
+    margin-top:60px;
 }
 .liked{
     color:red;
@@ -332,5 +332,5 @@ p{word-wrap: break-word;}
     .list-tag{
         display:none;   
     }
-    .mobile-tag{display:block;}
+    .mobile-tag{display:block; margin-bottom: 20px;}
 }

@@ -389,7 +389,7 @@ class ContentController extends Controller
         }
         $content = $dom->saveHTML();
 
-        $model->keterangan = $content;
+        $model->konten = $content;
         $model->tahun = $request->tahun;
         $model->judul = $request->judul;
 
@@ -413,14 +413,47 @@ class ContentController extends Controller
         $desa = $this->getDesa();
         $desa->nip = $request->get('nip');
         $desa->nama_kades = $request->get('nama_kades');
-
+        $desa->map = $request->get('map');
         if(!$model)
         {
             $model = new \App\ProfilDesa;
             $model->desa = $this->getDesa()->id;
         }
 
-        $model->konten = $request->input('konten');
+        $content = $request->konten;
+        $dom = new \DomDocument();
+        libxml_use_internal_errors(true);
+        $dom->loadHtml('<?xml encoding="utf-8" ?>'.$content, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+        $images = $dom->getElementsByTagName('img');
+
+        $gambar = [];
+
+        foreach($images as $k => $img){
+            $data = $img->getAttribute('src');
+            if(preg_match('/data:image/', $data)){
+                // get the mimetype
+                preg_match('/data:image\/(?<mime>.*?)\;/', $data, $groups);
+                $mimetype = $groups['mime'];
+                // Generating a random filename
+                $filename = Auth::Id().'_'.md5(time().$k.Auth()->Id());
+                $filepath = "/images/$filename.$mimetype";
+                // @see http://image.intervention.io/api/
+                $image = Image::make($data)
+                    // resize if required
+                    /* ->resize(300, 200) */
+                    ->encode($mimetype, 100)  // encode file to the specified mimetype
+                    ->save(public_path($filepath),50);
+
+                array_push($gambar, $filepath);
+
+                $new_src = asset($filepath);
+                $img->removeAttribute('src');
+                $img->setAttribute('src', $new_src);
+            } // <!--endif
+        }
+        $content = $dom->saveHTML();
+//        dd($request->all());
+        $model->konten = $content;
 
         if($request->hasFile('foto_desa')){
 

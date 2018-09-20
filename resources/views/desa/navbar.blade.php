@@ -3,19 +3,24 @@
 
         <li class="">
             <a class="nav-link" href="{{ route('profil_desa.beranda', $desa->id) }}">
-                Profil Desa
+                Beranda
             </a>
         </li>
 
         <li class="">
             <a class="nav-link" href="{{ route('profil_desa.selayang_pandang', $desa->id) }}">
-                Selayang Pandang
+                Profil
             </a>
         </li>
 
         <li class="">
             <a class="nav-link" href="{{ route('profil_desa.produk', $desa->id) }}">
                 Produk Unggulan
+            </a>
+        </li>
+        <li class="">
+            <a class="nav-link" href="{{ route('profil_desa.proyek', $desa->id) }}">
+                Proyek
             </a>
         </li>
 

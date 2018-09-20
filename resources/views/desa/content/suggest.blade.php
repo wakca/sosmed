@@ -6,8 +6,9 @@
     </div>
     <div class='panel-body'>
         <div class="container" id="data-desa">
-            <table class="table">
-                <thead>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
                     <tr>
                         <th>Nama Desa</th>
                         <th>Kecamatan</th>
@@ -15,21 +16,22 @@
                         <th>Provinsi</th>
                         <th>Aksi</th>
                     </tr>
-                </thead>
-                <tbody>
+                    </thead>
+                    <tbody>
                     @foreach($desa as $list_desa)
-                    <tr>
-                        <td><a href="{{ route('profil_desa.beranda', $list_desa->id) }}">{{ $list_desa->nama }} - {{ $list_desa->id }}</a></td>
-                        <td>{{ $list_desa->kecamatan->nama }} - {{ $list_desa->kecamatan->id }}</td>
-                        <td>{{ $list_desa->kecamatan->kab->nama }} - {{ $list_desa->kecamatan->kab->id }}</td>
-                        <td>{{ $list_desa->kecamatan->kab->prov->nama }} - {{ $list_desa->kecamatan->kab->prov->id }}</td>
-                        <td>
-                            <a href="{{ route('profil_desa.beranda', $list_desa->id) }}" class="btn btn-xs btn-primary">Kunjungi</a>
-                        </td>
-                    </tr>
+                        <tr>
+                            <td><a href="{{ route('profil_desa.beranda', $list_desa->id) }}">{{ $list_desa->nama }} - {{ $list_desa->id }}</a></td>
+                            <td>{{ $list_desa->kecamatan->nama }} - {{ $list_desa->kecamatan->id }}</td>
+                            <td>{{ $list_desa->kecamatan->kab->nama }} - {{ $list_desa->kecamatan->kab->id }}</td>
+                            <td>{{ $list_desa->kecamatan->kab->prov->nama }} - {{ $list_desa->kecamatan->kab->prov->id }}</td>
+                            <td>
+                                <a href="{{ route('profil_desa.beranda', $list_desa->id) }}" class="btn btn-xs btn-primary">Kunjungi</a>
+                            </td>
+                        </tr>
                     @endforeach
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
+            </div>
             {{-- {{ $desa->links() }} --}}
         </div>
     </div>

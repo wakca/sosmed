@@ -65,7 +65,7 @@
                     <p class="category">Desa {{ $desa->nama }}</p>
                 </div>
                 <div class="content" style="margin: 0px">
-                    <iframe src="http://petadesa.klikdesa.com/mod/peta.php?id={{ $desa->id }}" width="100%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+                    <iframe src="{{$desa->map}}" width="100%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
                 </div>
             </div>
         </div>

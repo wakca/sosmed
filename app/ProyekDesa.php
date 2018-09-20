@@ -8,7 +8,8 @@ class ProyekDesa extends Model
 {
     protected $table = 'proyek_desa';
 
-    public $timestamps = false;
+//    public $timestamps ;
+    protected $fillable = ['desa', 'judul', 'tahun', 'konten'];
 
     public function desa()
     {

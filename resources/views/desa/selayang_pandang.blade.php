@@ -4,10 +4,11 @@ Produk di Desa {{ $desa->nama }}
 @endsection
 
 @section('content')
-<h2>Selayang Pandang {{ $desa->nama }}</h2>
+<h2>Profil Desa/Kelurahan {{ $desa->nama }}</h2>
 <hr>
-@if($data)
-{!! $data->konten !!}
+
+@if($desa->profil_desa)
+{!! $desa->profil_desa->konten!!}
 @else
 <p>Belum ada Konten</p>
 @endif
