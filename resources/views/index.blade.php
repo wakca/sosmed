@@ -89,31 +89,6 @@
     function openTags() {
         $("#modal-tags").modal("show");
     }
-    $(function() {
-        var $affixElement = $('div[data-spy="affix"]');
-        $affixElement.width($affixElement.parent().width());
-    });
-    $(document).ready(function(){
-        $('.story-container .story:nth-child(3n - 1)').addClass('story-container-col2');
-        $('.story-container .story:nth-child(3n)').addClass('story-container-col3');
-        
-        $('.story-container-col2').appendTo('.story-container').removeClass('story-container-col2');
-        $('.story-container-col3').appendTo('.story-container').removeClass('story-container-col3');
-        
-        var loading_options = {
-            finishedMsg:'',
-            msgText:'',
-            selector: '#load-more',
-            speed:'normal',
-        };
-    
-        $('#list-story').infinitescroll({
-          loading : loading_options,
-          navSelector : "#wrapper .pagination",
-          nextSelector : "#wrapper .pagination li.active + li a",
-          itemSelector : "#list-story div.story",
-        });
-    });
     function submit()
     {
         var src = $("#search").val();
@@ -139,5 +114,31 @@
             });
         }
     }
+    $(function() {
+        var $affixElement = $('div[data-spy="affix"]');
+        $affixElement.width($affixElement.parent().width());
+    });
+    $(document).ready(function(){
+        $('.story-container .story:nth-child(3n - 1)').addClass('story-container-col2');
+        $('.story-container .story:nth-child(3n)').addClass('story-container-col3');
+        
+        $('.story-container-col2').appendTo('.story-container').removeClass('story-container-col2');
+        $('.story-container-col3').appendTo('.story-container').removeClass('story-container-col3');
+        
+        var loading_options = {
+            finishedMsg:'',
+            msgText:'',
+            selector: '#load-more',
+            speed:'normal',
+        };
+    
+        $('#list-story').infinitescroll({
+          loading : loading_options,
+          navSelector : "#wrapper .pagination",
+          nextSelector : "#wrapper .pagination li.active + li a",
+          itemSelector : "#list-story div.story",
+        });
+    });
+
 </script>
 @endsection
