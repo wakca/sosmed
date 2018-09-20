@@ -35,7 +35,7 @@
                 </ul>
             </div>
         </div>
-        <div id='wrapper'>
+
         <div class='col-md-9 col-xs-12'>
             <div class='mobile-tag'>
                 <div class="input-group">
@@ -49,6 +49,7 @@
                 </div>
                 <div id="suggest"></div>
             </div>
+            <div id='wrapper'>
 
             <div id='story'>
                 <div class='row story-container' id='list-story'>
@@ -76,12 +77,13 @@
                     @endforeach
                 </div>
             </div>
+            </div>
             <div class='hidden-div'>{{ $stories-> links() }}</div>
             <div class='center-text' id='load-more'>
             </div>
 
         </div>
-        </div>
+
     </div>
 </div>
 @endsection
