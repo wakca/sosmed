@@ -110,6 +110,9 @@
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
+@section('meta_image', )
+
+@endsection
 @section('script')
     <script src="{{ asset('js/jquery.infinitescroll.min.js') }}"></script>
     <script src="{{ asset('js/jquery.form.min.js') }}"></script>

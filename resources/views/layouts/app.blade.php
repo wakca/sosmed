@@ -5,9 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Menghubungkan tetangga dan sahabat">
-    <meta content='klipaa.com' property='og:site_name'/>
+    <meta content='{{url('/')}}' property='og:site_name'/>
     <meta content='website' property='og:type'/>
-    <meta content="{{ asset('img/logo.png') }}" property="og:image"/>
+    <meta content="@yield('meta_image')" property="og:image"/>
     <meta content="@yield('title'){{ config('app.name', 'Laravel') }}" property='og:title'/>
     <meta content='{{ app('url')->current() }}' property='og:url'/>
     <meta content='Menghubungkan tetangga dan sahabat' property='og:description'/>

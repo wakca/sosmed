@@ -23,6 +23,7 @@
     </div>
 </div>
 @endsection
+
 @section('css')
     <link href="{{ asset('css/summernote.css') }}" rel="stylesheet">
     <link href="{{ asset('bootstrap-select/css/bootstrap-select.css') }}" rel="stylesheet">
