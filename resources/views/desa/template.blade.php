@@ -11,6 +11,9 @@
 
 		<meta name="keywords" content="{{ $desa ?  'Halaman Profil Desa'.$desa->nama : '' }} " />
 		<meta name="description" content="{{ $desa ? 'Halaman Profil Desa '.$desa->nama : '' }}">
+		@if($desa->foto_desa)
+			<meta content="{{route('/storage/'.$desa->foto_desa)}}" property="og:image"/>
+		@endif
 		<meta name="author" content="{{ $desa ? $desa->nama : '' }}">
 
 		<meta name="csrf-token" content="{{ csrf_token() }}">
