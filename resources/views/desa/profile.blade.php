@@ -85,13 +85,14 @@ Desa {{ $desa->nama }}
                                 <article class="post">
                                     <h5><a class="text-dark" href="{{ route('story.view', $story->slug) }}">{{$story->title}}</a></h5>
                                     <p>
-                                        @php $konten =  substr($story->content,0, 500) @endphp
-                                        @php $konten =  preg_replace('#<img[^>]*>#i','', $konten) @endphp
-                                        @php
-                                            //$pattern = "/<p[^>]*><\\/p[^>]*>/";
-                                            $pattern = "/<[^\/>]*>([\s]?)*<\/[^>]*>/";
-                                        @endphp
-                                        {!! preg_replace($pattern, '', $konten) !!}
+                                        {{--@php $konten =  substr($story->content,0, 500) @endphp--}}
+                                        {{--@php $konten =  preg_replace('#<img[^>]*>#i','', $konten) @endphp--}}
+                                        {{--@php--}}
+                                            {{--//$pattern = "/<p[^>]*><\\/p[^>]*>/";--}}
+                                            {{--$pattern = "/<[^\/>]*>([\s]?)*<\/[^>]*>/";--}}
+                                        {{--@endphp--}}
+                                        {{--{!! preg_replace($pattern, '', $konten) !!}--}}
+                                        {{strlen(strip_tags($story->content)) > 100 ? str_limit(strip_tags($story->content),100)."...":strip_tags($story->content)}}
                                     </p>
                                     <div class="post-meta">
                                         <span><i class="fa fa-calendar"></i> {{$story->created_at->format('d-m-Y')}} </span>
@@ -107,7 +108,6 @@ Desa {{ $desa->nama }}
                                 </article>
                             </div>
                         </div>
-
                     @empty
 
                         <div class="col-md-6">

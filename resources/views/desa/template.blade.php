@@ -9,8 +9,8 @@
 
         <title>Beranda Desa {{ $desa ?  $desa->nama : '' }}</title>
 
-		<meta name="keywords" content="{{ $desa?  $desa->nama : '' }} " />
-		<meta name="description" content="{{ $desa ? $desa->profil_desa : '' }}">
+		<meta name="keywords" content="{{ $desa ?  'Halaman Profil Desa'.$desa->nama : '' }} " />
+		<meta name="description" content="{{ $desa ? 'Halaman Profil Desa '.$desa->nama : '' }}">
 		<meta name="author" content="{{ $desa ? $desa->nama : '' }}">
 
 		<meta name="csrf-token" content="{{ csrf_token() }}">

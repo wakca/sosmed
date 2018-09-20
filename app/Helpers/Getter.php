@@ -286,10 +286,10 @@ class Getter
         $images = $dom->getElementsByTagName('img');
         if(isset($images[0])){
             // return "<div class='thumbnail-story' style='background-image:url(".$images[0]->getAttribute('src').");' alt='$title' title='$title'></div>";
-            return "<img class='img-fluid' src='".$images[0]->getAttribute('src')."' style='width: 100%' alt='$title'>";
+            return "<img class='img-fluid' src='".$images[0]->getAttribute('src')."' style='width:300px; height:200px;' alt='$title'>";
         } else {
             // http://d2pa5gi5n2e1an.cloudfront.net/id/images/common/no_image_l.gif
-            return "<img class='responsive rounded' src='http://d2pa5gi5n2e1an.cloudfront.net/id/images/common/no_image_l.gif' style='width: 100%' alt='$title'>";
+            return "<img class='img-fluid' src='http://d2pa5gi5n2e1an.cloudfront.net/id/images/common/no_image_l.gif' style='width: 100%' alt='$title'>";
         }
     }
 
