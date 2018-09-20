@@ -35,6 +35,7 @@
                 </ul>
             </div>
         </div>
+        <div id='wrapper'>
         <div class='col-md-9 col-xs-12'>
             <div class='mobile-tag'>
                 <div class="input-group">
@@ -80,6 +81,7 @@
             </div>
 
         </div>
+        </div>
     </div>
 </div>
 @endsection
@@ -121,17 +123,17 @@
     $(document).ready(function(){
         $('.story-container .story:nth-child(3n - 1)').addClass('story-container-col2');
         $('.story-container .story:nth-child(3n)').addClass('story-container-col3');
-        
+
         $('.story-container-col2').appendTo('.story-container').removeClass('story-container-col2');
         $('.story-container-col3').appendTo('.story-container').removeClass('story-container-col3');
-        
+
         var loading_options = {
             finishedMsg:'',
             msgText:'',
             selector: '#load-more',
             speed:'normal',
         };
-    
+
         $('#list-story').infinitescroll({
           loading : loading_options,
           navSelector : "#wrapper .pagination",

@@ -36,6 +36,7 @@ class HomeController extends Controller
     
     public function index(){
         $numpage = Config::get('global.story_number');
+//        dd($numpage);
         $stories = Story::orderBy('created_at','desc')->paginate($numpage);
         $tags = Tag::all();
         return view('index', ['stories' => $stories, 'tags' => $tags]);    
