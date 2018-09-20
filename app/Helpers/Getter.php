@@ -279,6 +279,20 @@ class Getter
         }
     }
 
+    public static function getImageSingleThumb($content){
+        $dom = new \DomDocument();
+        libxml_use_internal_errors(true);
+        $dom->loadHtml($content, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+        $images = $dom->getElementsByTagName('img');
+        if(isset($images[0])){
+            // return "<div class='thumbnail-story' style='background-image:url(".$images[0]->getAttribute('src').");' alt='$title' title='$title'></div>";
+            return url('/').$images[0]->getAttribute('src');
+        } else {
+            // http://d2pa5gi5n2e1an.cloudfront.net/id/images/common/no_image_l.gif
+            return 'http://d2pa5gi5n2e1an.cloudfront.net/id/images/common/no_image_l.gif';
+        }
+    }
+
     public static function getImageThumbProfil($content,$title){
         $dom = new \DomDocument();
         libxml_use_internal_errors(true);

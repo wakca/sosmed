@@ -110,8 +110,14 @@
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
-@section('meta_image', )
+@section('meta_og')
+    <meta content="{{Getter::getImageSingleThumb($story->content)}}" property="og:image"/>
+    <meta content='{{url('/')}}' property='og:site_name'/>
+    <meta content='article' property='og:type'/>
 
+    <meta content="{{$story->title.' | '. config('app.name', 'Laravel') }}" property='og:title'/>
+    <meta content='{{ app('url')->current() }}' property='og:url'/>
+    <meta content='{{ strlen(strip_tags($story->content)) > 100 ? str_limit(strip_tags($story->content),100)."...":strip_tags($story->content) }}' property='og:description'/>
 @endsection
 @section('script')
     <script src="{{ asset('js/jquery.infinitescroll.min.js') }}"></script>
