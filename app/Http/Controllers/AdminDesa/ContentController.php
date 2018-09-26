@@ -83,11 +83,6 @@ class ContentController extends Controller
                 'data' => $this->getDesa()->profil_desa
             ],
             [
-                'slug' => 'produk_unggulan',
-                'judul' => 'Produk Unggulan',
-                'data' => $this->getDesa()->produk_unggulan
-            ],
-            [
                 'slug' => 'galeri_desa',
                 'judul' => 'Galeri Desa',
                 'data' => $this->getDesa()->galeri_desa
@@ -106,11 +101,6 @@ class ContentController extends Controller
                 'slug' => 'proyek_desa',
                 'judul' => 'Proyek Desa',
                 'data' => count($this->getDesa()->proyek_desa)
-            ],
-            [
-                'slug' => 'kabar_desa',
-                'judul' => 'Kabar Desa',
-                'data' => $this->getDesa()->kabar_desa
             ]
         ];
 
