@@ -39,7 +39,7 @@ class ProfilDesaController extends Controller
     public function organisasi($id_desa)
     {
         $desa = Desa::findOrFail($id_desa);
-        $list_organisasi = OrganisasiDesa::paginate(10);
+        $list_organisasi = OrganisasiDesa::where('desa', '=', $id_desa)->paginate(10);
         return view('desa.organisasi', [
             'desa' => $desa,
             'list_organisasi' => $list_organisasi
