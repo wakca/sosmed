@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\AdminDesa;
 
+use App\OrganisasiDesa;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -56,6 +57,10 @@ class ContentController extends Controller
     public function edit($slug)
     {
         $data = $this->content($slug);
+        if($slug == 'organisasi_desa'){
+            $data = OrganisasiDesa::paginate(10);
+        }
+//        dd($data);
         $option = [
             'data'=>$data,
             'desa'=>$this->getDesa()
@@ -174,11 +179,101 @@ class ContentController extends Controller
             $model = new \App\OrganisasiDesa;
             $model->desa = $this->getDesa()->id;
         }
-        $model->konten = $request->input('konten');
+
+        $content = $request->konten;
+        $dom = new \DomDocument();
+        libxml_use_internal_errors(true);
+        $dom->loadHtml('<?xml encoding="utf-8" ?>'.$content, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+        $images = $dom->getElementsByTagName('img');
+
+//        return dd($images[0]->getAttribute('src'));
+//
+        $gambar = [];
+
+        foreach($images as $k => $img){
+            $data = $img->getAttribute('src');
+            if(preg_match('/data:image/', $data)){
+                // get the mimetype
+                preg_match('/data:image\/(?<mime>.*?)\;/', $data, $groups);
+                $mimetype = $groups['mime'];
+                // Generating a random filename
+                $filename = Auth::Id().'_'.md5(time().$k.Auth()->Id());
+                $filepath = "/images/$filename.$mimetype";
+                // @see http://image.intervention.io/api/
+                $image = Image::make($data)
+                    // resize if required
+                    /* ->resize(300, 200) */
+                    ->encode($mimetype, 100)  // encode file to the specified mimetype
+                    ->save(public_path($filepath),50);
+
+                array_push($gambar, $filepath);
+
+                $new_src = asset($filepath);
+                $img->removeAttribute('src');
+                $img->setAttribute('src', $new_src);
+            } // <!--endif
+        }
+        $content = $dom->saveHTML();
+
+        $model->judul = $request->input('judul');
+        $model->konten = $content;
 
         if($model->save())
         {
-            return redirect()->route('admin_desa.content');
+            return redirect('/admin_desa/konten_desa/edit/organisasi_desa');
+        }
+    }
+
+    public function organisasi_desa_update(Request $request){
+        $model = $this->getDesa()->organisasi_desa;
+
+        if(!$model)
+        {
+            $model = new \App\OrganisasiDesa;
+            $model->desa = $this->getDesa()->id;
+        }
+
+        $content = $request->konten;
+        $dom = new \DomDocument();
+        libxml_use_internal_errors(true);
+        $dom->loadHtml('<?xml encoding="utf-8" ?>'.$content, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+        $images = $dom->getElementsByTagName('img');
+
+//        return dd($images[0]->getAttribute('src'));
+//
+        $gambar = [];
+
+        foreach($images as $k => $img){
+            $data = $img->getAttribute('src');
+            if(preg_match('/data:image/', $data)){
+                // get the mimetype
+                preg_match('/data:image\/(?<mime>.*?)\;/', $data, $groups);
+                $mimetype = $groups['mime'];
+                // Generating a random filename
+                $filename = Auth::Id().'_'.md5(time().$k.Auth()->Id());
+                $filepath = "/images/$filename.$mimetype";
+                // @see http://image.intervention.io/api/
+                $image = Image::make($data)
+                    // resize if required
+                    /* ->resize(300, 200) */
+                    ->encode($mimetype, 100)  // encode file to the specified mimetype
+                    ->save(public_path($filepath),50);
+
+                array_push($gambar, $filepath);
+
+                $new_src = asset($filepath);
+                $img->removeAttribute('src');
+                $img->setAttribute('src', $new_src);
+            } // <!--endif
+        }
+        $content = $dom->saveHTML();
+
+        $model->judul = $request->input('judul');
+        $model->konten = $content;
+
+        if($model->save())
+        {
+            return redirect('/admin_desa/konten_desa/edit/organisasi_desa');
         }
     }
 
@@ -608,6 +703,24 @@ class ContentController extends Controller
         
     }
 
+    public function delete_organisasi($id)
+    {
+        $organisasi = OrganisasiDesa::findOrFail($id);
+
+//        $proses = File::delete(public_path($galeri->link));
+
+        if($organisasi->delete()){
+            return response()->json([
+                'message' => 'Berhasil menghapus Dokumen',
+                'status' => 'success'
+            ]);
+        }
+
+
+
+
+    }
+
     public function delete_proyek($id)
     {
         $proyek = \App\ProyekDesa::findOrFail($id);
@@ -643,6 +756,13 @@ class ContentController extends Controller
 
         return $data;
         
+    }
+    public function data_organisasi($id)
+    {
+        $data = OrganisasiDesa::findOrFail($id);
+
+        return $data;
+
     }
 
     public function open_dokumen($id)

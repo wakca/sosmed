@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\OrganisasiDesa;
 use App\ProyekDesa;
 use Illuminate\Http\Request;
 
@@ -38,10 +39,10 @@ class ProfilDesaController extends Controller
     public function organisasi($id_desa)
     {
         $desa = Desa::findOrFail($id_desa);
-
+        $list_organisasi = OrganisasiDesa::paginate(10);
         return view('desa.organisasi', [
             'desa' => $desa,
-            'data' => $desa->organisasi
+            'list_organisasi' => $list_organisasi
         ]);
 
     }
@@ -136,5 +137,15 @@ class ProfilDesaController extends Controller
         }
 
 
+    }
+
+    public function detail_organisasi($id_desa, $id_proyek)
+    {
+        $desa = Desa::findOrFail($id_desa);
+        $organisasi= OrganisasiDesa::findOrFail($id_proyek);
+        return view('desa.detail_organisasi', [
+            'desa' => $desa,
+            'organisasi' => $organisasi
+        ]);
     }
 }

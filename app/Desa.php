@@ -50,7 +50,7 @@ class Desa extends Model
 
     public function organisasi_desa()
     {
-        return $this->hasOne('App\OrganisasiDesa', 'desa');
+        return $this->hasMany('App\OrganisasiDesa', 'desa', 'id');
     }
 
     public function profil_desa()

@@ -8,7 +8,8 @@ class OrganisasiDesa extends Model
 {
     protected $table = 'organisasi_desa';
 
-    public $timestamps = false;
+    protected $fillable = ['desa','judul', 'kontent'];
+//    public $timestamps = false;
 
     public function desa()
     {

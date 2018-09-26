@@ -33,3 +33,12 @@ $factory->define(App\ProyekDesa::class, function (Faker\Generator $faker) {
         'konten'=>$faker->paragraph
     ];
 });
+$factory->define(App\OrganisasiDesa::class, function (Faker\Generator $faker) {
+    static $password;
+
+    return [
+        'desa' => '3205120011',
+        'judul'=>$faker->sentence,
+        'konten'=>$faker->paragraph
+    ];
+});

@@ -4,13 +4,50 @@ Produk di Desa {{ $desa->nama }}
 @endsection
 
 @section('content')
-<h2>Organisasi Desa {{ $desa->nama }}</h2>
-<hr>
-@if($data)
-{!! $data->konten !!}
-@else
-<p>Belum ada Konten</p>
-@endif
+    <h2>Proyek Desa/Kelurahan {{ $desa->nama }}</h2>
+    <div class="masonry-loader masonry-loader-loaded">
+        <div class="row">
+
+            @forelse($list_organisasi as $organisasi)
+                <div class="col-12 col-sm-6 col-lg-4 product mt-3">
+                    <span class="product-thumb-info">
+                        <a href="{{route('profil_desa.organisasi.detail', [$organisasi->desa, $organisasi->id])}}">
+                            <span class="product-thumb-info-image">
+                                <span class="product-thumb-info-act">
+                                    <span class="product-thumb-info-act-right"><em><i class="fa fa-eye"></i> Detail Organisasi</em></span>
+                                </span>
+                                <img alt="" class="img-fluid" src="{{ Getter::getOnlyImgUrl($organisasi->konten, null) }}" style="height: 200px">
+                            </span>
+                        </a>
+                        <span class="product-thumb-info-content">
+                            <center>
+
+                                <a href="{{route('profil_desa.organisasi.detail', [$organisasi->desa, $organisasi->id])}}">
+                                    <h4>{{ $organisasi->judul }}</h4>
+                                </a>
+                            </center>
+                        </span>
+                    </span>
+                </div>
+            @empty
+                <div class="col-md-12" style="width: 100%">
+
+                    <div class="alert alert-default">
+                        Belum ada Proyek pada Desa / Kelurahan {{ $desa->nama }}<br/>
+                        <a href="/register" class="btn btn-success">Bergabunglah segera dengan Klipaa.com</a>
+                    </div>
+                </div>
+            @endforelse
+            <hr>
+
+        </div>
+        <center>{{ $list_organisasi->links('vendor.pagination.bootstrap-4') }}</center>
+        <div class="bounce-loader">
+            <div class="bounce1"></div>
+            <div class="bounce2"></div>
+            <div class="bounce3"></div>
+        </div>
+    </div>
 @endsection
 
 @section('scripts')

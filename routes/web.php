@@ -70,6 +70,7 @@ Route::group(['prefix' => 'profil_desa/{id_desa}'], function($id_desa){
     Route::get('/selayang_pandang', 'ProfilDesaController@selayang_pandang')->name('profil_desa.selayang_pandang');
     Route::get('/dokumen', 'ProfilDesaController@dokumen')->name('profil_desa.dokumen');
     Route::get('/organisasi', 'ProfilDesaController@organisasi')->name('profil_desa.organisasi');
+    Route::get('/organisasi/{id}', 'ProfilDesaController@detail_organisasi')->name('profil_desa.organisasi.detail');
     Route::get('/galeri', 'ProfilDesaController@galeri')->name('profil_desa.galeri');
     Route::get('/produk', 'ProfilDesaController@produk')->name('profil_desa.produk');
     Route::get('/proyek', 'ProfilDesaController@proyek')->name('profil_desa.proyek');
@@ -125,13 +126,16 @@ Route::group(['prefix' => 'admin_desa'], function () {
             Route::post('dokumen_desa', 'AdminDesa\ContentController@dokumen_desa_update')->name('admin_desa.content.dokumen_desa.update');
             Route::post('galeri', 'AdminDesa\ContentController@galeri_desa_update')->name('admin_desa.content.galeri.update');
             Route::post('proyek', 'AdminDesa\ContentController@proyek_desa_update')->name('admin_desa.content.proyek.update');
+            Route::post('organisasi', 'AdminDesa\ContentController@organisasi_desa_update')->name('admin_desa.content.organisasi.update');
         });
         
         Route::get('proyek/delete/{id}', 'AdminDesa\ContentController@delete_proyek')->name('admin_desa.content.proyek.delete');
         Route::get('galeri/delete/{id}', 'AdminDesa\ContentController@delete_galeri')->name('admin_desa.content.galeri.delete');
         Route::get('galeri/data/{id}', 'AdminDesa\ContentController@data_galeri')->name('admin_desa.content.galeri.data');
         Route::get('proyek/data/{id}', 'AdminDesa\ContentController@data_proyek')->name('admin_desa.content.proyek.data');
-        
+        Route::get('organisasi/data/{id}', 'AdminDesa\ContentController@data_organisasi')->name('admin_desa.content.organisasi.data');
+        Route::get('organisasi/delete/{id}', 'AdminDesa\ContentController@delete_organisasi')->name('admin_desa.content.organisasi.delete');
+
         Route::get('dokumen_desa/delete/{id}', 'AdminDesa\ContentController@delete_dokumen')->name('admin_desa.content.dokumen_desa.delete');
         Route::get('dokumen_desa/data/{id}', 'AdminDesa\ContentController@data_dokumen')->name('admin_desa.content.dokumen_desa.data');
     });

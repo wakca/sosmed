@@ -1,53 +1,54 @@
 @extends('desa.template')
 @section('title')
-    Produk di Desa {{ $desa->nama }}
+    Proyek Desa/Kelurahan {{ $desa->nama }}
 @endsection
 
 @section('content')
-    <h2>Proyek Desa/Kelurahan {{ $desa->nama }}</h2>
-    <div class="masonry-loader masonry-loader-loaded">
-        <div class="row">
-
-            @forelse($list_proyek as $proyek)
-                <div class="col-12 col-sm-6 col-lg-4 product mt-3">
-                    <span class="product-thumb-info">
-                        <a href="{{route('profil_desa.proyek.detail', [$proyek->desa, $proyek->id])}}">
-                            <span class="product-thumb-info-image">
-                                <span class="product-thumb-info-act">
-                                    <span class="product-thumb-info-act-right"><em><i class="fa fa-eye"></i> Detail Proyek</em></span>
-                                </span>
-                                <img alt="" class="img-fluid" src="{{ Getter::getOnlyImgUrl($proyek->konten, null) }}" style="height: 200px">
-                            </span>
-                        </a>
-                        <span class="product-thumb-info-content">
-                            <center>
-
-                                <a href="{{route('profil_desa.proyek.detail', [$proyek->desa, $proyek->id])}}">
-                                    <h4>{{ $proyek->judul }} (Tahun {{$proyek->tahun}})</h4>
-                                </a>
-                            </center>
-                        </span>
-                    </span>
+    <div class="row">
+        <div class="col-md-3 hidden-sm">
+            <div class="card text-center hidden-sm-down">
+                <div class="card-header">
+                    <i class="fa fa-info-circle"></i>&nbsp;&nbsp;&nbsp;INFO DESA/KELURAHAN
                 </div>
-            @empty
-                <div class="col-md-12" style="width: 100%">
+                <div class="card-body">
+                    <center><img src="{{$desa->foto_kades ? url('/storage/'.$desa->foto_kades) : url('/img/kades.png')}}" class="img img-responsive img-thumbnail"  alt="Foto Kepala Desa {{$desa->nama}}"></center>
+                    <h5 class="card-title">{{$desa->nama_kades}}</h5>
 
-                    <div class="alert alert-default">
-                        Belum ada Proyek pada Desa / Kelurahan {{ $desa->nama }}<br/>
-                        <a href="/register" class="btn btn-success">Bergabunglah segera dengan Klipaa.com</a>
-                    </div>
+                    <a href="{{route('profil_desa.proyek', [$desa->id])}}" class="btn btn-primary">Kembali Ke Proyek</a>
                 </div>
-            @endforelse
-                <hr>
-
+                <div class="card-footer text-muted">
+                    {{$organisasi->created_at ? $organisasi->created_at->diffForHumans() : ''}}
+                </div>
+            </div>
         </div>
-        {{ $list_proyek->links('vendor.pagination.bootstrap-4') }}
-        <div class="bounce-loader"><div class="bounce1"></div><div class="bounce2"></div><div class="bounce3"></div></div></div>
+        <div class="col-md-9" style="margin-top: 20px;">
+            <article class="post post-large blog-single-post">
+
+
+                <div class="post-date">
+                    <span class="day">{{$organisasi->created_at ? $organisasi->created_at->format('d') : ''}}</span>
+                    <span class="month">{{$organisasi->created_at ? $organisasi->created_at->format('M') : ''}}</span>
+                </div>
+
+                <div class="post-content">
+
+                    <h2><a href="#">{{$organisasi->judul}}</a></h2>
+
+                    <div class="post-meta">
+                        <span><i class="fa fa-user"></i>  <a href="#">{{$desa->nama}}</a> </span>
+                    </div>
+
+                    {!! $organisasi->konten !!}
+
+                </div>
+            </article>
+        </div>
+    </div>
 @endsection
 
 @section('scripts')
     <script>
-        var id_desa = {{ $desa->id }};
+        var id_desa = "{{ $desa->id }}";
         var url =  "{{ url('/') }}/";
 
         var judul = $("#judul_konten");
@@ -130,6 +131,8 @@
                 konten.html(data);
             });
         });
+
+
     </script>
 
 @endsection
