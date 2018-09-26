@@ -186,6 +186,7 @@
 			});
 			$(document).ready(function(){
                 $('p img').css('width', '100%');
+                $('table').css('width', '100%');
 			});
 		</script>
 		<!-- End of Kirim Pesan -->
