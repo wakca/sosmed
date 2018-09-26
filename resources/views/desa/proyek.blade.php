@@ -14,8 +14,7 @@
                         <a href="{{route('profil_desa.proyek.detail', [$proyek->desa, $proyek->id])}}">
                             <span class="product-thumb-info-image">
                                 <span class="product-thumb-info-act">
-                                    <span class="product-thumb-info-act-left"><em>View</em></span>
-                                    <span class="product-thumb-info-act-right"><em><i class="fas fa-plus"></i> Details</em></span>
+                                    <span class="product-thumb-info-act-right"><em><i class="fa fa-eye"></i> Detail Proyek</em></span>
                                 </span>
                                 <img alt="" class="img-fluid" src="{{ Getter::getOnlyImgUrl($proyek->konten, $proyek->judul) }}" style="height: 200px">
                             </span>
