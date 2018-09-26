@@ -22,7 +22,7 @@
                         <span class="product-thumb-info-content">
                             <center>
 
-                                <a href="#">
+                                <a href="{{route('profil_desa.proyek.detail', [$proyek->desa, $proyek->id])}}">
                                     <h4>{{ $proyek->judul }} (Tahun {{$proyek->tahun}})</h4>
                                 </a>
                             </center>
