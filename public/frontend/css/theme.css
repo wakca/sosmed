@@ -1737,6 +1737,7 @@ html.side-header #header {
 
 	html.side-header #header .header-row {
 		flex-direction: column;
+		height: 100px;
 	}
 
 	html.side-header #header .header-search {

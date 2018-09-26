@@ -1,4 +1,4 @@
-<nav class="collapse">
+
     <ul class="nav nav-pills" id="mainNav">
 
         <li class="">
@@ -52,4 +52,3 @@
 
 
     </ul>
-</nav>
