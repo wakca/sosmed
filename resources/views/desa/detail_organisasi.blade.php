@@ -14,7 +14,7 @@
                     <center><img src="{{$desa->foto_kades ? url('/storage/'.$desa->foto_kades) : url('/img/kades.png')}}" class="img img-responsive img-thumbnail"  alt="Foto Kepala Desa {{$desa->nama}}"></center>
                     <h5 class="card-title">{{$desa->nama_kades}}</h5>
 
-                    <a href="{{route('profil_desa.proyek', [$desa->id])}}" class="btn btn-primary">Kembali Ke Proyek</a>
+                    <a href="{{route('profil_desa.organisasi', [$desa->id])}}" class="btn btn-primary">Kembali Ke Organisasi</a>
                 </div>
                 <div class="card-footer text-muted">
                     {{$organisasi->created_at ? $organisasi->created_at->diffForHumans() : ''}}
