@@ -5,8 +5,8 @@
 
 @section('content')
     <div class="row">
-        <div class="col-md-3">
-            <div class="card text-center">
+        <div class="col-md-3 hidden-sm">
+            <div class="card text-center hidden-sm-down">
                 <div class="card-header">
                     <i class="fa fa-info-circle"></i>&nbsp;&nbsp;&nbsp;INFO DESA/KELURAHAN
                 </div>
@@ -21,7 +21,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-9">
+        <div class="col-md-9" style="margin-top: 20px;">
             <article class="post post-large blog-single-post">
 
 
@@ -49,7 +49,7 @@
 
 @section('scripts')
     <script>
-        var id_desa = {{ $desa->id }};
+        var id_desa = "{{ $desa->id }}";
         var url =  "{{ url('/') }}/";
 
         var judul = $("#judul_konten");
@@ -132,6 +132,8 @@
                 konten.html(data);
             });
         });
+
+
     </script>
 
 @endsection

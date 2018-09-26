@@ -184,10 +184,13 @@
 					console.log(data);
 				});
 			});
+			$(document).ready(function(){
+                $('p img').css('width', '100%');
+			});
 		</script>
 		<!-- End of Kirim Pesan -->
 
-		@stack('script')
+		@yield('script')
 
 	</body>
 </html>
