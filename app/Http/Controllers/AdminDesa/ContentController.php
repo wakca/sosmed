@@ -63,11 +63,11 @@ class ContentController extends Controller
     {
         $data = $this->content($slug);
         if($slug == 'organisasi_desa'){
-            $data = $this->getDesa();
+            $data = $this->getDesa()->organisasi_desa()->paginate(10);
         }
 //        dd($data);
         $option = [
-            'data'=>$data->organisasi_desa()->paginate(10),
+            'data'=>$data,
             'desa'=>$this->getDesa()
         ];
 
