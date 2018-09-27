@@ -25,6 +25,11 @@ class ContentController extends Controller
 {
     use ImageUploader;
 
+    public function __construct()
+    {
+        $this->middleware(['auth','admin_desa']);
+    }
+
 
     private function getDesa()
     {
@@ -58,11 +63,11 @@ class ContentController extends Controller
     {
         $data = $this->content($slug);
         if($slug == 'organisasi_desa'){
-            $data = OrganisasiDesa::paginate(10);
+            $data = $this->getDesa();
         }
 //        dd($data);
         $option = [
-            'data'=>$data,
+            'data'=>$data->organisasi_desa()->paginate(10),
             'desa'=>$this->getDesa()
         ];
 
