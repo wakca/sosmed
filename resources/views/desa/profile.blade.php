@@ -103,7 +103,7 @@ Desa {{ $desa->nama }}
                                             @endforeach
                                             <a href="#">Duis</a>, <a href="#">News</a>
                                         </span>
-                                        <span><i class="fa fa-comments"></i> <a href="#">12 Comments</a></span>
+                                        <span><i class="fa fa-comments"></i> <a href="{{url('/story/'.$story->slug.'#comments')}}">{{$story->comment()->count()}} Comments</a></span>
                                     </div>
                                 </article>
                             </div>
