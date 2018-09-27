@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\OrganisasiDesa;
+use App\PesanWarga;
 use App\ProyekDesa;
 use Illuminate\Http\Request;
 
@@ -103,16 +104,41 @@ class ProfilDesaController extends Controller
         ]);
     }
 
-    public function peta($id_desa)
+    public function kontak($id_desa, Request $request)
     {
         $desa = Desa::findOrFail($id_desa);
         $provinsi = Provinsi::all();
 
 
-        return view('desa.peta', [
+        return view('desa.kontak', [
             'desa' => $desa,
             'provinsi' => $provinsi
         ]);
+    }
+
+    public function simpanSubmitKontak($id_desa, Request $request)
+    {
+        $this->validate($request, [
+            'nama_lengkap'=>'required|min:2',
+            'email'=>'required|email',
+            'subjek'=>'required',
+            'pesan'=>'required'
+        ]);
+//        dd($request->all());
+        $pesan = new PesanWarga();
+        if($request->get('id')){
+            $pesan = PesanWarga::findOrFail($request->get('id'));
+        }
+
+        $pesan->nama_lengkap = $request->get('nama_lengkap');
+        $pesan->email = $request->get('email');
+        $pesan->subjek = $request->get('subjek');
+        $pesan->pesan = $request->get('pesan');
+        $pesan->desa_id = $id_desa;
+
+        if($pesan->save()){
+            return redirect()->route('profil_desa.kontak', $id_desa)->with('sukses', 'Berhasil Mengirim Pesan Ke Desa. Silahkan cek email anda untuk respon pada setiap desa!');
+        }
     }
 
     public function kirim_pesan(Request $request)

@@ -72,5 +72,10 @@ class Desa extends Model
     {
         return $this->hasOne('App\KabarDesa', 'desa');
     }
+
+    public function pesan_warga()
+    {
+        return $this->belongsTo('App\Desa', 'desa');
+    }
     
 }

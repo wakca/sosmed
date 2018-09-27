@@ -76,7 +76,8 @@ Route::group(['prefix' => 'profil_desa/{id_desa}'], function($id_desa){
     Route::get('/proyek', 'ProfilDesaController@proyek')->name('profil_desa.proyek');
     Route::get('/proyek/{id}', 'ProfilDesaController@detail_proyek')->name('profil_desa.proyek.detail');
     Route::get('/story', 'ProfilDesaController@story')->name('profil_desa.story');
-    Route::get('/peta', 'ProfilDesaController@peta')->name('profil_desa.peta');
+    Route::get('/kontak', 'ProfilDesaController@kontak')->name('profil_desa.kontak');
+    Route::post('/kontak', 'ProfilDesaController@simpanSubmitKontak')->name('profil_desa.simpan_kontak');
 
     Route::post('kirim_pesan', 'MessageController@send_message')->name('kirim_pesan');
 });

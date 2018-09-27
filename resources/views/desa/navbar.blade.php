@@ -45,8 +45,8 @@
         </li>
 
         <li class="">
-            <a class="nav-link" href="{{ route('profil_desa.peta', $desa->id) }}">
-                Peta
+            <a class="nav-link" href="{{ route('profil_desa.kontak', $desa->id) }}">
+                Kontak
             </a>
         </li>
 

@@ -42,3 +42,13 @@ $factory->define(App\OrganisasiDesa::class, function (Faker\Generator $faker) {
         'konten'=>$faker->paragraph
     ];
 });
+
+$factory->define(App\PesanWarga::class, function (Faker\Generator $faker) {
+    return [
+        'desa_id' => '3205120011',
+        'nama_lengkap'=>$faker->name,
+        'email'=>$faker->email,
+        'subjek'=>$faker->sentence,
+        'pesan'=>$faker->paragraph
+    ];
+});
