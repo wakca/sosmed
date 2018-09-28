@@ -167,13 +167,11 @@ class ContentController extends Controller
     
     public function organisasi_desa(Request $request)
     {
-        $model = $this->getDesa()->organisasi_desa;
-
-        if(!$model)
-        {
-            $model = new \App\OrganisasiDesa;
-            $model->desa = $this->getDesa()->id;
+        $model = new OrganisasiDesa();
+        if($request->has('id_organisasi')){
+            $model = OrganisasiDesa::findOrfail($request->get('id_organisasi'));
         }
+        $model->desa = $this->getDesa()->id;
 
         $content = $request->konten;
         $dom = new \DomDocument();
@@ -231,7 +229,7 @@ class ContentController extends Controller
             $model->desa = $this->getDesa()->id;
 //        }
 
-        $content = $request->konten;
+        $content = $request->get('konten');
         $dom = new \DomDocument();
         libxml_use_internal_errors(true);
         $dom->loadHtml('<?xml encoding="utf-8" ?>'.$content, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
