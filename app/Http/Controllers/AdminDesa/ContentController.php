@@ -220,13 +220,16 @@ class ContentController extends Controller
     }
 
     public function organisasi_desa_update(Request $request){
-        $model = $this->getDesa()->organisasi_desa;
-
-        if(!$model)
-        {
-            $model = new \App\OrganisasiDesa;
+//        $model = $this->getDesa()->organisasi_desa;
+//
+//        if(!$model)
+//        {
+            $model = new OrganisasiDesa();
+            if($request->has('id_organisasi')){
+                $model = OrganisasiDesa::findOrfail($request->get('id_organisasi'));
+            }
             $model->desa = $this->getDesa()->id;
-        }
+//        }
 
         $content = $request->konten;
         $dom = new \DomDocument();
