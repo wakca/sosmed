@@ -186,7 +186,9 @@
 			});
 			$(document).ready(function(){
                 $('p img').css('width', '100%');
-                $('table').css({'width': '100%', 'border-collapse': 'collapse'});
+                $('table').css({'width': '100%', 'border-collapse': 'collapse', 'overflow' : 'auto'});
+				$('table').addClass('table-responsive');
+				
 			});
 		</script>
 		<!-- End of Kirim Pesan -->
