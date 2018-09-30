@@ -4,7 +4,7 @@ Produk di Desa {{ $desa->nama }}
 @endsection
 
 @section('content')
-    <h2>Proyek Desa/Kelurahan {{ $desa->nama }}</h2>
+    <h2>Organisasi Desa/Kelurahan {{ $desa->nama }}</h2>
     <div class="masonry-loader masonry-loader-loaded">
         <div class="row">
 
