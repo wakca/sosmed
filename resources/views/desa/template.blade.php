@@ -186,6 +186,8 @@
 			});
 			$(document).ready(function(){
                 $('p img').css('width', '100%');
+                $('h3 img').css('width', '100%');
+
                 $('table').css({'width': '100%', 'border-collapse': 'collapse', 'overflow' : 'auto'});
 				$('table').addClass('table-responsive');
 				
