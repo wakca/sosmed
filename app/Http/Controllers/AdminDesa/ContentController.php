@@ -556,6 +556,10 @@ class ContentController extends Controller
             $desa->foto_kades = $this->uploadImage($request->file('foto_kades'));
         }
 
+        if($request->has('link_web')){
+            $desa->link_web = $request->get('link_web');
+        }
+
         if($model->save() && $desa->save())
         {
             return redirect('/admin_desa/konten_desa/edit/profil_desa');
