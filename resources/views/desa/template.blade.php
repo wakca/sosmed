@@ -144,6 +144,7 @@
 		 -->
 
 		 <script type="text/javascript">
+			 var url_web = "{{urlencode(url()->current())}}";
 			function shareFb(url)
 			{
 				window.open('https://www.facebook.com/sharer/sharer.php?u=' + url , 'newwindow','width=800,height=600');
@@ -154,6 +155,14 @@
 			{
 				window.open('https://twitter.com/intent/tweet?text='+ text +'&amp;url=' + url , 'newwindow','width=800,height=600');
 				return false;
+			}
+
+			function shareWhatsApp()
+			{
+				event.preventDefault();
+				console.log('share Whatsapp');
+				window.open('https://wa.me/?text='+url_web, 'newwindow','width=800,height=600');
+                return false;
 			}
 
 

@@ -34,7 +34,8 @@
                                 @endif
 
                                 <li class="social-icons-facebook"><a href="{{ $desa ?  $desa->facebook : '#'}}" target="_blank" title="Facebook"><i class="fa fa-facebook"></i></a></li>
-                                <li class="social-icons-twitter"><a href="{{ $desa ? $desa->twitter : '#' }}" target="_blank" title="Twitter"><i class="fa fa-twitter"></i></a></li>
+                                <li class="social-icons-twitter"><a href="#" onclick="shareWhatsApp()" target="_blank" title="Share ke Whatsapp"><i class="fa fa-whatsapp"></i></a></li>
+                                {{--<li class="social-icons-twitter"><a href="#" onclick="shareWhatsApp()" target="_blank" title="Share ke Whatsapp"><i class="fa fa-whatsapp"></i></a></li>--}}
                             </ul>
                             <button class="btn header-btn-collapse-nav" data-toggle="collapse" data-target=".header-nav-main nav">
                                 <i class="fa fa-bars"></i>

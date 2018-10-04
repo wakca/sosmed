@@ -126,6 +126,7 @@ Desa {{ $desa->nama }}
 @endsection
 
 @section('scripts')
+    <script type="text/javascript" src="//platform-api.sharethis.com/js/sharethis.js#property=599bc3c3a3155100110e7200&product=sticky-share-buttons"></script>
 <script>
     var id_desa = {{ $desa->id }};
     var url =  "{{ url('/') }}/";
