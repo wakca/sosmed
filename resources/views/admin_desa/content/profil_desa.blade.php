@@ -55,7 +55,7 @@
                 <textarea name="konten" id="konten" cols="30" rows="15" class="form-control">@if($data) {{ $data->konten }} @endif</textarea>
             </div>
             <div class="form-group">
-                <label>Masukan Alamat Website Desa <i>(Misal : https://contohdesa.com)</i></label>
+                <label>Masukan Alamat Website Kecamatan <i>(Misal : https://contohkecamatan.com)</i></label>
                 <input type="text" name="link_web" class="form-control" value="{{$data->link_web ?  $data->link_web : ''}}">
             </div>
 

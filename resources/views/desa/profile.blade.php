@@ -27,6 +27,14 @@ Desa {{ $desa->nama }}
                         <td>:</td>
                         <td><strong>{{ $desa->kecamatan->nama }}</strong> ({{ $desa->kecamatan->id }})</td>
                     </tr>
+                    @if($desa->link_web)
+                        <tr>
+                            <td>Web Kecamatan</td>
+                            <td>:</td>
+                            <td><a href="{{$desa->link_web}}">{{$desa->link_web}}</a></td>
+                        </tr>
+                    @endif
+
                     <tr>
                         <td>Kota/Kabupaten</td>
                         <td>:</td>
