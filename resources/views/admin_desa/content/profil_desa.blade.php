@@ -56,7 +56,7 @@
             </div>
             <div class="form-group">
                 <label>Masukan Alamat Website Kecamatan <i>(Misal : https://contohkecamatan.com)</i></label>
-                <input type="text" name="link_web" class="form-control" value="{{$desa->link_web ?  $data->link_web : '' }}">
+                <input type="text" name="link_web" class="form-control" value="{{$desa->link_web ?  $desa->link_web : '' }}">
             </div>
 
             <div class="clearfix">
