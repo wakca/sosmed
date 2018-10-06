@@ -30,10 +30,10 @@
                             </div>
                             <ul class="header-social-icons social-icons ">
                                 @if($desa->link_web)
-                                    <li class="social-icons-instagram"><a href="{{ $desa ? $desa->link_web : '#' }}" target="_blank" title="Masuk ke Web Kecamatan"><i class="fa fa-globe"></i></a></li>
+                                    <li class="social-icons-instagram"><a href="{!! $desa ? $desa->link_web : '#' !!}" title="Masuk ke Web Kecamatan"><i class="fa fa-globe"></i></a></li>
                                 @endif
 
-                                <li class="social-icons-facebook"><a href="{{ $desa ?  $desa->facebook : '#'}}" target="_blank" title="Facebook"><i class="fa fa-facebook"></i></a></li>
+                                <li class="social-icons-facebook"><a href="{{ $desa ?  $desa->facebook : '#'}}" title="Facebook"><i class="fa fa-facebook"></i></a></li>
                                 <li class="social-icons-twitter"><a href="#" onclick="shareWhatsApp()" target="_blank" title="Share ke Whatsapp"><i class="fa fa-whatsapp"></i></a></li>
                                 {{--<li class="social-icons-twitter"><a href="#" onclick="shareWhatsApp()" target="_blank" title="Share ke Whatsapp"><i class="fa fa-whatsapp"></i></a></li>--}}
                             </ul>
