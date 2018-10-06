@@ -115,7 +115,7 @@
                                     {!! Auth::user()->level == 3 ?"<li><a href='/admin/dashboard'>Halaman Administrator</a></li>":"" !!}
                                     {!! Auth::user()->level == 2 ?"<li><a href='/admin_desa/dashboard'>Halaman Admin Desa</a></li>":"" !!}
                                     <li><a href="/{{ Auth::user()->username }}">My Profile</a></li>
-                                    <li><a href="/profil_desa/{{ Auth::user()->username }}/beranda">Masuk ke Desa/Kelurahan {{Auth::user()->des->nama}}</a></li>
+                                    <li><a href="/profil_desa/{{ Auth::user()->des->id }}/beranda">Masuk ke Desa/Kelurahan {{Auth::user()->des->nama}}</a></li>
                                     <li><a href='/account-setting'>Pengaturan Akun</a></li>
                                     <li role="separator" class="divider"></li>
                                     <li>
