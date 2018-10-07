@@ -557,7 +557,7 @@ class ContentController extends Controller
         }
 
         if($request->has('link_web')){
-            $desa->link_web = strpos($request->get('link_web'), 'http') ? $request->get('link_web') : 'http://'.$request->get('link_web');
+            $desa->link_web = strpos($request->get('link_web'), 'http') !== false ? $request->get('link_web') : 'http://'.$request->get('link_web');
         }
 
         if($model->save() && $desa->save())
