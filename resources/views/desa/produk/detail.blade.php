@@ -49,8 +49,8 @@
                         <div class="col-md-12">
 
                             @if($produk->des)
-                                <a href="{{url('/profil_desa/'.$produk->des->id.'/beranda')}}" class="btn btn-primary btn-block" style="white-space: normal;">Masuk ke Desa/Kecamatan {{$produk->des->nama}}</a>
-                                <a href="{{url('/profil_desa/'.$produk->des->id.'/produk')}}" class="btn btn-success btn-block" style="white-space: normal;">Produk Unggulan Desa/Kecamatan {{$produk->des->nama}}</a>
+                                <a href="{{url('/profil_desa/'.$produk->des->id.'/beranda')}}" class="btn btn-primary btn-block" style="white-space: normal;">Masuk ke Desa/Kelurahan {{$produk->des->nama}}</a>
+                                <a href="{{url('/profil_desa/'.$produk->des->id.'/produk')}}" class="btn btn-success btn-block" style="white-space: normal;">Produk Unggulan Desa/Kelurahan {{$produk->des->nama}}</a>
                             @endif
                         </div>
                     </div>
