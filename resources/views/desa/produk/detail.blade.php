@@ -47,9 +47,10 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-md-12">
-                            <a href="" class="btn btn-primary btn-block">Produk Unggulan</a>
+
                             @if($produk->des)
-                                <a href="" class="btn btn-success btn-block" style="white-space: normal;">Produk Unggulan Desa/Kecamatan {{$produk->des->nama}}</a>
+                                <a href="{{url('/profil_desa/'.$produk->des->id.'/beranda')}}" class="btn btn-primary btn-block" style="white-space: normal;">Masuk ke Desa/Kecamatan {{$produk->des->nama}}</a>
+                                <a href="{{url('/profil_desa/'.$produk->des->id.'/produk')}}" class="btn btn-success btn-block" style="white-space: normal;">Produk Unggulan Desa/Kecamatan {{$produk->des->nama}}</a>
                             @endif
                         </div>
                     </div>
