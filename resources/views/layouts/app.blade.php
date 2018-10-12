@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="keywords" content="Berita Desa, Berita Desa Hari Ini, Berita Harian Desa, Berita Desa Terbaru, Berita Desa Akurat, Berita Desa Terpercaya, Kabar Desa, Berita Desa Terpopuler, Berita, Info Desa Terkini, Klip, Klipaa, klipa, Berita Hari Ini">
-    <meta name="description" content="Menghubungkan tetangga dan sahabat">
+    <meta name="description" content="Penyedia Data dan Info Desa/Kelurahan dari Seluruh Indonesia">
     @yield('meta_og')
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
