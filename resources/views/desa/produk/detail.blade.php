@@ -38,7 +38,24 @@
                         @endif
                     </div>
                 </div>
+                <br />
             @endif
+            <div class="panel">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Menu Pintas</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <a href="" class="btn btn-primary btn-block">Produk Unggulan</a>
+                            @if($produk->des)
+                                <a href="" class="btn btn-success btn-block" style="white-space: normal;">Produk Unggulan Desa/Kecamatan {{$produk->des->nama}}</a>
+                            @endif
+                        </div>
+                    </div>
+
+                </div>
+            </div>
         </div>
     </div>
 </div>
