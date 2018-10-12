@@ -25,9 +25,11 @@
                     </div>
                     <div class="panel-body">
                         @if($produk->des->produk_unggulan()->count() > 1)
-                        <ul>
+                        <ul class="list-group">
                             @foreach($produk->des->produk_unggulan()->where('id', '!=', $produk->id)->limit(5)->get() as $prodes)
-                                <li>{{$prodes->nama}}</li>
+                                <li class="list-group-item">
+                                    <a href="{{url('/desa/produk/detail/'.$prodes->id)}}">{{$prodes->nama}}</a>
+                                </li>
                             @endforeach
                         </ul>
 
