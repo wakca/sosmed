@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class='row'>
-        <div class='col-md-9' id="story-content">
+        <div class='col-md-9' id="story-content" style="margin-bottom: 20px;">
 
 
             <div class='panel panel-default'>
@@ -19,7 +19,7 @@
 
         <div class='col-md-3'>
             @if($produk->des)
-                <div class="panel panel-primary">
+                <div class="panel">
                     <div class="panel-heading">
                         <h3 class="panel-title">Produk Unggulan {{$produk->des->nama}}</h3>
                     </div>
