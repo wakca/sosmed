@@ -16,7 +16,8 @@
         </div>
         <div class='col-md-3'>
             @include('profile.card')
-            @if($story->des)
+
+            @if($data == "view" && $story->des)
                 <div class="panel" style="margin-bottom: 20px;">
                     <div class="panel-heading">
                         <h3 class="panel-title">Menu Pintas</h3>
