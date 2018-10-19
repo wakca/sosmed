@@ -27,10 +27,8 @@
                             <div class="col-md-12">
                                 <a href="{{url('/profil_desa/'.$story->des->id.'/beranda')}}" class="btn btn-primary btn-block" style="white-space: normal;">Masuk ke Desa/Kelurahan {{$story->des->nama}}</a>
                                 <a href="{{url('/profil_desa/'.$story->des->id.'/produk')}}" class="btn btn-success btn-block" style="white-space: normal;">Produk Unggulan Desa/Kelurahan {{$story->des->nama}}</a>
-
                             </div>
                         </div>
-
                     </div>
                 </div>
             @endif
