@@ -3,7 +3,7 @@
     font-family: 'Sofia Pro Regular';
     font-style: normal;
     font-weight: normal;
-    src: local('Sofia Pro Regular'), url('../fonts/Sofia Pro Regular Az.woff') format('woff');
+    src: url('../fonts/Sofia Pro Regular Az.woff') format('woff');
 }
 
 
@@ -11,7 +11,7 @@
     font-family: 'Sofia Pro Italic';
     font-style: normal;
     font-weight: normal;
-    src: local('Sofia Pro Italic'), url('../fonts/Sofia Pro Regular Italic Az.woff') format('woff');
+    src: url('../fonts/Sofia Pro Regular Italic Az.woff') format('woff');
 }
 
 
@@ -19,7 +19,7 @@
     font-family: 'Sofia Pro ExtraLight';
     font-style: normal;
     font-weight: normal;
-    src: local('Sofia Pro ExtraLight'), url('../fonts/Sofia Pro ExtraLight Az.woff') format('woff');
+    src: url('../fonts/Sofia Pro ExtraLight Az.woff') format('woff');
 }
 
 
@@ -27,7 +27,7 @@
     font-family: 'Sofia Pro UltraLight';
     font-style: normal;
     font-weight: normal;
-    src: local('Sofia Pro UltraLight'), url('../fonts/Sofia Pro UltraLight Az.woff') format('woff');
+    src: url('../fonts/Sofia Pro UltraLight Az.woff') format('woff');
 }
 
 
@@ -35,7 +35,7 @@
     font-family: 'Sofia Pro ExtraLight Italic';
     font-style: normal;
     font-weight: normal;
-    src: local('Sofia Pro ExtraLight Italic'), url('../fonts/Sofia Pro ExtraLight Italic Az.woff') format('woff');
+    src: url('../fonts/Sofia Pro ExtraLight Italic Az.woff') format('woff');
 }
 
 
@@ -43,7 +43,7 @@
     font-family: 'Sofia Pro UltraLight Italic';
     font-style: normal;
     font-weight: normal;
-    src: local('Sofia Pro UltraLight Italic'), url('../fonts/Sofia Pro UltraLight Italic Az.woff') format('woff');
+    src: url('../fonts/Sofia Pro UltraLight Italic Az.woff') format('woff');
 }
 
 
@@ -51,7 +51,7 @@
     font-family: 'Sofia Pro Light';
     font-style: normal;
     font-weight: normal;
-    src: local('Sofia Pro Light'), url('../fonts/Sofia Pro Light Az.woff') format('woff');
+    src: url('../fonts/Sofia Pro Light Az.woff') format('woff');
 }
 
 
@@ -59,7 +59,7 @@
     font-family: 'Sofia Pro Light Italic';
     font-style: normal;
     font-weight: normal;
-    src: local('Sofia Pro Light Italic'), url('../fonts/Sofia Pro Light Italic Az.woff') format('woff');
+    src: url('../fonts/Sofia Pro Light Italic Az.woff') format('woff');
 }
 
 
@@ -67,7 +67,7 @@
     font-family: 'Sofia Pro Medium';
     font-style: normal;
     font-weight: normal;
-    src: local('Sofia Pro Medium'), url('../fonts/Sofia Pro Medium Az.woff') format('woff');
+    src: url('../fonts/Sofia Pro Medium Az.woff') format('woff');
 }
 
 
@@ -75,7 +75,7 @@
     font-family: 'Sofia Pro Medium Italic';
     font-style: normal;
     font-weight: normal;
-    src: local('Sofia Pro Medium Italic'), url('../fonts/Sofia Pro Medium Italic Az.woff') format('woff');
+    src: url('../fonts/Sofia Pro Medium Italic Az.woff') format('woff');
 }
 
 
@@ -83,7 +83,7 @@
     font-family: 'Sofia Pro SemiBold';
     font-style: normal;
     font-weight: normal;
-    src: local('Sofia Pro SemiBold'), url('../fonts/Sofia Pro Semi Bold Az.woff') format('woff');
+    src: url('../fonts/Sofia Pro Semi Bold Az.woff') format('woff');
 }
 
 
@@ -91,7 +91,7 @@
     font-family: 'Sofia Pro SemiBold Italic';
     font-style: normal;
     font-weight: normal;
-    src: local('Sofia Pro SemiBold Italic'), url('../fonts/Sofia Pro Semi Bold Italic Az.woff') format('woff');
+    src: url('../fonts/Sofia Pro Semi Bold Italic Az.woff') format('woff');
 }
 
 
@@ -99,7 +99,7 @@
     font-family: 'Sofia Pro Bold';
     font-style: normal;
     font-weight: normal;
-    src: local('Sofia Pro Bold'), url('../fonts/Sofia Pro Bold Az.woff') format('woff');
+    src: url('../fonts/Sofia Pro Bold Az.woff') format('woff');
 }
 
 
@@ -107,7 +107,7 @@
     font-family: 'Sofia Pro Bold Italic';
     font-style: normal;
     font-weight: normal;
-    src: local('Sofia Pro Bold Italic'), url('../fonts/Sofia Pro Bold Italic Az.woff') format('woff');
+    src: url('../fonts/Sofia Pro Bold Italic Az.woff') format('woff');
 }
 
 
@@ -115,7 +115,7 @@
     font-family: 'Sofia Pro Black';
     font-style: normal;
     font-weight: normal;
-    src: local('Sofia Pro Black'), url('../fonts/Sofia Pro Black Az.woff') format('woff');
+    src: url('../fonts/Sofia Pro Black Az.woff') format('woff');
 }
 
 
@@ -123,7 +123,7 @@
     font-family: 'Sofia Pro Black Italic';
     font-style: normal;
     font-weight: normal;
-    src: local('Sofia Pro Black Italic'), url('../fonts/Sofia Pro Black Italic Az.woff') format('woff');
+    src: url('../fonts/Sofia Pro Black Italic Az.woff') format('woff');
 }
 
 html,body{font-family: 'Sofia Pro'; font-weight: bold;}
