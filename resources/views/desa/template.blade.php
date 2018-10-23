@@ -59,6 +59,8 @@
 		<!-- Theme Custom CSS -->
 		<link rel="stylesheet" href="{{ asset('frontend/css/custom.css') }}">
 
+		@yield('style')
+
 		<!-- Head Libs -->
 		<script src="{{ asset('frontend/vendor/modernizr/modernizr.min.js') }}"></script>
 
@@ -90,6 +92,9 @@
 					<div style="margin-top: 20px"></div>
                     @yield('content')
                     <hr>
+
+					@include('desa.footer_content')
+
                 </div>
             </div>
             @include('desa.footer')
