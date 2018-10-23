@@ -45,17 +45,20 @@
             </tr>
             <tr>
                 <td>Desa/Kelurahan</td>
-                <td>: {{ isset($profile->des) ? $profile->des->nama : '' }}</td>
+                <td>: <a href="{{isset($profile->des) ? url('/profil_desa/'.$profile->des->id.'/beranda') : '#'}}" class="link">{{ isset($profile->des) ? $profile->des->nama : '' }}</a></td>
             </tr>
             <tr>
                 <td>Alamat</td>
                 <td>: {{ $profile->alamat }}</td>
             </tr>             
         </table>
-        @if($profile->id == Auth::Id())
-            <div class='margin-top'>
-                <a href='/profile-setting' class='btn btn-sm btn-default'>Edit Profil</a>
-            </div>
-        @endif
+        <div class='margin-top'>
+            @if(isset($profile->des))
+                <a href="{{url('/profil_desa/'.$profile->des->id.'/beranda')}}" class="btn btn-primary btn-block"><i class="fa fa-home"></i>&nbsp;&nbsp;Kunjungi Desa / Kelurahan</a>
+            @endif
+            @if($profile->id == Auth::Id())
+                <a href='/profile-setting' class='btn btn-sm btn-default btn-block'>Edit Profil</a>
+            @endif
+        </div>
     </div>
 </div>

@@ -9,7 +9,7 @@
                             <a href="{{url('/profil_desa/'.$d->id.'/beranda')}}">
                                 <span class="thumb-info thumb-info-centered-info thumb-info-no-borders">
                                     <span class="thumb-info-wrapper">
-                                        <img src="{{$d->foto_desa ? url('/storage/'.$d->foto_desa) : url('/img/blank_foto.png')}}" style="height: 150px; width: auto;" class="img-fluid" alt="">
+                                        <img src="{{$d->foto_desa ? url('/storage/'.$d->foto_desa) : url('/img/blank_foto.png')}}" style="height: 150px; width: auto;" class="img-fluid img-responsive" alt="">
                                         <span class="thumb-info-title">
 
                                             <span class="thumb-info-inner">Desa/Kelurahan {{$d->nama}}</span>
