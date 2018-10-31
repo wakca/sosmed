@@ -25,7 +25,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
 
 		<!-- Web Fonts  -->
-		<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800%7CShadows+Into+Light" rel="stylesheet" type="text/css">
+		<link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
 
 		<!-- Vendor CSS -->
         <link rel="stylesheet" href="{{ asset('frontend/vendor/bootstrap/css/bootstrap.min.css') }}">

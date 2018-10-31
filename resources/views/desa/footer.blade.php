@@ -2,8 +2,8 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8">
-                <h4>Tentang Desa</h4>
-                <p>{{ $desa ? $desa->tentang : '' }}</p>
+                <h4>Tentang Klipaa</h4>
+                <p>klipaa adalah layanan instan untuk web desa dan kelurahan di Indonesia..</p>
                 <hr class="light">
             </div>
             <div class="col-lg-3 col-lg-offset-1">
