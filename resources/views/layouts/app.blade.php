@@ -35,6 +35,7 @@
     <title>@yield('title'){{ config('app.name', 'Laravel') }}</title>
 
     <!-- Styles -->
+    <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/bootstrap-glyphicons.css') }}" rel="stylesheet">
     <link href="{{ asset('css/ekko-lightbox.min.css') }}" rel="stylesheet">
