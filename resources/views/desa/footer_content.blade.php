@@ -3,30 +3,24 @@
 
         <h4>Desa / Kelurahan Sekitar {{$desa->nama}}</h4>
         @if($desa)
-                <div class="owl-carousel owl-theme full-width" data-plugin-options="{'items': 5, 'loop': false, 'nav': true, 'dots': false}">
-                    @forelse($desa->kecamatan->des as $d)
-                        <div>
-                            <a href="{{url('/profil_desa/'.$d->id.'/beranda')}}">
-                                <span class="thumb-info thumb-info-centered-info thumb-info-no-borders">
-                                    <span class="thumb-info-wrapper">
-                                        <img src="{{$d->foto_desa ? url('/storage/'.$d->foto_desa) : url('/img/blank_foto.png')}}" style="height: 150px; width: auto;" class="img-fluid img-responsive" alt="">
-                                        <span class="thumb-info-title">
+            <ul>
+                @forelse($desa->kecamatan->des as $d)
+                    @if($d->id != $desa->id)
+                        <li>
+                            <div>
+                                <a href="{{url('/profil_desa/'.$d->id.'/beranda')}}"><i class="fa fa-tag"></i>&nbsp;&nbsp;Desa/Kelurahan {{$d->nama}}&nbsp;&nbsp;{{$d->foto_desa ? '<i class="fa fa-check"></i>' : ''}}</a>
+                            </div>
+                        </li>
+                    @endif
 
-                                            <span class="thumb-info-inner">Desa/Kelurahan {{$d->nama}}</span>
-                                            <span class="thumb-info-type">Kunjungi Halaman</span>
-                                        </span>
-                                        <span class="thumb-info-action">
-                                            <span class="thumb-info-action-icon"><i class="fa fa-link"></i></span>
-                                        </span>
-                                    </span>
-                                </span>
-                            </a>
-                        </div>
 
-                    @empty
 
-                    @endforelse
-                </div>
+                @empty
+
+                @endforelse
+            </ul>
+
+            </div>
 
         @endif
 

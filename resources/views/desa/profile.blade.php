@@ -5,11 +5,11 @@ Desa {{ $desa->nama }}
 
 @section('content')
         <img src="{{$desa ? $desa->foto_desa ? url('/storage/'.$desa->foto_desa) : url('/img/banner.png') : ''}}" class="img img-responsive img-thumbnail" width="100%"  alt="img">
-<br /><br /><br />
-        <hr class="tall">
+
+        <hr>
 <div class="row">
 
-    <div class="col-sm-12">
+    <div class="col-sm-12 col-xs-12">
 
         <h1>Selamat Datang di Desa {{ $desa->nama }}</h1>
 
@@ -69,13 +69,13 @@ Desa {{ $desa->nama }}
                     </tr>
                 </table>
             </div>
-            <div class="col-md-4">
-                <img src="{{$desa->foto_kades ? url('/storage/'.$desa->foto_kades): url('/img/kades.png')}}" class="img img-thumbnail" alt="img">
+            <div class="col-md-4 col-xs-12">
+                <center><img src="{{$desa->foto_kades ? url('/storage/'.$desa->foto_kades): url('/img/kades.png')}}" class="img img-thumbnail" alt="img"></center>
             </div>
 
 
         </div>
-        <hr class="tall">
+        <hr>
         <!-- /Berita -->
         <section class="section mt-0 section-footer">
             <div class="container">
@@ -109,7 +109,6 @@ Desa {{ $desa->nama }}
                                             @foreach($story->tags as $tag)
                                                 <a class='label label-default' href='{{ route('story.tag',['tag' => $tag->name]) }}'>{{ ucfirst($tag->name) }}</a>
                                             @endforeach
-                                            <a href="#">Duis</a>, <a href="#">News</a>
                                         </span>
                                         <span><i class="fa fa-comments"></i> <a href="{{url('/story/'.$story->slug.'#comments')}}">{{$story->comment()->count()}} Comments</a></span>
                                     </div>
