@@ -13,7 +13,7 @@ Peta Desa {{ $desa->nama }}
                     <div class="col">
                         <ul class="breadcrumb">
                             <li><a href="{{route('profil_desa.beranda', $desa->id)}}">Beranda</a></li>
-                            <li class="active">Hubungi Kami</li>
+                            <li class="active">Hubungi Kami {{$desa->id}}</li>
                         </ul>
                     </div>
                 </div>
@@ -26,7 +26,8 @@ Peta Desa {{ $desa->nama }}
         </section>
 
         <!-- Google Maps - Go to the bottom of the page to change settings and map location. -->
-        <iframe src="{{$desa->map ? $desa->map : 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7917.4656460095275!2d107.99719067238848!3d-7.156857284053712!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e68b4809110030f%3A0xb5572e5e13bafde2!2sSukarasa%2C+Pangatikan%2C+Kabupaten+Garut%2C+Jawa+Barat!5e0!3m2!1sid!2sid!4v1536908164691'}}" width="100%" height="350" frameborder="0" style="border:0" allowfullscreen></iframe>
+        {{--<iframe src="{{$desa->map ? $desa->map : 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7917.4656460095275!2d107.99719067238848!3d-7.156857284053712!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e68b4809110030f%3A0xb5572e5e13bafde2!2sSukarasa%2C+Pangatikan%2C+Kabupaten+Garut%2C+Jawa+Barat!5e0!3m2!1sid!2sid!4v1536908164691'}}" width="100%" height="350" frameborder="0" style="border:0" allowfullscreen></iframe>--}}
+        <iframe src="https://petadesa.klikdesa.com/mod/peta.php?id={{$desa->id}}&jnis=9" width="100%" height="350" frameborder="0" style="border:0" allowfullscreen></iframe>
 
         <div class="container">
 
