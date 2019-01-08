@@ -9,7 +9,7 @@ class Desa extends Model
     //
     protected $table = "desa";
     protected $casts = ['id' => 'string'];
-    protected $fillable = ['admin_id'];
+    protected $fillable = ['admin_id', 'id', 'id_kecamatan', 'nama'];
     public $timestamps = false;
     
     public function kecamatan(){
