@@ -49,6 +49,9 @@
     </script>
 </head>
 <body>
+    <div class="loader">
+        <img src="{{url('/img/loading.gif')}}" width="100%" alt="loader">
+    </div>
     <div id="app">
         <nav class="navbar navbar-default navbar-fixed-top">
             <div class="container">
@@ -91,10 +94,10 @@
                     </a>
                 </div>
                 
-                <div class="collapse navbar-collapse" id="app-navbar-collapse">
+                <div class="collapse navbar-collapse " id="app-navbar-collapse">
 
                     <!-- Right Side Of Navbar -->
-                    <ul class="nav navbar-nav navbar-right">
+                    <ul class="nav navbar-nav">
                         <!-- Authentication Links -->
                         @if (Auth::guest())
                             <li><a href="{{ url('/') }}">Beranda</a></li>
