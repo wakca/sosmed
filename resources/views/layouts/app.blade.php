@@ -214,14 +214,14 @@
             });
             return result;
         }
-        window.setInterval(getNumNotif, 1100);
-        function getNumNotif() {
-            $("#notif").load('/notifications/count','fast');
-            $("#message").load('/messages/count','fast');
-            $("#message").load('/messages/group/count','fast');
-            $("#notif-icon").load('/notifications/count','fast');
-            $("#message-icon").load('/messages/count','fast');
-        }
+        // window.setInterval(getNumNotif, 1100);
+        // function getNumNotif() {
+        //     $("#notif").load('/notifications/count','fast');
+        //     $("#message").load('/messages/count','fast');
+        //     $("#message").load('/messages/group/count','fast');
+        //     $("#notif-icon").load('/notifications/count','fast');
+        //     $("#message-icon").load('/messages/count','fast');
+        // }
         $(document).on('click', '[data-toggle="lightbox"]', function(event) {
             event.preventDefault();
             $(this).ekkoLightbox();
