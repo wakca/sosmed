@@ -95,7 +95,7 @@
                                     <div class="row">
                                         <div class="col-xs-12">
                                             <center>
-                                                <div class="huge"><h3>{{ count(Auth::user()->produk_unggulan) }}</h3></div>
+                                                <div class="huge"><h3>{{ count(Auth::user()->produk) }}</h3></div>
                                                 <div>Produk Anda</div>
                                             </center>
                                         </div>
