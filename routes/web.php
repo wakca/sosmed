@@ -16,6 +16,9 @@ Route::get('/storage/{id_foto}', 'ImageController@get_foto');
 
 Route::get('/konten/{slug}', 'HomeController@viewContent')->name('view.content');
 
+Route::get('/user/query', 'AjaxController@query_user')->name('user.query');
+Route::get('/user/query_name', 'AjaxController@query_user_name')->name('user.query_name');
+
 Route::get('/beranda','HomeController@beranda')->middleware(['auth','checkname']);
 
 Route::get('/syarat-ketentuan', 'HomeController@syarat_ketentuan')->name('syarat_ketentuan');
