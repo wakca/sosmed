@@ -18,7 +18,7 @@ class DBFunction
     public static function saveNotification($post_id, $user_id, $target_id, $type, $read, $delete){
         $current_time = Date::now()->toDateTimeString(); 
         $notif = Notification::where([['post_id',$post_id],['user_id',$user_id],['target_id',$target_id],['type',$type]])->first();
-        if(count($notif) == 0){
+        if(!$notif){
             Notification::create(['post_id' => $post_id, 'user_id' => $user_id, 'target_id' => $target_id, 'type' => $type, 'tgl_notif' => $current_time]);
         }
         else{

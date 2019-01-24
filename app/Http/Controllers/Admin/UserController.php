@@ -40,7 +40,7 @@ class UserController extends Controller
                                 GROUP BY follows.following_id) as numfollowers"),
                     \DB::raw("(SELECT count(follows.user_id) FROM follows
                                 WHERE follows.user_id = users.id AND follows.status = 'Y'
-                                GROUP BY follows.user_id) as numfollowing"))->get();
+                                GROUP BY follows.user_id) as numfollowing"));
         
         
         
