@@ -7,9 +7,16 @@ window._ = require('lodash');
  * code may be modified to fit the specific needs of your application.
  */
 
-window.$ = window.jQuery = require('jquery');
+// window.$ = window.jQuery = require('jquery');
 
-require('bootstrap-sass');
+try {
+    window.Popper = require('popper.js').default;
+    window.$ = window.jQuery = require('jquery');
+
+    require('bootstrap');
+} catch (e) {}
+// require('bootstrap-sass');
+require('bootstrap');
 
 /**
  * Vue is a modern JavaScript library for building interactive web interfaces
@@ -19,10 +26,7 @@ require('bootstrap-sass');
 
 window.Vue = require('vue');
 
-window.addEventListener("load", function () {
-    const loader = document.querySelector(".loader");
-    loader.className += " hidden"; // class "loader hidden"
-});
+
 
 $(document).ready(function() {
     var sideslider = $('[data-toggle=collapse-side]');

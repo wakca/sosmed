@@ -32,201 +32,846 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>@yield('title'){{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Laravel') }} || @yield('title')</title>
 
     <!-- Styles -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
     <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/bootstrap-glyphicons.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/ekko-lightbox.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
     @yield('css')
-    <!-- Scripts -->
-    <script>
-        window.Laravel = {!! json_encode([
-            'csrfToken' => csrf_token(),
-        ]) !!};
-    </script>
 </head>
 <body>
-    <div class="loader">
-        <img src="{{url('/img/loading.gif')}}" width="100%" alt="loader">
-    </div>
-    <div id="app">
-        <nav class="navbar navbar-default navbar-fixed-top">
-            <div class="container">
-                <div class="navbar-header">
-                    @if (Auth::guest())
-                    <div class="collapse navbar-collapsed" id="1">
-
-                            <!-- Right Side Of Navbar -->
-                        <ul class="nav navbar-nav navbar-right">
-                            <!-- Authentication Links -->
-                            
-                            <li><a href='/desa'>&nbsp;&nbsp;Kanal Desa <span id='message'></span></a></li>
-                            <li><a href="{{ route('login') }}">&nbsp;&nbsp;Login</a></li>
-                            <li><a href="{{ route('register') }}">&nbsp;&nbsp;Daftar</a></li>
-                        </ul>
-                    </div>
-                    <!-- Collapsed Hamburger -->
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#1">
-                        <span class="sr-only">Toggle Navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span id='notif-icon' class='collapsed'></span>
-                        <span id='message-icon' class='collapsed'></span>
-                    </button>
-                    @else
-                    <!-- Collapsed Hamburger -->
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
-                        <span class="sr-only">Toggle Navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span id='notif-icon' class='collapsed'></span>
-                        <span id='message-icon' class='collapsed'></span>
-                    </button>
-                    @endif
-                    <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
-                        <img src="{{ asset('img/klipaa.png') }}" alt="Logo Klipaa.com" style="width: 150px">
-                    </a>
+    <nav class="navbar navbar-light bg-white navbar-expand-sm border-bottom shadow-sm fixed-top">
+        <a class="navbar-brand" href="{{url('/')}}">
+            <img src="https://s3.eu-central-1.amazonaws.com/bootstrapbaymisc/blog/24_days_bootstrap/logo_white.png" width="30" height="30" alt="logo">
+            Klipaa.com
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-list-8" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-between" id="navbar-list-8">
+            <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">About Us</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Blog</a>
+            </li>
+            </ul>
+            
+            <div class="right-side d-flex">
+            <form class="form-inline">
+                <input class="form-control mr-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-info" type="submit"><i class="fas fa-search"></i></button>
+            </form>
+            <ul class="navbar-nav">
+                <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <img src="https://s3.eu-central-1.amazonaws.com/bootstrapbaymisc/blog/24_days_bootstrap/fox.jpg" width="40" height="40" class="rounded-circle">
+                </a>
+                <div class="dropdown-menu  dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="#">Dashboard</a>
+                    <a class="dropdown-item" href="#">Edit Profile</a>
+                    <a class="dropdown-item" href="#">Log Out</a>
                 </div>
-                
-                <div class="collapse navbar-collapse " id="app-navbar-collapse">
+                </li>   
+            </ul>
+            </div>
+            
+        </div>
+    </nav>
+    <main role="main" class="container">
+        <div class="row">
+            <main class="col col-xl-6 order-xl-2 col-lg-12 order-lg-1 col-md-12 col-sm-12 col-12">
 
-                    <!-- Right Side Of Navbar -->
-                    <ul class="nav navbar-nav">
-                        <!-- Authentication Links -->
-                        @if (Auth::guest())
-                            <li><a href="{{ url('/') }}">Beranda</a></li>
-                            <li><a href='/desa'>Kanal Desa <span id='message'></span></a></li>
-                            <li><a href="{{ route('login') }}">Login</a></li>
-                            <li><a href="{{ route('register') }}">Daftar</a></li>
-                        @else
-                            <li><a href='/beranda'>Beranda</a></li>
-                            <li><a href='/story'>Story</a></li>
-                            <li><a href='/notifications'>Pemberitahuan <span id='notif'></span></a></li>
-                            <li><a href='/messages'>Pesan <span id='message'></span></a></li>
-                            <li><a href='/desa'>Kanal Desa <span id='message'></span></a></li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                    <i class='glyphicon glyphicon-user'></i> {{ isset(Auth::user()->name)?Auth::user()->name : Auth::user()->username }} <span class="caret"></span>
+                <div class="ui-block">
+
+                    <!-- News Feed Form  -->
+
+                    <div class="news-feed-form">
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active inline-items" data-toggle="tab" href="#home-1" role="tab" aria-expanded="true">
+
+                                    <svg class="olymp-status-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-status-icon"></use></svg>
+
+                                    <span>Status</span>
                                 </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link inline-items" data-toggle="tab" href="#profile-1" role="tab" aria-expanded="false">
 
-                                <ul class="dropdown-menu" role="menu">
-                                    {!! Auth::user()->level == 3 ?"<li><a href='/admin/dashboard'>Halaman Administrator</a></li>":"" !!}
-                                    {!! Auth::user()->level == 2 ?"<li><a href='/admin_desa/dashboard'>Halaman Admin Desa</a></li>":"" !!}
-                                    <li><a href="/{{ Auth::user()->username }}">My Profile</a></li>
-                                    @if(Auth::user()->des)
-                                        <li><a href="/profil_desa/{{ Auth::user()->des->id }}/beranda" target="_blank">Masuk ke Desa/Kelurahan {{Auth::user()->des->nama}}</a></li>
-                                    @endif
-                                    <li><a href='/account-setting'>Pengaturan Akun</a></li>
-                                    <li role="separator" class="divider"></li>
-                                    <li>
-                                        <a href="{{ route('logout') }}"
-                                            onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                            Logout
+                                    <svg class="olymp-multimedia-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-multimedia-icon"></use></svg>
+
+                                    <span>Multimedia</span>
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link inline-items" data-toggle="tab" href="#blog" role="tab" aria-expanded="false">
+                                    <svg class="olymp-blog-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-blog-icon"></use></svg>
+
+                                    <span>Blog Post</span>
+                                </a>
+                            </li>
+                        </ul>
+
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="home-1" role="tabpanel" aria-expanded="true">
+                                <form>
+                                    <div class="author-thumb">
+                                        <img src="img/author-page.jpg" alt="author">
+                                    </div>
+                                    <div class="form-group with-icon label-floating is-empty">
+                                        <label class="control-label">Share what you are thinking here...</label>
+                                        <textarea class="form-control" placeholder=""></textarea>
+                                        <span class="material-input"></span></div>
+                                    <div class="add-options-message">
+                                        <a href="#" class="options-message" data-toggle="tooltip" data-placement="top" data-original-title="ADD PHOTOS">
+                                            <svg class="olymp-camera-icon" data-toggle="modal" data-target="#update-header-photo"><use xlink:href="svg-icons/sprites/icons.svg#olymp-camera-icon"></use></svg>
+                                        </a>
+                                        <a href="#" class="options-message" data-toggle="tooltip" data-placement="top" data-original-title="TAG YOUR FRIENDS">
+                                            <svg class="olymp-computer-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-computer-icon"></use></svg>
                                         </a>
 
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                            {{ csrf_field() }}
-                                        </form>
-                                    </li>
-                                </ul>
-                            </li>
-                        @endif
-                    </ul>
-                    @if(!Auth::guest())
-                    <form class="navbar-form navbar-right" method='GET' action='/search'>
-                        {{ csrf_field() }}
-                       <div class="input-group">
-                        <input type="text" class="form-control" name='keyword' placeholder="Cari Seseorang ?" required>
-                        <span class="input-group-btn">
-                          <button class="btn btn-default" type="submit"><span class='glyphicon glyphicon-search'></span></button>
-                        </span>
-                      </div><!-- /input-group -->
-                    </form>
-                    @endif
-                </div>
-            </div>
-        </nav>
-        <div class='margin-separator'></div>
-        @if(Auth::check())
-            @if(Getter::checkDetail(Auth::user()))
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-12 col-xl-12 col-xs-12">
-                            <div class="alert alert-danger" role="alert">
-                                Anda Belum Mengisi Data Profil Lengkap <a href="{{route('profile.edit')}}">Silahkan isi Data</a>
+                                        <a href="#" class="options-message" data-toggle="tooltip" data-placement="top" data-original-title="ADD LOCATION">
+                                            <svg class="olymp-small-pin-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-small-pin-icon"></use></svg>
+                                        </a>
+
+                                        <button class="btn btn-primary btn-md-2">Post Status</button>
+                                        <button class="btn btn-md-2 btn-border-think btn-transparent c-grey">Preview</button>
+
+                                    </div>
+
+                                </form>
+                            </div>
+
+                            <div class="tab-pane" id="profile-1" role="tabpanel" aria-expanded="true">
+                                <form>
+                                    <div class="author-thumb">
+                                        <img src="img/author-page.jpg" alt="author">
+                                    </div>
+                                    <div class="form-group with-icon label-floating is-empty">
+                                        <label class="control-label">Share what you are thinking here...</label>
+                                        <textarea class="form-control" placeholder=""></textarea>
+                                        <span class="material-input"></span></div>
+                                    <div class="add-options-message">
+                                        <a href="#" class="options-message" data-toggle="tooltip" data-placement="top" data-original-title="ADD PHOTOS">
+                                            <svg class="olymp-camera-icon" data-toggle="modal" data-target="#update-header-photo"><use xlink:href="svg-icons/sprites/icons.svg#olymp-camera-icon"></use></svg>
+                                        </a>
+                                        <a href="#" class="options-message" data-toggle="tooltip" data-placement="top" data-original-title="TAG YOUR FRIENDS">
+                                            <svg class="olymp-computer-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-computer-icon"></use></svg>
+                                        </a>
+
+                                        <a href="#" class="options-message" data-toggle="tooltip" data-placement="top" data-original-title="ADD LOCATION">
+                                            <svg class="olymp-small-pin-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-small-pin-icon"></use></svg>
+                                        </a>
+
+                                        <button class="btn btn-primary btn-md-2">Post Status</button>
+                                        <button class="btn btn-md-2 btn-border-think btn-transparent c-grey">Preview</button>
+
+                                    </div>
+
+                                </form>
+                            </div>
+
+                            <div class="tab-pane" id="blog" role="tabpanel" aria-expanded="true">
+                                <form>
+                                    <div class="author-thumb">
+                                        <img src="img/author-page.jpg" alt="author">
+                                    </div>
+                                    <div class="form-group with-icon label-floating is-empty">
+                                        <label class="control-label">Share what you are thinking here...</label>
+                                        <textarea class="form-control" placeholder=""></textarea>
+                                        <span class="material-input"></span></div>
+                                    <div class="add-options-message">
+                                        <a href="#" class="options-message" data-toggle="tooltip" data-placement="top" data-original-title="ADD PHOTOS">
+                                            <svg class="olymp-camera-icon" data-toggle="modal" data-target="#update-header-photo"><use xlink:href="svg-icons/sprites/icons.svg#olymp-camera-icon"></use></svg>
+                                        </a>
+                                        <a href="#" class="options-message" data-toggle="tooltip" data-placement="top" data-original-title="TAG YOUR FRIENDS">
+                                            <svg class="olymp-computer-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-computer-icon"></use></svg>
+                                        </a>
+
+                                        <a href="#" class="options-message" data-toggle="tooltip" data-placement="top" data-original-title="ADD LOCATION">
+                                            <svg class="olymp-small-pin-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-small-pin-icon"></use></svg>
+                                        </a>
+
+                                        <button class="btn btn-primary btn-md-2">Post Status</button>
+                                        <button class="btn btn-md-2 btn-border-think btn-transparent c-grey">Preview</button>
+
+                                    </div>
+
+                                </form>
                             </div>
                         </div>
                     </div>
+
+                    <!-- ... end News Feed Form  -->			</div>
+
+                <div id="newsfeed-items-grid">
+
+                    <div class="ui-block">
+
+                        <article class="hentry post video">
+
+                            <div class="post__author author vcard inline-items">
+                                <img src="img/avatar7-sm.jpg" alt="author">
+
+                                <div class="author-date">
+                                    <a class="h6 post__author-name fn" href="#">Marina Valentine</a> shared a <a href="#">link</a>
+                                    <div class="post__date">
+                                        <time class="published" datetime="2004-07-24T18:18">
+                                            March 4 at 2:05pm
+                                        </time>
+                                    </div>
+                                </div>
+
+                                <div class="more"><svg class="olymp-three-dots-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-three-dots-icon"></use></svg>
+                                    <ul class="more-dropdown">
+                                        <li>
+                                            <a href="#">Edit Post</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">Delete Post</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">Turn Off Notifications</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">Select as Featured</a>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                            </div>
+
+                            <p>Hey <a href="#">Cindi</a>, you should really check out this new song by Iron Maid. The next time they come to the city we should totally go!</p>
+
+                            <div class="post-video">
+                                <div class="video-thumb">
+                                    <img src="img/video-youtube1.jpg" alt="photo">
+                                    <a href="https://youtube.com/watch?v=excVFQ2TWig" class="play-video">
+                                        <svg class="olymp-play-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-play-icon"></use></svg>
+                                    </a>
+                                </div>
+
+                                <div class="video-content">
+                                    <a href="#" class="h4 title">Iron Maid - ChillGroves</a>
+                                    <p>Lorem ipsum dolor sit amet, consectetur ipisicing elit, sed do eiusmod tempor incididunt
+                                        ut labore et dolore magna aliqua...
+                                    </p>
+                                    <a href="#" class="link-site">YOUTUBE.COM</a>
+                                </div>
+                            </div>
+
+                            <div class="post-additional-info inline-items">
+
+                                <a href="#" class="post-add-icon inline-items">
+                                    <svg class="olymp-heart-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-heart-icon"></use></svg>
+                                    <span>18</span>
+                                </a>
+
+                                <ul class="friends-harmonic">
+                                    <li>
+                                        <a href="#">
+                                            <img src="img/friend-harmonic9.jpg" alt="friend">
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <img src="img/friend-harmonic10.jpg" alt="friend">
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <img src="img/friend-harmonic7.jpg" alt="friend">
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <img src="img/friend-harmonic8.jpg" alt="friend">
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <img src="img/friend-harmonic11.jpg" alt="friend">
+                                        </a>
+                                    </li>
+                                </ul>
+
+                                <div class="names-people-likes">
+                                    <a href="#">Jenny</a>, <a href="#">Robert</a> and
+                                    <br>18 more liked this
+                                </div>
+
+                                <div class="comments-shared">
+                                    <a href="#" class="post-add-icon inline-items">
+                                        <svg class="olymp-speech-balloon-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-speech-balloon-icon"></use></svg>
+
+                                        <span>0</span>
+                                    </a>
+
+                                    <a href="#" class="post-add-icon inline-items">
+                                        <svg class="olymp-share-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-share-icon"></use></svg>
+
+                                        <span>16</span>
+                                    </a>
+                                </div>
+
+
+                            </div>
+
+                            <div class="control-block-button post-control-button">
+
+                                <a href="#" class="btn btn-control">
+                                    <svg class="olymp-like-post-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-like-post-icon"></use></svg>
+                                </a>
+
+                                <a href="#" class="btn btn-control">
+                                    <svg class="olymp-comments-post-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-comments-post-icon"></use></svg>
+                                </a>
+
+                                <a href="#" class="btn btn-control">
+                                    <svg class="olymp-share-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-share-icon"></use></svg>
+                                </a>
+
+                            </div>
+
+                        </article>
+                    </div>
+
+                    <div class="ui-block">
+
+
+                        <article class="hentry post">
+
+                            <div class="post__author author vcard inline-items">
+                                <img src="img/avatar10-sm.jpg" alt="author">
+
+                                <div class="author-date">
+                                    <a class="h6 post__author-name fn" href="#">Elaine Dreyfuss</a>
+                                    <div class="post__date">
+                                        <time class="published" datetime="2004-07-24T18:18">
+                                            9 hours ago
+                                        </time>
+                                    </div>
+                                </div>
+
+                                <div class="more"><svg class="olymp-three-dots-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-three-dots-icon"></use></svg>
+                                    <ul class="more-dropdown">
+                                        <li>
+                                            <a href="#">Edit Post</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">Delete Post</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">Turn Off Notifications</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">Select as Featured</a>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                            </div>
+
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempo incididunt ut
+                                labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris consequat.
+                            </p>
+
+                            <div class="post-additional-info inline-items">
+
+                                <a href="#" class="post-add-icon inline-items">
+                                    <svg class="olymp-heart-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-heart-icon"></use></svg>
+                                    <span>24</span>
+                                </a>
+
+                                <ul class="friends-harmonic">
+                                    <li>
+                                        <a href="#">
+                                            <img src="img/friend-harmonic7.jpg" alt="friend">
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <img src="img/friend-harmonic8.jpg" alt="friend">
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <img src="img/friend-harmonic9.jpg" alt="friend">
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <img src="img/friend-harmonic10.jpg" alt="friend">
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <img src="img/friend-harmonic11.jpg" alt="friend">
+                                        </a>
+                                    </li>
+                                </ul>
+
+                                <div class="names-people-likes">
+                                    <a href="#">You</a>, <a href="#">Elaine</a> and
+                                    <br>22 more liked this
+                                </div>
+
+
+                                <div class="comments-shared">
+                                    <a href="#" class="post-add-icon inline-items">
+                                        <svg class="olymp-speech-balloon-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-speech-balloon-icon"></use></svg>
+                                        <span>17</span>
+                                    </a>
+
+                                    <a href="#" class="post-add-icon inline-items">
+                                        <svg class="olymp-share-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-share-icon"></use></svg>
+                                        <span>24</span>
+                                    </a>
+                                </div>
+
+
+                            </div>
+
+                            <div class="control-block-button post-control-button">
+
+                                <a href="#" class="btn btn-control">
+                                    <svg class="olymp-like-post-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-like-post-icon"></use></svg>
+                                </a>
+
+                                <a href="#" class="btn btn-control">
+                                    <svg class="olymp-comments-post-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-comments-post-icon"></use></svg>
+                                </a>
+
+                                <a href="#" class="btn btn-control">
+                                    <svg class="olymp-share-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-share-icon"></use></svg>
+                                </a>
+
+                            </div>
+
+                        </article>
+
+                        <!-- Comments -->
+
+                        <ul class="comments-list">
+                            <li class="comment-item">
+                                <div class="post__author author vcard inline-items">
+                                    <img src="img/author-page.jpg" alt="author">
+
+                                    <div class="author-date">
+                                        <a class="h6 post__author-name fn" href="02-ProfilePage.html">James Spiegel</a>
+                                        <div class="post__date">
+                                            <time class="published" datetime="2004-07-24T18:18">
+                                                38 mins ago
+                                            </time>
+                                        </div>
+                                    </div>
+
+                                    <a href="#" class="more"><svg class="olymp-three-dots-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-three-dots-icon"></use></svg></a>
+
+                                </div>
+
+                                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium der doloremque laudantium.</p>
+
+                                <a href="#" class="post-add-icon inline-items">
+                                    <svg class="olymp-heart-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-heart-icon"></use></svg>
+                                    <span>3</span>
+                                </a>
+                                <a href="#" class="reply">Reply</a>
+                            </li>
+                            <li class="comment-item">
+                                <div class="post__author author vcard inline-items">
+                                    <img src="img/avatar1-sm.jpg" alt="author">
+
+                                    <div class="author-date">
+                                        <a class="h6 post__author-name fn" href="#">Mathilda Brinker</a>
+                                        <div class="post__date">
+                                            <time class="published" datetime="2004-07-24T18:18">
+                                                1 hour ago
+                                            </time>
+                                        </div>
+                                    </div>
+
+                                    <a href="#" class="more"><svg class="olymp-three-dots-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-three-dots-icon"></use></svg></a>
+
+                                </div>
+
+                                <p>Ratione voluptatem sequi en lod nesciunt. Neque porro quisquam est, quinder dolorem ipsum
+                                    quia dolor sit amet, consectetur adipisci velit en lorem ipsum duis aute irure dolor in reprehenderit in voluptate velit esse cillum.
+                                </p>
+
+                                <a href="#" class="post-add-icon inline-items">
+                                    <svg class="olymp-heart-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-heart-icon"></use></svg>
+                                    <span>8</span>
+                                </a>
+                                <a href="#" class="reply">Reply</a>
+                            </li>
+                        </ul>
+
+                        <!-- ... end Comments -->
+
+                        <a href="#" class="more-comments">View more comments <span>+</span></a>
+
+
+                        <!-- Comment Form  -->
+
+                        <form class="comment-form inline-items">
+
+                            <div class="post__author author vcard inline-items">
+                                <img src="img/author-page.jpg" alt="author">
+
+                                <div class="form-group with-icon-right is-empty">
+                                    <textarea class="form-control" placeholder=""></textarea>
+                                    <div class="add-options-message">
+                                        <a href="#" class="options-message" data-toggle="modal" data-target="#update-header-photo">
+                                            <svg class="olymp-camera-icon">
+                                                <use xlink:href="svg-icons/sprites/icons.svg#olymp-camera-icon"></use>
+                                            </svg>
+                                        </a>
+                                    </div>
+                                    <span class="material-input"></span></div>
+                            </div>
+
+                            <button class="btn btn-md-2 btn-primary">Post Comment</button>
+
+                            <button class="btn btn-md-2 btn-border-think c-grey btn-transparent custom-color">Cancel</button>
+
+                        </form>
+
+                        <!-- ... end Comment Form  -->
+                    </div>
+
+                    <div class="ui-block">
+
+                        <article class="hentry post has-post-thumbnail">
+
+                            <div class="post__author author vcard inline-items">
+                                <img src="img/avatar5-sm.jpg" alt="author">
+
+                                <div class="author-date">
+                                    <a class="h6 post__author-name fn" href="#">Green Goo Rock</a>
+                                    <div class="post__date">
+                                        <time class="published" datetime="2004-07-24T18:18">
+                                            March 8 at 6:42pm
+                                        </time>
+                                    </div>
+                                </div>
+
+                                <div class="more"><svg class="olymp-three-dots-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-three-dots-icon"></use></svg>
+                                    <ul class="more-dropdown">
+                                        <li>
+                                            <a href="#">Edit Post</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">Delete Post</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">Turn Off Notifications</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">Select as Featured</a>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                            </div>
+
+                            <p>Hey guys! We are gona be playing this Saturday of <a href="#">The Marina Bar</a> for their new Mystic Deer Party.
+                                If you wanna hang out and have a really good time, come and join us. We’l be waiting for you!
+                            </p>
+
+                            <div class="post-thumb">
+                                <img src="img/post__thumb1.jpg" alt="photo">
+                            </div>
+
+                            <div class="post-additional-info inline-items">
+
+                                <a href="#" class="post-add-icon inline-items">
+                                    <svg class="olymp-heart-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-heart-icon"></use></svg>
+                                    <span>49</span>
+                                </a>
+
+                                <ul class="friends-harmonic">
+                                    <li>
+                                        <a href="#">
+                                            <img src="img/friend-harmonic9.jpg" alt="friend">
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <img src="img/friend-harmonic10.jpg" alt="friend">
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <img src="img/friend-harmonic7.jpg" alt="friend">
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <img src="img/friend-harmonic8.jpg" alt="friend">
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <img src="img/friend-harmonic11.jpg" alt="friend">
+                                        </a>
+                                    </li>
+                                </ul>
+
+                                <div class="names-people-likes">
+                                    <a href="#">Jimmy</a>, <a href="#">Andrea</a> and
+                                    <br>47 more liked this
+                                </div>
+
+
+                                <div class="comments-shared">
+                                    <a href="#" class="post-add-icon inline-items">
+                                        <svg class="olymp-speech-balloon-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-speech-balloon-icon"></use></svg>
+                                        <span>264</span>
+                                    </a>
+
+                                    <a href="#" class="post-add-icon inline-items">
+                                        <svg class="olymp-share-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-share-icon"></use></svg>
+                                        <span>37</span>
+                                    </a>
+                                </div>
+
+
+                            </div>
+
+                            <div class="control-block-button post-control-button">
+
+                                <a href="#" class="btn btn-control">
+                                    <svg class="olymp-like-post-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-like-post-icon"></use></svg>
+                                </a>
+
+                                <a href="#" class="btn btn-control">
+                                    <svg class="olymp-comments-post-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-comments-post-icon"></use></svg>
+                                </a>
+
+                                <a href="#" class="btn btn-control">
+                                    <svg class="olymp-share-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-share-icon"></use></svg>
+                                </a>
+
+                            </div>
+
+                        </article>
+                    </div>
+
+                    <div class="ui-block">
+
+                        <article class="hentry post has-post-thumbnail">
+
+                            <div class="post__author author vcard inline-items">
+                                <img src="img/avatar3-sm.jpg" alt="author">
+
+                                <div class="author-date">
+                                    <a class="h6 post__author-name fn" href="#">Sarah Hetfield</a>
+                                    <div class="post__date">
+                                        <time class="published" datetime="2004-07-24T18:18">
+                                            March 2 at 9:06am
+                                        </time>
+                                    </div>
+                                </div>
+
+                                <div class="more"><svg class="olymp-three-dots-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-three-dots-icon"></use></svg>
+                                    <ul class="more-dropdown">
+                                        <li>
+                                            <a href="#">Edit Post</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">Delete Post</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">Turn Off Notifications</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">Select as Featured</a>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                            </div>
+
+                            <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                                pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+                                mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque.
+                            </p>
+
+                            <div class="post-additional-info inline-items">
+
+                                <a href="#" class="post-add-icon inline-items">
+                                    <svg class="olymp-heart-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-heart-icon"></use></svg>
+                                    <span>0 Likes</span>
+                                </a>
+
+                                <div class="comments-shared">
+                                    <a href="#" class="post-add-icon inline-items">
+                                        <svg class="olymp-speech-balloon-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-speech-balloon-icon"></use></svg>
+                                        <span>0 Comments</span>
+                                    </a>
+
+                                    <a href="#" class="post-add-icon inline-items">
+                                        <svg class="olymp-share-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-share-icon"></use></svg>
+                                        <span>2 Shares</span>
+                                    </a>
+                                </div>
+
+
+                            </div>
+
+                            <div class="control-block-button post-control-button">
+
+                                <a href="#" class="btn btn-control">
+                                    <svg class="olymp-like-post-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-like-post-icon"></use></svg>
+                                </a>
+
+                                <a href="#" class="btn btn-control">
+                                    <svg class="olymp-comments-post-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-comments-post-icon"></use></svg>
+                                </a>
+
+                                <a href="#" class="btn btn-control">
+                                    <svg class="olymp-share-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-share-icon"></use></svg>
+                                </a>
+
+                            </div>
+
+                        </article>
+                    </div>
+
+                    <div class="ui-block">
+
+                        <article class="hentry post has-post-thumbnail">
+
+                            <div class="post__author author vcard inline-items">
+                                <img src="img/avatar2-sm.jpg" alt="author">
+
+                                <div class="author-date">
+                                    <a class="h6 post__author-name fn" href="#">Nicholas Grissom</a>
+                                    <div class="post__date">
+                                        <time class="published" datetime="2004-07-24T18:18">
+                                            March 2 at 8:34am
+                                        </time>
+                                    </div>
+                                </div>
+
+                                <div class="more"><svg class="olymp-three-dots-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-three-dots-icon"></use></svg>
+                                    <ul class="more-dropdown">
+                                        <li>
+                                            <a href="#">Edit Post</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">Delete Post</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">Turn Off Notifications</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">Select as Featured</a>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                            </div>
+
+                            <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                                pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+                                mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+                                accusantium doloremque.
+                            </p>
+
+                            <div class="post-additional-info inline-items">
+
+                                <a href="#" class="post-add-icon inline-items">
+                                    <svg class="olymp-heart-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-heart-icon"></use></svg>
+                                    <span>22</span>
+                                </a>
+
+                                <ul class="friends-harmonic">
+                                    <li>
+                                        <a href="#">
+                                            <img src="img/friend-harmonic9.jpg" alt="friend">
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <img src="img/friend-harmonic10.jpg" alt="friend">
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <img src="img/friend-harmonic7.jpg" alt="friend">
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <img src="img/friend-harmonic8.jpg" alt="friend">
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <img src="img/friend-harmonic11.jpg" alt="friend">
+                                        </a>
+                                    </li>
+                                </ul>
+
+                                <div class="names-people-likes">
+                                    <a href="#">Jimmy</a>, <a href="#">Andrea</a> and
+                                    <br>47 more liked this
+                                </div>
+
+
+                                <div class="comments-shared">
+                                    <a href="#" class="post-add-icon inline-items">
+                                        <svg class="olymp-speech-balloon-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-speech-balloon-icon"></use></svg>
+                                        <span>0</span>
+                                    </a>
+
+                                    <a href="#" class="post-add-icon inline-items">
+                                        <svg class="olymp-share-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-share-icon"></use></svg>
+                                        <span>2</span>
+                                    </a>
+                                </div>
+
+
+                            </div>
+
+                            <div class="control-block-button post-control-button">
+
+                                <a href="#" class="btn btn-control">
+                                    <svg class="olymp-like-post-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-like-post-icon"></use></svg>
+                                </a>
+
+                                <a href="#" class="btn btn-control">
+                                    <svg class="olymp-comments-post-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-comments-post-icon"></use></svg>
+                                </a>
+
+                                <a href="#" class="btn btn-control">
+                                    <svg class="olymp-share-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-share-icon"></use></svg>
+                                </a>
+
+                            </div>
+
+                        </article>
+                    </div>
+
                 </div>
-            @endif
-        @endif
 
-        @yield('content')
-        <div class='footer-page'>
-            <div class='container center-text'>
-                <ul class="nav nav-pills">
-                    <li><a href="{{ route('tentang') }}">Tentang</a></li>
-                    <li><a href="{{ route('syarat_ketentuan') }}">S & K</a></li>
-                    <li><a href="{{ route('partner') }}">Partner</a></li>
-                    <li><a href="{{ route('kontak') }}">Kontak</a></li>
+                <a id="load-more-button" href="#" class="btn btn-control btn-more" data-load-link="items-to-load.html" data-container="newsfeed-items-grid"><svg class="olymp-three-dots-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-three-dots-icon"></use></svg></a>
 
-                </ul>
-            </div>
+            </main>
         </div>
-    </div>
-    <!-- Scripts -->
-
-    <script
-  src="https://code.jquery.com/jquery-1.12.4.min.js"
-  integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
-  crossorigin="anonymous"></script>
-    <script src="{{ asset('js/app.js') }}"></script>
-    <script src="{{ asset('js/ekko-lightbox.min.js') }}"></script>
-    <script src="{{ asset('js/URI.min.js') }}"></script>
-
-    @yield('js')
-
+    </main>
+    <script src="{{asset('js/app.js')}}"></script>
     @yield('script')
-
-    @yield('script2')
-
-    @if(Auth::check())
-    <script type='text/javascript'>
-        function getLinks(text) {    
-            var result = URI.withinString(text, function(url) {
-                var uri = new URI(url);
-                var prot = uri.protocol();
-                console.log(prot);
-                if (prot == '') {
-                    prot = 'http://'
-                }
-                else{
-                    prot = '';
-                }
-                return "<a href='"+prot+uri+"' rel='nofollow'>" + url + "</a>";
-            });
-            return result;
-        }
-        // window.setInterval(getNumNotif, 1100);
-        // function getNumNotif() {
-        //     $("#notif").load('/notifications/count','fast');
-        //     $("#message").load('/messages/count','fast');
-        //     $("#message").load('/messages/group/count','fast');
-        //     $("#notif-icon").load('/notifications/count','fast');
-        //     $("#message-icon").load('/messages/count','fast');
-        // }
-        $(document).on('click', '[data-toggle="lightbox"]', function(event) {
-            event.preventDefault();
-            $(this).ekkoLightbox();
-        });
-    </script>
-    @endif
 </body>
 </html>
