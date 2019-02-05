@@ -14,7 +14,15 @@ require('./bootstrap');
  */
 
 // Vue.component('example', require('./components/Example.vue').default);
-
+Vue.component('side-bar', require('./components/Sidebar.vue').default);
+Vue.component('home', require('./components/Home.vue').default);
+// Vue.component('post', require('./components/Post'));
 const app = new Vue({
-    el: '#app'
+    el: '#app',
+
+    data(){
+        return {
+            siteTitle: 'Aplikasi Sosial'
+        }
+    }
 });

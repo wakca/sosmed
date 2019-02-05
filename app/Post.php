@@ -6,19 +6,22 @@ use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
-    //
+    protected $table = 'posts';
     protected $fillable = ['user_id', 'recepient_id', 'content', 'num_share', 'has_image','privacy'];
+    protected $with = ['user', 'comments', 'likes', 'photos'];
+
+
     
     public function user(){
-        return $this->belongsTo('App\User', 'user_id');
+        return $this->hasOne('\App\User', 'id', 'user_id');
     }
     
     public function comments(){
-        return $this->hasMany('App\Comment');
+        return $this->hasMany('App\Comment', 'post_id', 'id');
     }
     
     public function likes(){
-        return $this->hasMany('App\Like');
+        return $this->hasMany('App\Like', 'post_id', 'id');
     }
     
     public function numcomments(){
@@ -27,5 +30,10 @@ class Post extends Model
     
     public function numlikes(){
         return $this->likes->count();
+    }
+
+    public function photos()
+    {
+        return $this->hasMany('App\Photo', 'post_id', 'id' );
     }
 }

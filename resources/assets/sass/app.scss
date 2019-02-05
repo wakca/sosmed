@@ -5,8 +5,121 @@
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
-@import "posts";
-@import "ui-block";
+
+
+@import "frontend/theme-styles/variables";
+//@import "frontend/plugins/Tables-of-content";
+
+
+/*------------- #THEME-STYLES --------------*/
+
+@import "frontend/theme-styles/variables";
+@import "frontend/theme-styles/mixins";
+@import "frontend/theme-styles/header";
+@import "frontend/theme-styles/footer";
+@import "frontend/theme-styles/section";
+@import "frontend/theme-styles/stunning-header";
+@import "frontend/theme-styles/mobile-app";
+@import "frontend/theme-styles/shop-cart";
+@import "frontend/theme-styles/bootstrap-customization";
+
+
+/*------------- #BLOCKS --------------*/
+
+@import "frontend/blocks/ui-block";
+@import "frontend/blocks/buttons";
+@import "frontend/blocks/forms";
+@import "frontend/blocks/fixed-sidebar";
+@import "frontend/blocks/skills";
+@import "frontend/blocks/friends";
+@import "frontend/blocks/sliders";
+@import "frontend/blocks/pagination";
+@import "frontend/blocks/landing";
+@import "frontend/blocks/registration-login-form";
+@import "frontend/blocks/main-header";
+@import "frontend/blocks/your-profile";
+@import "frontend/blocks/notification";
+@import "frontend/blocks/popup-chat";
+@import "frontend/blocks/overlay-menu";
+@import "frontend/blocks/popup-windows";
+@import "frontend/blocks/ol-lists";
+@import "frontend/blocks/friends-harmonic";
+@import "frontend/blocks/posts";
+@import "frontend/blocks/comment-list";
+@import "frontend/blocks/post-video";
+@import "frontend/blocks/video-player";
+@import "frontend/blocks/news-feed-form";
+@import "frontend/blocks/photo-gallery";
+@import "frontend/blocks/features-video";
+@import "frontend/blocks/event-item";
+@import "frontend/blocks/available-widget";
+@import "frontend/blocks/today-events";
+@import "frontend/blocks/calendar-events-tabs";
+@import "frontend/blocks/statistics";
+@import "frontend/blocks/forums";
+@import "frontend/blocks/open-topic-table";
+@import "frontend/blocks/blog-posts";
+@import "frontend/blocks/clients";
+@import "frontend/blocks/heading";
+@import "frontend/blocks/testimonials";
+@import "frontend/blocks/info-boxes";
+@import "frontend/blocks/counters";
+@import "frontend/blocks/teammembers";
+@import "frontend/blocks/socials";
+@import "frontend/blocks/contacts";
+@import "frontend/blocks/contact-form";
+@import "frontend/blocks/accordion-faqs";
+@import "frontend/blocks/table-careers";
+@import "frontend/blocks/follow-instagram";
+@import "frontend/blocks/help-support-block";
+@import "frontend/blocks/search-help-result";
+@import "frontend/blocks/shop";
+@import "frontend/blocks/helper";
+@import "frontend/blocks/video-background";
+@import "frontend/blocks/search-results";
+@import "frontend/blocks/range-slider";
+
+/*------------- #WIDGETS --------------*/
+
+@import "frontend/widgets/w-search";
+@import "frontend/widgets/w-personal-info";
+@import "frontend/widgets/w-socials";
+@import "frontend/widgets/w-select";
+@import "frontend/widgets/w-contacts";
+@import "frontend/widgets/w-faved-page";
+@import "frontend/widgets/w-twitter";
+@import "frontend/widgets/w-latest-photo";
+@import "frontend/widgets/w-playlist";
+@import "frontend/widgets/w-friend-pages-added";
+@import "frontend/widgets/w-create-fav-page";
+@import "frontend/widgets/w-birthday-alert";
+@import "frontend/widgets/w-action";
+@import "frontend/widgets/w-activity-feed";
+@import "frontend/widgets/w-wethear";
+@import "frontend/widgets/w-last-video";
+@import "frontend/widgets/w-pool";
+@import "frontend/widgets/w-badges";
+@import "frontend/widgets/w-blog-posts";
+@import "frontend/widgets/w-about";
+@import "frontend/widgets/w-list";
+@import "frontend/widgets/w-featured-topics";
+@import "frontend/widgets/w-build-fav";
+
+
+/*------------- #PLUGINS --------------*/
+
+//@import "/frontend/plugins/bootstrap-select.scss";
+//@import "/frontend/plugins/daterangepicker.scss";
+//@import "/frontend/plugins/fullcalendar.scss";
+//@import "/frontend/plugins/jquery.mCustomScrollbar.min.scss";
+//@import "/frontend/plugins/magnific-popup.scss";
+//@import "/frontend/plugins/mediaelement-playlist-plugin.min.scss";
+//@import "/frontend/plugins/mediaelementplayer.scss";
+//@import "/frontend/plugins/simplecalendar.scss";
+//@import "/frontend/plugins/swiper.min.scss";
+//@import "/frontend/plugins/ion.rangeSlider";
+
+@import "sidenav";
 
 .main-navbar{
   -webkit-box-shadow: 1px 1px 9px 0px rgba(0,0,0,0.75);

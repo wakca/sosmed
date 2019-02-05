@@ -17,4 +17,5 @@ use Illuminate\Http\Request;
 //    return $request->user();
 //});
 
+Route::get('/get-status', 'Api\PostController@get_status');
 Route::get('/get-story', 'Api\StoryController@get_story');

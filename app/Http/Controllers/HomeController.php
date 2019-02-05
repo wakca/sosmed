@@ -39,7 +39,24 @@ class HomeController extends Controller
 //        dd($numpage);
         $stories = Story::orderBy('created_at','desc')->paginate($numpage);
         $tags = Tag::all();
-        return view('index', ['stories' => $stories, 'tags' => $tags]);    
+        $sidemenu = [
+            [
+                'ref'=>'home',
+                'icon'=>'<svg class="olymp-newsfeed-icon left-menu-icon mr-2" data-toggle="tooltip" data-placement="right" data-original-title="NEWSFEED"><use xlink:href="svg-icons/sprites/icons.svg#olymp-newsfeed-icon"></use></svg>',
+                'title'=>'Beranda'
+            ],
+            [
+                'ref'=>'berita',
+                'icon'=>'<svg class="olymp-chat---messages-icon mr-2"><use xlink:href="svg-icons/sprites/icons.svg#olymp-chat---messages-icon"></use></svg>',
+                'title'=>'Berita'
+            ],
+            [
+                'ref'=>'kanal',
+                'icon'=>'<svg class="olymp-happy-faces-icon left-menu-icon mr-2" data-toggle="tooltip" data-placement="right" data-original-title="FRIEND GROUPS"><use xlink:href="svg-icons/sprites/icons.svg#olymp-happy-faces-icon"></use></svg>',
+                'title'=>'Kanal Desa'
+            ]
+        ];
+        return view('index', ['stories' => $stories, 'tags' => $tags, 'sidemenu'=>$sidemenu]);
     }
     
     public function beranda()

@@ -12,7 +12,7 @@ window._ = require('lodash');
 try {
     window.Popper = require('popper.js').default;
     window.$ = window.jQuery = require('jquery');
-
+    window.moment = require('moment');
     require('bootstrap');
 } catch (e) {}
 // require('bootstrap-sass');
@@ -27,8 +27,37 @@ require('bootstrap');
 window.Vue = require('vue');
 
 
+moment.locale('id');
+
+Vue.prototype.moment = moment;
+
+
+var KLIPAA = {};
+var $window = $(window),
+    $document = $(document),
+    $body = $('body'),
+    $sidebar = $('.fixed-sidebar'),
+    $preloader = $('#hellopreloader');
+
+KLIPAA.preloader = function () {
+    // $window.scrollTop(0);
+    setTimeout(function () {
+        $preloader.fadeOut(800);
+    }, 500);
+    return false;
+};
+
+//Scroll to top.
+jQuery('.back-to-top').on('click', function () {
+    $('html,body').animate({
+        scrollTop: 0
+    }, 1200);
+    return false;
+});
+
 
 $(document).ready(function() {
+    // KLIPAA.preloader();
     var sideslider = $('[data-toggle=collapse-side]');
     var sel = sideslider.attr('data-target');
     var sel2 = sideslider.attr('data-target-2');
@@ -36,7 +65,11 @@ $(document).ready(function() {
         $(sel).toggleClass('in');
         $(sel2).toggleClass('out');
     });
+
+
 });
+
+
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
@@ -46,10 +79,16 @@ $(document).ready(function() {
 
 window.axios = require('axios');
 
-window.axios.defaults.headers.common = {
-    'X-CSRF-TOKEN': window.Laravel.csrfToken,
-    'X-Requested-With': 'XMLHttpRequest'
-};
+let token = document.head.querySelector('meta[name="csrf-token"]');
+axios.defaults.baseURL = 'http://sosmed.test/api';
+
+if (token) {
+
+    window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
+
+} else {
+    console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
+}
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
