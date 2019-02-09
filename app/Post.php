@@ -8,7 +8,7 @@ class Post extends Model
 {
     protected $table = 'posts';
     protected $fillable = ['user_id', 'recepient_id', 'content', 'num_share', 'has_image','privacy'];
-    protected $with = ['user', 'comments', 'likes', 'photos'];
+    protected $with = ['user', 'comments', 'likes', 'photos', 'receive'];
 
 
     
@@ -35,5 +35,10 @@ class Post extends Model
     public function photos()
     {
         return $this->hasMany('App\Photo', 'post_id', 'id' );
+    }
+
+    public function receive()
+    {
+        return $this->hasOne('App\User', 'id', 'recepient_id');
     }
 }

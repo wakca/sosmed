@@ -2,217 +2,156 @@
     <div class="row" >
         <aside class="col col-xl-3 order-xl-1 col-lg-6 order-lg-2 col-md-6 col-sm-6 col-12">
             <side-bar v-on:getData="getPage($event)" ></side-bar>
-            <div class="ui-block">
-                <div class="ui-block-title">
-                    <h6 class="title">James’s Badges</h6>
-                </div>
-                <div class="ui-block-content">
 
-                    <!-- W-Badges -->
-
-                    <ul class="widget w-badges">
-                        <li>
-                            <a href="24-CommunityBadges.html">
-                                <img src="img/badge1.png" alt="author">
-                                <div class="label-avatar bg-primary">2</div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="24-CommunityBadges.html">
-                                <img src="img/badge4.png" alt="author">
-                            </a>
-                        </li>
-                        <li>
-                            <a href="24-CommunityBadges.html">
-                                <img src="img/badge3.png" alt="author">
-                                <div class="label-avatar bg-blue">4</div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="24-CommunityBadges.html">
-                                <img src="img/badge6.png" alt="author">
-                            </a>
-                        </li>
-                        <li>
-                            <a href="24-CommunityBadges.html">
-                                <img src="img/badge11.png" alt="author">
-                            </a>
-                        </li>
-                        <li>
-                            <a href="24-CommunityBadges.html">
-                                <img src="img/badge8.png" alt="author">
-                            </a>
-                        </li>
-                        <li>
-                            <a href="24-CommunityBadges.html">
-                                <img src="img/badge10.png" alt="author">
-                            </a>
-                        </li>
-                        <li>
-                            <a href="24-CommunityBadges.html">
-                                <img src="img/badge13.png" alt="author">
-                                <div class="label-avatar bg-breez">2</div>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="24-CommunityBadges.html">
-                                <img src="img/badge7.png" alt="author">
-                            </a>
-                        </li>
-                        <li>
-                            <a href="24-CommunityBadges.html">
-                                <img src="img/badge12.png" alt="author">
-                            </a>
-                        </li>
-                    </ul>
-
-                    <!--.. end W-Badges -->
-                </div>
-            </div>
         </aside>
         <main class="col col-xl-6 order-xl-2 col-lg-12 order-lg-1 col-md-12 col-sm-12 col-12">
-            <loading :active.sync="loadingContent"
-                     :can-cancel="false"
-                     :loader="loader"
-                     :opacity="1.0"
-                     :is-full-page="true"></loading>
-            <div id="newsfeed-items-grid">
 
-                <div v-for="(post, $index) in posting" :key="$index">
-                    <h4>{{post.content}}</h4>
+            <div id="newsfeed-items-grid">
+                <div class="ui-block" v-for="post in postUser">
+                    <!-- Post -->
+
+                    <article class="hentry post">
+
+                        <div class="post__author author vcard inline-items">
+                            <img :src="post.user.photo ? '/storage/'+post.user.photo : '/photos/av-default.jpg'" :alt="post.user.name">
+
+                            <div class="author-date">
+                                <a class="h6 post__author-name fn" href="02-ProfilePage.html">{{post.user.name}}</a>
+                                <span v-show="post.receive.id != post.user.id">
+                                    >
+
+                                    <a class="h6 post__author-name fn"  href="02-ProfilePage.html">{{post.receive.name}}</a>
+                                </span>
+
+                                <div class="post__date">
+                                    <i class="text-muted" >
+                                        {{moment(post.created_at).local('id').fromNow()}}
+                                    </i>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <p>
+                            <read-more more-str="Lebih Lanjut" :text="post.content" link="#" less-str="Lebih Singkat" :max-chars="250"></read-more>
+
+                        </p>
+
+                        <div class="post-additional-info inline-items">
+
+                            <a href="#" class="post-add-icon inline-items">
+                                <svg class="olymp-heart-icon">
+                                    <use xlink:href="svg-icons/sprites/icons.svg#olymp-heart-icon"></use>
+                                </svg>
+                                <span>{{post.likes.length}}</span>
+                            </a>
+
+                            <ul class="friends-harmonic" v-show="post.likes.length > 0">
+                                <li v-for="like in post.likes">
+                                    <a href="#">
+                                        <img :src="like.user.photo ? '/storage/'+like.user.photo : '/photos/av-default.jpg'" :alt="like.user.name">
+                                    </a>
+                                </li>
+                                <li v-show="post.likes.length > 5">
+                                    <a href="#">
+                                        <img src="img/friend-harmonic11.jpg" alt="friend">
+                                    </a>
+                                </li>
+                            </ul>
+
+
+                            <div class="comments-shared">
+                                <a :href="'#comment_form_'+post.id"  class="post-add-icon inline-items">
+                                    <svg class="olymp-speech-balloon-icon">
+                                        <use xlink:href="svg-icons/sprites/icons.svg#olymp-speech-balloon-icon"></use>
+                                    </svg>
+                                    <span>{{post.comments.length}}</span>
+                                </a>
+                            </div>
+
+
+                        </div>
+
+
+
+                    </article>
+
+                    <!-- .. end Post -->
+                    <ul class="comments-list" v-show="post.comments.length > 0">
+                        <li class="comment-item" v-for="comment in post.comments.slice(0, 2)">
+                            <div class="post__author author vcard inline-items">
+                                <img :src="comment.user.photo ? '/storage/'+comment.user.photo : '/photos/av-default.jpg'" :alt="comment.user.name">
+
+                                <div class="author-date">
+                                    <a class="h6 post__author-name fn" href="#">{{comment.user.name}}</a>
+                                    <div class="post__date">
+                                        <span class=" text-muted" >
+                                            {{moment(comment.created_at).local('id').fromNow()}}
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <a href="#" class="more"><svg class="olymp-three-dots-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-three-dots-icon"></use></svg></a>
+
+                            </div>
+
+                            <p>
+                                <read-more more-str="Lebih Lanjut" :text="comment.content" link="#" less-str="Lebih Singkat" :max-chars="250"></read-more>
+                            </p>
+
+                            <a href="#" class="post-add-icon inline-items">
+                                <svg class="olymp-heart-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-heart-icon"></use></svg>
+                                <span>6</span>
+                            </a>
+                            <a href="#" class="reply">Reply</a>
+                        </li>
+                    </ul>
+                    <a href="#" class="more-comments" v-show="post.comments.length > 2">View more comments <span>+</span></a>
+                    <form class="comment-form inline-items" :id="'comment_form_'+post.id" v-show="commentRow">
+
+                        <div class="post__author author vcard inline-items">
+                            <img src="img/author-page.jpg" alt="author">
+
+                            <div class="form-group with-icon-right is-empty">
+                                <textarea class="form-control" placeholder=""></textarea>
+                                <div class="add-options-message">
+                                    <a href="#" class="options-message" data-toggle="modal" data-target="#update-header-photo">
+                                        <svg class="olymp-camera-icon">
+                                            <use xlink:href="svg-icons/sprites/icons.svg#olymp-camera-icon"></use>
+                                        </svg>
+                                    </a>
+                                </div>
+                                <span class="material-input"></span></div>
+                        </div>
+
+                        <button class="btn btn-md-2 btn-primary">Post Comment</button>
+
+                        <button class="btn btn-md-2 btn-border-think c-grey btn-transparent custom-color">Cancel</button>
+
+                    </form>
                 </div>
 
-
-
-            </div>
-            <div v-infinite-scroll="initialize" infinite-scroll-disabled="busy" infinite-scroll-distance="10">
-                ...
+                <infinite-loading @infinite="getMore" v-show="infinityShow" spinner="spiral">
+                    <span slot="no-more">Tidak Terdapat Data</span>
+                </infinite-loading>
+                <loading :active.sync="loadingContent"
+                         :can-cancel="false"
+                         :opacity="0.9"
+                         :is-full-page="false"></loading>
             </div>
 
         </main>
-        <aside class="col col-xl-3 order-xl-3 col-lg-6 order-lg-3 col-md-6 col-sm-6 col-12">
 
-            <div class="ui-block">
-                <!-- W-Birthsday-Alert -->
-
-                <div class="widget w-birthday-alert">
-                    <div class="icons-block">
-                        <svg class="olymp-cupcake-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-cupcake-icon"></use></svg>
-                        <a href="#" class="more"><svg class="olymp-three-dots-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-three-dots-icon"></use></svg></a>
-                    </div>
-
-                    <div class="content">
-                        <div class="author-thumb">
-                            <img src="img/avatar48-sm.jpg" alt="author">
-                        </div>
-                        <span>Today is</span>
-                        <a href="#" class="h4 title">Marina Valentine’s Birthday!</a>
-                        <p>Leave her a message with your best wishes on her profile page!</p>
-                    </div>
-                </div>
-
-                <!-- ... end W-Birthsday-Alert -->			</div>
-
-            <div class="ui-block">
-                <div class="ui-block-title">
-                    <h6 class="title">Friend Suggestions</h6>
-                    <a href="#" class="more"><svg class="olymp-three-dots-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-three-dots-icon"></use></svg></a>
-                </div>
-
-
-
-                <!-- W-Action -->
-
-                <ul class="widget w-friend-pages-added notification-list friend-requests">
-                    <li class="inline-items">
-                        <div class="author-thumb">
-                            <img src="img/avatar38-sm.jpg" alt="author">
-                        </div>
-                        <div class="notification-event">
-                            <a href="#" class="h6 notification-friend">Francine Smith</a>
-                            <span class="chat-message-item">8 Friends in Common</span>
-                        </div>
-                        <span class="notification-icon">
-							<a href="#" class="accept-request">
-								<span class="icon-add without-text">
-									<svg class="olymp-happy-face-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-happy-face-icon"></use></svg>
-								</span>
-							</a>
-						</span>
-                    </li>
-
-                    <li class="inline-items">
-                        <div class="author-thumb">
-                            <img src="img/avatar39-sm.jpg" alt="author">
-                        </div>
-                        <div class="notification-event">
-                            <a href="#" class="h6 notification-friend">Hugh Wilson</a>
-                            <span class="chat-message-item">6 Friends in Common</span>
-                        </div>
-                        <span class="notification-icon">
-							<a href="#" class="accept-request">
-								<span class="icon-add without-text">
-									<svg class="olymp-happy-face-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-happy-face-icon"></use></svg>
-								</span>
-							</a>
-						</span>
-                    </li>
-
-                    <li class="inline-items">
-                        <div class="author-thumb">
-                            <img src="img/avatar40-sm.jpg" alt="author">
-                        </div>
-                        <div class="notification-event">
-                            <a href="#" class="h6 notification-friend">Karen Masters</a>
-                            <span class="chat-message-item">6 Friends in Common</span>
-                        </div>
-                        <span class="notification-icon">
-							<a href="#" class="accept-request">
-								<span class="icon-add without-text">
-									<svg class="olymp-happy-face-icon"><use xlink:href="svg-icons/sprites/icons.svg#olymp-happy-face-icon"></use></svg>
-								</span>
-							</a>
-						</span>
-                    </li>
-
-                </ul>
-
-                <!-- ... end W-Action -->
-            </div>
-
-
-
-
-            <div class="ui-block">
-
-
-                <!-- W-Action -->
-
-                <div class="widget w-action">
-
-                    <img src="img/logo.png" alt="Olympus">
-                    <div class="content">
-                        <h4 class="title">KLIPAA.com</h4>
-                        <span>THE BEST SOCIAL NETWORK THEME IS HERE!</span>
-                        <a href="01-LandingPage.html" class="btn btn-bg-secondary btn-md">Register Now!</a>
-                    </div>
-                </div>
-
-                <!-- ... end W-Action -->
-            </div>
-
-        </aside>
     </div>
 </template>
 
 <script>
     import Loading from 'vue-loading-overlay';
     import 'vue-loading-overlay/dist/vue-loading.css';
+    import ReadMore from 'vue-read-more';
     import VLazyImage from "v-lazy-image";
-    import infiniteScroll from 'vue-infinite-scroll';
     import InfiniteLoading from 'vue-infinite-loading';
-    // Vue.use(InfiniteLoading);
-
+    Vue.use(ReadMore);
     export default {
         components: {
             Loading,
@@ -221,25 +160,24 @@
         },
         data(){
             return {
-                posting: [],
+                postUser: [],
                 loadingContent: false,
+                loadEx: false,
                 place: 'home',
                 loader: 'dots',
                 data_res: null,
                 busy: false,
                 page: 1,
-                singlepost: ''
+                infinityShow: false,
+                contoh: ['satu', 'dua', 'tiga'],
+                commentRow: false,
             }
 
         },
-        computed: {
-            initialPost(){
-                return this.posting;
-            }
-        },
-        mounted()
+        created()
         {
-            this.loadingContent = true;
+            console.log('Aplikasi Dibuka');
+            // this.loadingContent = true;
             this.initialize();
         },
         methods: {
@@ -247,70 +185,62 @@
                 switch (ref) {
                     case 'home':
                         this.place = 'home';
-                        console.log('Halaman Home 2');
                         break;
                     case 'berita':
                         this.place = 'berita';
-                        console.log('Halaman Berita 2');
                         break;
                     case 'kanal':
                         this.place = 'kanal';
-                        console.log('Halaman Kanal 2  ');
                         break;
                     default : console.log('Tidak Ada Referensi');
                 }
             },
             initialize()
             {
+                this.loadingContent = true
                 axios.get('/get-status?page='+this.page)
                     .then((response)=>{
-                        let {list_post} = response.data;
-                        if(list_post.data instanceof Array){
-                            console.log(list_post.data);
-                            Array.prototype.push.apply(this.posting, list_post.data);
-                        }
 
-                        this.data_res = list_post;
-                        this.page += 1;
-                        this.loadingContent = false
+                        // this.posting.push(response.data.list_post.data);
+                        setTimeout(()=>{
+                            Array.prototype.push.apply(this.postUser, response.data.list_post.data);
+
+                            this.page = this.page+ 1;
+                            this.loadingContent = false;
+                            this.infinityShow = true;
+                            console.log(this.postUser);
+                        }, 200);
+
 
                     }).catch(error => {
-                    this.loadingContent = false;
-                    console.log(JSON.stringify(error));
+                        console.log(error.message);
                 });
             },
-            getMore(){
+            getMore($state){
+                this.page  = this.page +1;
+                this.loadingContent = true;
                 axios.get('/get-status?page='+this.page)
                     .then((response)=>{
-                        if (response.data.data.length ) {
-                            this.page += 1;
-                            let {list_post} = response.data;
-                            if(list_post.data instanceof Array){
-                                console.log(list_post.data);
-                                Array.prototype.push.apply(this.posting, list_post.data);
-                            }
-                            $state.loaded();
-                        } else {
-                            $state.complete();
-                        }
-                        // let {list_post} = response.data;
-                        // if(list_post.data instanceof Array){
-                        //     console.log(list_post.data);
-                        //     Array.prototype.push.apply(this.posting, list_post.data);
-                        // }
-                        //
-                        // this.data_res = list_post;
-                        // this.page++;
-                        // setTimeout(() => {
-                        //
-                        //     console.log(JSON.stringify(this.posting));
-                        //     this.loadingContent = false
-                        // },5000)
+                        this.loadMore($state, response.data);
 
                     }).catch(error => {
-                    this.loadingContent = false;
-                    console.log(JSON.stringify(error));
-                });
+                        console.log(error.message);
+                    });
+            },
+            loadMore($state, response){
+                if (response.list_post.data.length > 0) {
+                    Array.prototype.push.apply(this.postUser, response.list_post.data);
+                    setTimeout(()=>{
+                        $state.loaded();
+                        this.loadingContent = false;
+                    }, 200);
+
+                    if(this.postUser.length === response.list_post.total){
+                        $state.complete();
+                    }
+                } else {
+                    $state.complete();
+                }
             },
             formatDate(date) {
                 var monthNames = [

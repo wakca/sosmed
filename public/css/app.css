@@ -19245,12 +19245,12 @@ ol ol li {
 
 .post {
   position: relative;
-  padding: 25px;
+  padding: 20px;
   border-bottom: 1px solid #e6ecf5;
 }
 
 .post p {
-  margin: 25px 0;
+  margin: 15px 0;
 }
 
 .post .control-block-button {
@@ -19299,6 +19299,7 @@ ol ol li {
 
 .post .post__author-name {
   font-weight: 700;
+  font-size: 0.875rem;
   margin-bottom: 0;
 }
 
@@ -19374,7 +19375,7 @@ ol ol li {
 }
 
 .post__author {
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 
 .post__author img {
@@ -19392,14 +19393,14 @@ ol ol li {
 }
 
 .post-additional-info {
-  padding: 20px 0 0;
+  padding: 10px 0 0;
   border-top: 1px solid #e6ecf5;
   display: flex;
   align-items: center;
 }
 
 .post-additional-info > * {
-  margin-right: 15px;
+  margin-right: 10px;
 }
 
 .post-additional-info > *:last-child {
@@ -19601,7 +19602,7 @@ ol ol li {
 }
 
 .comments-list .comment-item {
-  padding: 25px;
+  padding: 15px;
   border-bottom: 1px solid #e6ecf5;
   background-color: #fafbfd;
   position: relative;
@@ -19711,7 +19712,7 @@ ol ol li {
 }
 
 .children.single-children .comment-item {
-  padding: 25px;
+  padding: 15px;
   position: relative;
 }
 

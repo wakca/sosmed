@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Like extends Model
 {
     //
+    protected $with = 'user';
     protected $fillable = ['post_id', 'user_id', 'page_id', 'status'];
     
     public function post(){
