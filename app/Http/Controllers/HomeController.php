@@ -38,8 +38,10 @@ class HomeController extends Controller
         $numpage = Config::get('global.story_number');
 //        dd($numpage);
         $stories = Story::orderBy('created_at','desc')->paginate($numpage);
+        //Hits Story
+        $hits_story = Story::orderBy('views', 'asc')->limit(5)->get();
         $tags = Tag::all();
-        return view('index', ['stories' => $stories, 'tags' => $tags]);    
+        return view('index', ['stories' => $stories, 'tags' => $tags, 'hits_story'=>$hits_story]);
     }
     
     public function beranda()

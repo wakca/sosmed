@@ -9,7 +9,7 @@ window._ = require('lodash');
 
 window.$ = window.jQuery = require('jquery');
 
-require('bootstrap-sass');
+require('bootstrap');
 
 /**
  * Vue is a modern JavaScript library for building interactive web interfaces
@@ -19,10 +19,6 @@ require('bootstrap-sass');
 
 window.Vue = require('vue');
 
-window.addEventListener("load", function () {
-    const loader = document.querySelector(".loader");
-    loader.className += " hidden"; // class "loader hidden"
-});
 
 $(document).ready(function() {
     var sideslider = $('[data-toggle=collapse-side]');
@@ -32,6 +28,7 @@ $(document).ready(function() {
         $(sel).toggleClass('in');
         $(sel2).toggleClass('out');
     });
+
 });
 
 /**

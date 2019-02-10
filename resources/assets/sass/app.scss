@@ -1,40 +1,32 @@
 
 // Fonts
-@import url('https://fonts.googleapis.com/css?family=Raleway:300,400,600');
-
+//@import url('https://fonts.googleapis.com/css?family=Raleway:300,400,600');
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,400i,500,500i,600,600i,700,700i');
 // Variables
 @import "variables";
 
 // Bootstrap
-@import "~bootstrap-sass/assets/stylesheets/bootstrap";
+@import "~bootstrap/scss/bootstrap";
 
-.loader {
-  position: relative;
-  z-index: 99;
-  top: 0;
-  left: 0;
-  width: 100%;
+@import "loader";
+
+body{
+  font-family: 'Montserrat', sans-serif;
+  padding-top: 89px;
+}
+
+.card-img-right {
   height: 100%;
-  background: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.loader > img {
-  width: 100px;
+  border-radius: 0 3px 3px 0;
 }
 
-.loader.hidden {
-  animation: fadeOut 1s;
-  animation-fill-mode: forwards;
+.hidden-div{
+  display: none;
 }
-
-@keyframes fadeOut {
-  100% {
-    opacity: 0;
-    visibility: hidden;
-  }
+#load-more{
+  font-size: 13px;
+  color:#999;
 }
-
-// Navbar Collapse
-
+.nav-link{
+  font-weight: bold;
+}

@@ -1,6 +1,6 @@
 
 /* === bootstrap custom css by. Mr.Indras ====== */
-html,body{font-family: 'Quicksand',  sans-serif; font-weight: 400;min-height: 100% !important;height: 100% !important;margin: 0;}
+html,body{font-family: 'Montserrat',  sans-serif; font-weight: 400;min-height: 100% !important;height: 100% !important;margin: 0;}
 body{
     background-color:#E8EAF6;
 }
@@ -70,7 +70,7 @@ a{color:#304FFE;}
 }
 .mobile-tag{display:none;}
 .mobile-tag h1{
-    font-family: 'Quicksand', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-size:1.5em;
     margin-top:0px;
     margin-bottom:30px;
@@ -90,7 +90,7 @@ a{color:#304FFE;}
 .posts:first-child,.modal-comments:first-child,.message:first-child{border-top:none;}
 .nav-pills{
     margin-top:10px;
-    font-size: 13px;
+    font-size: 20px;
 }
 .nav-pills > li:hover a, .nav-pills > li a:visited , .nav-pills > li a:active {
     background-color:#fff;
@@ -121,6 +121,7 @@ a{color:#304FFE;}
 }
 .label-xs{font-size:8px;}
 .label-lg{font-size:1em;}
+
 #load-more{
     font-size: 13px;
     color:#999;
@@ -280,7 +281,7 @@ a{color:#304FFE;}
 #list-member,#elist-member{margin-top:10px;max-height: 200px;overflow-y: auto;}
 .group-member{padding:5px;border-bottom: 1px solid #d3e0e9;}
 .added-member a, .eadded-member a{
-   text-decoration: none;color: #fff; 
+   text-decoration: none;color: #fff;
 }
 
 .story .panel-body{border-bottom:1px solid #d3e0e9;}
@@ -294,7 +295,7 @@ a{color:#304FFE;}
  -webkit-column-width: 25em;
  column-width: 25em;
  -moz-column-gap: .5em;
- -webkit-column-gap: .5em; 
+ -webkit-column-gap: .5em;
   column-gap: .5em;
 }
 
@@ -303,7 +304,7 @@ a{color:#304FFE;}
  margin-left:.3em;
  margin-right:.3em;
  margin-bottom: 1em;
- padding:  0; 
+ padding:  0;
  -webkit-column-break-inside: avoid;
           page-break-inside: avoid;
                break-inside: avoid;
@@ -330,7 +331,7 @@ p{word-wrap: break-word;}
 .story-tags{font-size: 1.3em;font-weight: normal;margin-bottom:5px;}
 @media screen and (max-width:991px){
     .list-tag{
-        display:none;   
+        display:none;
     }
     .mobile-tag{display:block; margin-bottom: 20px;}
 }

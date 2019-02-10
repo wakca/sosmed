@@ -261,7 +261,14 @@ class Getter
         $dom->loadHtml($content, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);    
         $images = $dom->getElementsByTagName('img');
         if(isset($images[0])){
-            return "<div class='thumbnail-story' style='background-image:url(".$images[0]->getAttribute('src')."); width: 100%;' alt='$title' title='$title'></div>";
+//            return "<div class='bd-placeholder-img card-img-top' style='background-image:url(".$images[0]->getAttribute('src')."); width: 100%; height: auto;' alt='$title' title='$title'></div>";
+            $cache = file_get_contents($images[0]->getAttribute('src'));
+            $image = \Intervention\Image\Facades\Image::cache(function($image) use($cache){
+                return $image->make($cache)->resize(100,50);
+            }, 10, true);
+//            dd($image->encode('png'));
+//            dd($image);
+            return $images[0]->getAttribute('src');
         }
     }
 
